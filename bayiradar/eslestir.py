@@ -32,7 +32,8 @@ DOLGU = {
 ADRES_DOLGU = {
     "mah", "mahalle", "mahallesi", "cad", "cadde", "caddesi", "sok", "sokak",
     "no", "blv", "bulvar", "bulvari", "apt", "kat", "d", "ic", "kapi",
-    "osb", "sanayi", "sitesi", "blok", "cars", "carsi", "merkez",
+    "osb", "sanayi", "sitesi", "site", "blok", "daire", "plaza",
+    "apartmani", "apartman", "merkezi", "is", "cars", "carsi", "merkez",
 }
 
 
@@ -66,6 +67,100 @@ def _ortak_oran(a: str, b: str) -> float:
     return len(A & B) / len(A | B)
 
 
+# Şirket eklerini eleyip ayırt edici kelimeleri bırakır.
+_GENEL_EK = {
+    "san", "sanayi", "tic", "ticaret", "ltd", "limited", "sti", "sirketi",
+    "as", "ve", "insaat", "taahhut", "turizm", "pazarlama", "otomotiv",
+    "motor", "motorlu", "araclar", "motosiklet", "bisiklet", "grup",
+}
+
+
+# Parantez içi AÇIKLAMA, firma adının parçası değil: "EYMEN MOTOR
+# (Önder Motor)" kaydı, hangi merkeze bağlı olduğunu belirtmek için
+# böyle yazılıyor. Eşleştirmede sayılırsa "Önder Motor Merkez 1" ile
+# ortak kelime çıkıp iki AYRI firma birleşiyordu.
+_PARANTEZ = re.compile(r"\([^)]*\)")
+
+
+def _ayirt_edici(ad: str) -> set:
+    cekirdek = _PARANTEZ.sub(" ", ad or "")
+    k = {w for w in fold(cekirdek).split() if len(w) > 2 and w not in _GENEL_EK}
+    # Parantez dışında hiçbir şey kalmadıysa parantez içini kullan
+    return k or {w for w in fold(ad or "").split()
+                 if len(w) > 2 and w not in _GENEL_EK}
+
+
+def adres_belirtecleri(adres: str) -> set:
+    """Adresin ayırt edici kelimeleri (mah/cad/sok gibi dolgular atılır)."""
+    return {k for k in fold(adres or "").split()
+            if k not in ADRES_DOLGU and len(k) > 1}
+
+
+_KAPI = re.compile(r"\bno\s*[:.]?\s*(\d{1,4})|\b(\d{1,4})\s*/\s*[a-zA-Z]\b", re.I)
+# "431A" ile "431 A" aynı sayılsın diye rakam-harf sınırına boşluk koyuyoruz
+_RAKAM_HARF = re.compile(r"(\d)([a-z])|([a-z])(\d)", re.I)
+
+
+# Adres alanına ikinci bir adres iliştirilebiliyor:
+# "... NO: 42 AA SEVKİYAT ADRESİ: ECE MAH. ..." — karşılaştırmada asıl
+# adresi kullanıyoruz, yoksa aynı firma iki ayrı yer sanılıyor.
+_EK_ADRES = re.compile(
+    r"\s*(sevkiyat|teslimat|fatura|kargo)\s*adres[iı]?\s*:.*$", re.I | re.S)
+
+
+def asil_adres(adres: str) -> str:
+    return _EK_ADRES.sub("", adres or "").strip()
+
+
+def kapi_no(adres: str) -> str:
+    """Adresteki kapı numarası.
+
+    En güçlü ayırt edici: "NO: 20" ile "NO: 10" aynı sokakta ama AYRI
+    işyeri. Yalnız kelime örtüşmesine bakınca bunlar aynı sanılıyordu
+    (Çakmakçı, Remzi Özsoy, Ethemoğlu tek koda düşmüştü).
+    """
+    m = _KAPI.search(asil_adres(adres))
+    return (m.group(1) or m.group(2)) if m else ""
+
+
+def adres_belirtecleri(adres: str) -> set:
+    """Adresin ayırt edici kelimeleri (mah/cad/sok gibi dolgular atılır)."""
+    # İki kez: "4A11" tek geçişte "4 A11" oluyor, ikinci geçiş "4 A 11"
+    # yapıyor; karşı taraftaki "NO: 4A BLOK DAİRE: 11" ile eşleşsin.
+    d = asil_adres(adres)
+    for _ in range(2):
+        d = _RAKAM_HARF.sub(lambda m: " ".join(x for x in m.groups() if x), d)
+    return {k for k in fold(d).split()
+            if k not in ADRES_DOLGU and len(k) > 1}
+
+
+def adres_benzer(a: str, b: str, esik: float = 0.5) -> bool:
+    """İki adres aynı yeri mi gösteriyor?
+
+    TEK KAYNAK: hem kayıt eşleştirme hem cari kod üretimi bu fonksiyonu
+    kullanıyor. İkisi ayrı ayrı yazılıydı ve farklı sonuç veriyordu.
+
+    Katı eşitlik işe yaramıyor: aynı yer sayfadan sayfaya farklı yazılıyor
+    ("... NO:2/B ATAŞEHİR/İSTANBUL" ile "... NO:2/B ATAŞEHİR"). Eşitlik
+    arayınca 45 kayıt boş yere ikiye bölünüyordu. Bu yüzden önce kapı
+    numarasına, sonra kelime örtüşmesine bakıyoruz.
+    """
+    ka, kb = kapi_no(a), kapi_no(b)
+    if ka and kb and ka != kb:
+        return False
+    A, B = adres_belirtecleri(a), adres_belirtecleri(b)
+    if not A or not B:
+        return True
+    if A <= B or B <= A:
+        return True
+    # KAPSAMA oranı (kesişim / kısa adres), birleşim değil. Aynı adres
+    # bir yerde ayrıntılı yazılıyor ("... ZEREN SANAYİ SİTESİ NO: 4A
+    # BLOK DAİRE: 11"), başka yerde sade ("... No: 4A11 Urla/İzmir").
+    # Birleşime bölünce fazladan kelimeler oranı düşürüp aynı yeri iki
+    # ayrı adres gösteriyordu. Farklı kapı numarası zaten yukarıda elendi.
+    return len(A & B) / min(len(A), len(B)) >= 0.6
+
+
 def ayni_firma_mi(a: dict, b: dict) -> tuple[bool, str]:
     """İki kayıt aynı firma mı? (evet_mi, gerekçe)"""
     # 1. Telefon — güçlü kanıt AMA tek başına yetmiyor.
@@ -87,7 +182,22 @@ def ayni_firma_mi(a: dict, b: dict) -> tuple[bool, str]:
         ia = fold(a.get("ilce", "") or "")
         ib = fold(b.get("ilce", "") or "")
         if ia and ib and ia == ib:
-            return True, "telefon + aynı ilçe"
+            # Aynı numarayı FARKLI firmalar da kullanabiliyor. Niğde'de
+            # "HAFIZLAR OTOMOTİV" ile "MERTAS PAZARLAMA" aynı numarada
+            # ve tek firmaya iniyorlardı. Adlar hiç ortak kelime
+            # taşımıyorsa ayrı işyeri sayıyoruz.
+            ka = _ayirt_edici(a.get("bayi_adi", ""))
+            kb = _ayirt_edici(b.get("bayi_adi", ""))
+            if ka and kb and not (ka & kb):
+                return False, "aynı telefon, farklı firma adı"
+            # ADRES BELİRLEYİCİ: aynı ilçede, aynı numarayla çalışan iki
+            # AYRI şube olabiliyor. CFMoto/Edremit'te Özdemir Mağazaları
+            # hem Altınkum hem Camivasat şubesiyle listede; Bayhas Motors
+            # da böyle. Bunlar ayrı bayi sayılmalı.
+            # Yazım farkı bölmesin diye eşitlik değil benzerlik arıyoruz.
+            if not adres_benzer(a.get("adres", ""), b.get("adres", "")):
+                return False, "aynı telefon, farklı adres"
+            return True, "telefon + aynı ilçe + aynı adres"
 
         # FARKLI ilçede aynı numara → zincir bayinin ayrı şubesi.
         # Bajaj'da 7 gerçek nokta bu yüzden tek kayda iniyordu.
@@ -142,9 +252,14 @@ def ayni_firma_mi(a: dict, b: dict) -> tuple[bool, str]:
     if ia and ib and ia != ib:
         return False, ""
 
-    # 2. Ad çekirdeği birebir + aynı ilçe
+    # 2. Ad çekirdeği birebir + aynı ilçe + ADRES ÇELİŞMİYOR
+    #    Adres şartı olmadan aynı ilçedeki ŞUBELER birleşiyordu: KOÇ
+    #    MOTOR'un Hendek/Pamukova şubeleri, Bayhas Motors gibi. Aynı ad
+    #    aynı ilçede iki ayrı kapı numarası varsa iki ayrı bayidir.
     if ca == cb and ia and ia == ib:
-        return True, "ad+ilçe"
+        if adres_benzer(a.get("adres", ""), b.get("adres", "")):
+            return True, "ad+ilçe"
+        return False, "aynı ad ve ilçe, farklı adres"
 
     # 3. Ad çok benzer + adres benzer
     ad_oran = _ortak_oran(ca, cb)

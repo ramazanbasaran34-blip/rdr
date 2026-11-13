@@ -1,0 +1,28 @@
+{
+ "url": "https://taktas.com.tr/bayi-ve-servis",
+ "yanitlar": [
+  {
+   "dosya": "taktas-json-01.json",
+   "url": "https://taktas.com.tr/turkiyemap/turkiyemap.json",
+   "boyut": 8715,
+   "ipucu": []
+  }
+ ],
+ "istekler": [
+  {
+   "url": "https://taktas.com.tr/bayi-ve-servis",
+   "method": "GET",
+   "basliklar": {
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  }
+ ],
+ "tiklanan": [
+  "Servis",
+  "Yedek"
+ ],
+ "sayfa_boyut": 434188
+}

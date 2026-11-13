@@ -1,0 +1,14 @@
+{
+ "KTM": {
+  "kayit": 68,
+  "il": 26,
+  "ilsiz": 0,
+  "db": "{'durum': 'basarili', 'adet': 68, 'yeni': 33, 'guncel': 35, 'supheli': 1, 'mesaj': ''}"
+ },
+ "Husqvarna": {
+  "kayit": 53,
+  "il": 25,
+  "ilsiz": 0,
+  "db": "{'durum': 'basarili', 'adet': 53, 'yeni': 21, 'guncel': 32, 'supheli': 0, 'mesaj': ''}"
+ }
+}

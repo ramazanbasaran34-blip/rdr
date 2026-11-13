@@ -7,6 +7,9 @@ name: Sadece siteyi yayınla
 
 on:
   workflow_dispatch:
+  # tetik/yayinla dosyası değişince site yeniden üretilip yayınlanır.
+  push:
+    paths: ["tetik/yayinla"]
 
 permissions:
   contents: write
@@ -30,8 +33,34 @@ jobs:
 
       - name: Sayfayı üret
         run: |
-          mkdir -p site
-          python uret_index.py site/index.html
+          mkdir -p site site/onizleme
+          # CANLI SAYFA DONDURULMUŞTUR.
+          # Onaylanmış hâli canli/index.html'de saklanıyor ve olduğu gibi
+          # kopyalanıyor. Böylece görünüm değişiklikleri (renk, sütun,
+          # yazı boyutu) canlıya SIZMAZ; yalnızca "Önizlemeyi canlıya al"
+          # akışı bu kopyayı yeniler. Kopya yoksa (ilk kurulum) üretilir.
+          if [ -f canli/index.html ]; then
+            cp canli/index.html site/index.html
+            echo "canlı sayfa dondurulmuş kopyadan alındı"
+          else
+            python uret_index.py site/index.html
+            echo "canlı sayfa üretildi (dondurulmuş kopya yok)"
+          fi
+          # ÖNİZLEME: son taramanın sonucu. bayiler_yeni.db henüz yoksa
+          # canlının kopyası konuyor ki adres 404 vermesin.
+          if [ -f bayiler_yeni.db ]; then
+            python uret_index.py site/onizleme/index.html --db bayiler_yeni.db
+          else
+            cp site/index.html site/onizleme/index.html
+          fi
+          test -s site/onizleme/index.html || { echo "önizleme üretilemedi"; exit 1; }
+          # YEDEK ADRES: bazı durumlarda alt klasör 404 veriyordu.
+          # Aynı sayfayı kökte tek dosya olarak da yayınlıyoruz:
+          #   .../onizleme/        (klasör)
+          #   .../onizleme.html    (tek dosya — her zaman çalışır)
+          cp site/onizleme/index.html site/onizleme.html
+          echo "önizleme boyutu: $(du -h site/onizleme/index.html | cut -f1)"
+          ls -la site/ site/onizleme/
 
       - name: Çıktıyı doğrula
         run: |
@@ -55,13 +84,15 @@ jobs:
           PY
           echo "boyut: $(du -h site/index.html | cut -f1)"
 
-      - name: Canlı ve önizlemeye yaz, gönder
+      - name: Depoya yaz (dal üzerinden yayın)
         run: |
           git config user.name  "bayi-radar-bot"
           git config user.email "bot@users.noreply.github.com"
           cp site/index.html index.html
-          mkdir -p preview && cp site/index.html preview/index.html
-          git add index.html preview/index.html
+          mkdir -p onizleme
+          cp site/onizleme/index.html onizleme/index.html
+          cp site/onizleme.html onizleme.html
+          git add index.html onizleme/index.html onizleme.html
           git diff --staged --quiet && { echo "Değişiklik yok"; exit 0; }
           git commit -m "Site yayınlandı: $(date -u +'%Y-%m-%d %H:%M UTC')"
           for i in 1 2 3 4 5; do

@@ -1,5 +1,5 @@
 {
- "_aciklama": "Hero Türkiye bayi ve servis ağı. Site Cloudflare korumalı ve GitHub Actions IP'lerinden 403 dönüyor; otomatik taranamıyor. Veri, sitenin kendi arama formu kullanılarak kullanıcının kendi tarayıcı oturumundan toplandı (hero-konsol3.js). Güncelleme aynı yolla yapılır.",
+ "_aciklama": "Hero Türkiye bayi ve servis ağı. Site Cloudflare korumalı ve GitHub Actions IP'lerinden 403 dönüyor; otomatik taranamıyor. Veri, sitenin kendi arama formu kullanılarak kullanıcının kendi tarayıcı oturumundan toplandı (hero-konsol3.js). Güncelleme aynı yolla yapılır. Aynı numarayı paylaşan farklı adresteki noktalar AYRI bayidir (KOÇ MOTOR'un 3 şubesi, ARMA MOTOR'S'un 2 şubesi gibi). Önder Motor'un numarasını paylaşan bağımsız isimli kayıtların yanına parantez içinde (Önder Motor) yazılıyor.",
  "_kaynak": [
   "https://www.heromotor.com.tr/bayiler/",
   "https://www.heromotor.com.tr/servisler/"
@@ -103,17 +103,6 @@
    "ilce": "MERKEZ",
    "adres": "HACILAR HARMANI MH. TOPTANCILAR ÇARŞISI 5735 SOK. NO:1/C MERKEZ /AKSARAY",
    "telefon": "0543 654 27 45",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "satis",
-   "bayi_adi": "HERO MOTOR MERKEZ SHOWROOM ANKARA (7/24 AÇIK )",
-   "il": "Ankara",
-   "ilce": "ETİMESGUT",
-   "adres": "YENİ BAĞLICA MAH.ÇAMBAYIRI CAD. NO:125/2 ETİMESGUT / ANKARA",
-   "telefon": "0312 503 88 98 / 0501 208 48 53",
    "email": "",
    "website": ""
   },
@@ -252,22 +241,11 @@
   {
    "marka": "Hero",
    "rol": "satis",
-   "bayi_adi": "EYMEN MOTOR",
+   "bayi_adi": "EYMEN MOTOR (Önder Motor)",
    "il": "Aydın",
    "ilce": "NAZİLLİ",
    "adres": "ŞİRİNEVLER MAH. HÜRRİYET CAD. NO:261 (4 YOL KAVŞAĞI) NAZİLLİ / AYDIN",
    "telefon": "0537 885 01 85 (0533 045 46 58 Yedek Parça WhatsApp Sipariş Hattı)",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "satis",
-   "bayi_adi": "HERO MOTOR MERKEZ SHOWROOM ÖNDER MOTOR NAZİLLİ",
-   "il": "Aydın",
-   "ilce": "NAZİLLİ",
-   "adres": "ŞİRİNEVLER MAH. HÜRRİYET CAD. NO:261 (4 YOL KAVŞAĞI) NAZİLLİ/AYDIN",
-   "telefon": "0537 885 01 85",
    "email": "",
    "website": ""
   },
@@ -790,17 +768,6 @@
   },
   {
    "marka": "Hero",
-   "rol": "satis",
-   "bayi_adi": "HERO MOTOR MERKEZ SHOWROOM ÖNDER MOTOR ÜSKÜDAR (7/24 AÇIK)",
-   "il": "İstanbul",
-   "ilce": "ÜSKÜDAR",
-   "adres": "KISIKLI MAH. BOSNA BULVARI NO:29 ÜSKÜDAR / İSTANBUL",
-   "telefon": "0542 254 0724 - 0216 311 93 93",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
    "rol": "satis_servis",
    "bayi_adi": "CENGİZ MOTOR",
    "il": "İstanbul",
@@ -906,17 +873,6 @@
    "ilce": "TORBALI",
    "adres": "AYDIN CADDESİ YEDİ EYLÜL MAH. NO: 157/2B TORBALI / İZMİR",
    "telefon": "0555 518 09 68",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "satis",
-   "bayi_adi": "HERO MOTOR MERKEZ SHOWROOM ÖNDER MOTOR ÖDEMİŞ",
-   "il": "İzmir",
-   "ilce": "ÖDEMİŞ",
-   "adres": "HÜRRİYET MAH. ATATÜRK CAD. NO:70 ÖDEMİŞ/İZMİR",
-   "telefon": "0 538 219 16 23",
    "email": "",
    "website": ""
   },
@@ -1291,17 +1247,6 @@
    "ilce": "ANAMUR",
    "adres": "SULTAN ALAADDİN MAHALLESİ PROF. DR.AHMET TANER KIŞLALI CAD. NO:25/11 ANAMUR / MERSİN",
    "telefon": "0324 816 54 71",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "satis",
-   "bayi_adi": "HERO MOTOR MERKEZ SHOWROOM ÖNDER MOTOR FETHİYE",
-   "il": "Muğla",
-   "ilce": "FETHİYE",
-   "adres": "MENTEŞOĞLU MAH. SÜLEYMAN DEMİREL BULVARI NO:295/A FETHİYE / MUĞLA",
-   "telefon": "0533 052 4658",
    "email": "",
    "website": ""
   },
@@ -1759,17 +1704,6 @@
   {
    "marka": "Hero",
    "rol": "servis",
-   "bayi_adi": "HERO MOTOR MERKEZ SERVİS ANKARA (7/24 AÇIK )",
-   "il": "Ankara",
-   "ilce": "ETİMESGUT",
-   "adres": "YENİ BAĞLICA MAH.ÇAMBAYIRI CAD. NO:125/2 ETİMESGUT / ANKARA",
-   "telefon": "0312 503 88 98 / 0501 208 48 53",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "servis",
    "bayi_adi": "BEY MOTOR / MURAT KAYA",
    "il": "Ankara",
    "ilce": "BEYPAZARI",
@@ -1929,17 +1863,6 @@
    "ilce": "BORÇKA",
    "adres": "SANAYİ SİTESİ NO:0/0 BORÇKA /ARTVİN",
    "telefon": "0 533 369 41 77",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "servis",
-   "bayi_adi": "HERO MOTOR MERKEZ SERVİS ÖNDER MOTOR NAZİLLİ",
-   "il": "Aydın",
-   "ilce": "NAZİLLİ",
-   "adres": "ŞİRİNEVLER MAH. HÜRRİYET CAD. NO:261 (4 YOL KAVŞAĞI) NAZİLLİ/AYDIN",
-   "telefon": "0537 885 01 85 - (0533 045 46 58 Yedek Parça WhatsApp Sipariş Hattı)",
    "email": "",
    "website": ""
   },
@@ -2600,17 +2523,6 @@
    "ilce": "MERKEZ",
    "adres": "SANAYİ MAH. 3202 ÇELİK SK. NO:14 MERKEZ / ISPARTA",
    "telefon": "0546 808 97 88",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "servis",
-   "bayi_adi": "HERO MOTOR MERKEZ SERVİS ÖNDER MOTOR ÜSKÜDAR (7/24 Açık)",
-   "il": "İstanbul",
-   "ilce": "ÜSKÜDAR",
-   "adres": "KISIKLI MAH. BOSNA BULVARI NO:29 ÜSKÜDAR / İSTANBUL",
-   "telefon": "0533 048 46 58 - 0216 311 93 93 (0533 045 46 58 Yedek Parça WhatsApp Sipariş Hattı)",
    "email": "",
    "website": ""
   },
@@ -3409,17 +3321,6 @@
   {
    "marka": "Hero",
    "rol": "servis",
-   "bayi_adi": "HERO MOTOR MERKEZ SERVİS ÖNDER MOTOR FETHİYE",
-   "il": "Muğla",
-   "ilce": "FETHİYE",
-   "adres": "MENTEŞOĞLU MAH. SÜLEYMAN DEMİREL BULVARI NO:295/A FETHİYE / MUĞLA",
-   "telefon": "0533 052 46 58 - (0533 045 46 58 Yedek Parça WhatsApp Sipariş Hattı)",
-   "email": "",
-   "website": ""
-  },
-  {
-   "marka": "Hero",
-   "rol": "servis",
    "bayi_adi": "TEKNO MOTOR/OSMAN YABAŞ",
    "il": "Muğla",
    "ilce": "Dalaman",
@@ -3854,6 +3755,61 @@
    "ilce": "EREĞLİ",
    "adres": "MÜFTÜ MAH. ŞEHİT ÖMER HALİSDEMİR BLV. NO:28 C İÇ KAPI NO:C EREĞLİ / ZONGULDAK",
    "telefon": "0532 390 86 67 - 0372 257 77 77",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Hero",
+   "rol": "satis_servis",
+   "bayi_adi": "Hero Motor Merkez 1",
+   "il": "Ankara",
+   "ilce": "ETİMESGUT",
+   "adres": "YENİ BAĞLICA MAH.ÇAMBAYIRI CAD. NO:125/2 ETİMESGUT / ANKARA",
+   "telefon": "0312 503 88 98 / 0501 208 48 53",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Hero",
+   "rol": "satis_servis",
+   "bayi_adi": "Önder Motor Merkez 1",
+   "il": "Aydın",
+   "ilce": "NAZİLLİ",
+   "adres": "ŞİRİNEVLER MAH. HÜRRİYET CAD. NO:261 (4 YOL KAVŞAĞI) NAZİLLİ/AYDIN",
+   "telefon": "0537 885 01 85",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Hero",
+   "rol": "satis_servis",
+   "bayi_adi": "Önder Motor Merkez 2",
+   "il": "Muğla",
+   "ilce": "FETHİYE",
+   "adres": "MENTEŞOĞLU MAH. SÜLEYMAN DEMİREL BULVARI NO:295/A FETHİYE / MUĞLA",
+   "telefon": "0533 052 4658",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Hero",
+   "rol": "satis_servis",
+   "bayi_adi": "Önder Motor Merkez 3",
+   "il": "İstanbul",
+   "ilce": "ÜSKÜDAR",
+   "adres": "KISIKLI MAH. BOSNA BULVARI NO:29 ÜSKÜDAR / İSTANBUL",
+   "telefon": "0542 254 0724 - 0216 311 93 93",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Hero",
+   "rol": "satis",
+   "bayi_adi": "Önder Motor Merkez 4",
+   "il": "İzmir",
+   "ilce": "ÖDEMİŞ",
+   "adres": "HÜRRİYET MAH. ATATÜRK CAD. NO:70 ÖDEMİŞ/İZMİR",
+   "telefon": "0 538 219 16 23",
    "email": "",
    "website": ""
   }

@@ -1,0 +1,9 @@
+{
+ "satis": {
+  "il_sayisi": 0,
+  "iller": {}
+ },
+ "servis": {
+  "hata": "Cloudflare doğrulaması geçilemedi"
+ }
+}

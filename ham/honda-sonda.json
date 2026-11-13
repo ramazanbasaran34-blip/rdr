@@ -1,0 +1,156 @@
+{
+ "url": "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler",
+ "yanitlar": [
+  {
+   "dosya": "honda-json-01.json",
+   "url": "https://www.honda.com.tr/assets/BKdv8cFM-bundle-graph.json",
+   "boyut": 149606,
+   "ipucu": []
+  },
+  {
+   "dosya": "honda-json-02.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-dunyasi/miras-ve-felsefe/q-data.json",
+   "boyut": 3667,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-03.json",
+   "url": "https://www.honda.com.tr/motosiklet/q-data.json",
+   "boyut": 3605,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-04.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/kullanim-kitapciklari/q-data.json",
+   "boyut": 3694,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-05.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/gonullu-geri-cagirma/q-data.json",
+   "boyut": 3696,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-06.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/servis-randevu-formu/q-data.json",
+   "boyut": 3690,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-07.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/motosiklet-kampanyalari/q-data.json",
+   "boyut": 3636,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-08.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/aktif-yol-yardimi/q-data.json",
+   "boyut": 3662,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-09.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/periyodik-bakim/q-data.json",
+   "boyut": 3649,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-10.json",
+   "url": "https://www.honda.com.tr/motosiklet/motosiklet-fiyat-listesi-2026/q-data.json",
+   "boyut": 5086,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-11.json",
+   "url": "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler/q-data.json",
+   "boyut": 3643,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-12.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-dunyasi/motosiklet-gelisim-merkezi/q-data.json",
+   "boyut": 3672,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-13.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/sikca-sorulan-sorular/q-data.json",
+   "boyut": 3697,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-14.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/orijinal-yedek-parca/q-data.json",
+   "boyut": 3680,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-15.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/honda-kasko/q-data.json",
+   "boyut": 3613,
+   "ipucu": [
+    "city"
+   ]
+  },
+  {
+   "dosya": "honda-json-16.json",
+   "url": "https://www.honda.com.tr/motosiklet/honda-sahipleri/orijinal-urun-garantisi/q-data.json",
+   "boyut": 3689,
+   "ipucu": [
+    "city"
+   ]
+  }
+ ],
+ "istekler": [
+  {
+   "url": "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler",
+   "method": "GET",
+   "basliklar": {
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"HeadlessChrome\";v=\"153\", \"Not_A Brand\";v=\"8\", \"Chromium\";v=\"153\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  },
+  {
+   "url": "https://www.honda.com.tr/cdn-cgi/rum?",
+   "method": "POST",
+   "govde": "{\"startTime\":1789875683573,\"pageloadId\":\"487a6104-796f-4614-a2f9-d5800638b7a4\",\"eventType\":1,\"nt\":\"navigate\",\"location\":\"https://www.honda.com.tr/motosiklet/bayiler-ve-servisler\",\"versions\":{\"fl\":\"2024.11.0\",\"js\":\"2026.9.1\",\"timings\":2},\"bi\":{\"be\":\"Blink\",\"bev\":\"124\",\"bv\":\"124\",\"ov\":\"10\"},\"memory\":{\"totalJSHeapSize\":31200000,\"usedJSHeapSize\":19300000,\"jsHeapSizeLimit\":3760000000},\"firstPaint\":636,\"firstContentfulPaint\":636,\"timingsV2\":{\"nextHopProtocol\":\"h2\",\"domainLookupStart\":2,\"domainLookupEnd\":225,\"connectStart\":225,\"connectEnd\":261,\"secureConnectionStart\":229,\"requestStart\":262,\"responseS",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler",
+    "sec-ch-ua": "\"HeadlessChrome\";v=\"153\", \"Not_A Brand\";v=\"8\", \"Chromium\";v=\"153\"",
+    "content-type": "application/json",
+    "sec-ch-ua-mobile": "?0"
+   }
+  }
+ ],
+ "sayfa_boyut": 1368388
+}

@@ -1,0 +1,21 @@
+{
+ "yuki": {
+  "url": "https://yukimotor.com.tr/satis-noktalari/",
+  "istekler": [],
+  "secim_yapildi": false,
+  "sayfa_boyut": 135807
+ },
+ "yuki-servis": {
+  "url": "https://yukimotor.com.tr/servis-noktalari/",
+  "istekler": [],
+  "secim_yapildi": false,
+  "sayfa_boyut": 172849
+ },
+ "stmax": {
+  "url": "https://stmax.com.tr/yetkili-servisler/",
+  "istekler": [],
+  "secilen": "https://stmax.com.tr/iller/adana/",
+  "secim_yapildi": true,
+  "sayfa_boyut": 275492
+ }
+}

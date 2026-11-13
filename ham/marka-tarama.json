@@ -1,0 +1,32 @@
+{
+ "Kral": {
+  "kayit": 457,
+  "il": 72,
+  "ilsiz": 0
+ },
+ "Musatti": {
+  "kayit": 0,
+  "il": 0,
+  "ilsiz": 0
+ },
+ "Falcon": {
+  "kayit": 0,
+  "il": 0,
+  "ilsiz": 0
+ },
+ "Vespa": {
+  "kayit": 75,
+  "il": 18,
+  "ilsiz": 0
+ },
+ "Aprilia": {
+  "kayit": 71,
+  "il": 17,
+  "ilsiz": 0
+ },
+ "Piaggio": {
+  "kayit": 75,
+  "il": 18,
+  "ilsiz": 0
+ }
+}

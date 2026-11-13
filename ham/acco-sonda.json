@@ -1,0 +1,516 @@
+{
+ "url": "https://actiomobilite.com/bayiler",
+ "yanitlar": [
+  {
+   "dosya": "acco-json-01.json",
+   "url": "https://actiomobilite.com/store/menus?type=header_menu",
+   "boyut": 3126,
+   "ipucu": []
+  },
+  {
+   "dosya": "acco-json-02.json",
+   "url": "https://actiomobilite.com/store/dealers",
+   "boyut": 2107,
+   "ipucu": [
+    "dealer",
+    "latitude",
+    "longitude",
+    "address",
+    "city",
+    "phone"
+   ]
+  },
+  {
+   "dosya": "acco-json-03.json",
+   "url": "https://actiomobilite.com/store/site-settings",
+   "boyut": 723,
+   "ipucu": [
+    "address",
+    "phone"
+   ]
+  },
+  {
+   "dosya": "acco-json-04.json",
+   "url": "https://actiomobilite.com/store/menus?type=footer_corporate_menu",
+   "boyut": 1377,
+   "ipucu": []
+  },
+  {
+   "dosya": "acco-json-05.json",
+   "url": "https://actiomobilite.com/store/menus?type=footer_quick_menu",
+   "boyut": 981,
+   "ipucu": []
+  },
+  {
+   "dosya": "acco-json-06.json",
+   "url": "https://actiomobilite.com/store/menus?type=footer_support_menu",
+   "boyut": 999,
+   "ipucu": []
+  },
+  {
+   "dosya": "acco-json-07.json",
+   "url": "https://actiomobilite.com/store/menus?type=footer_legal_menu",
+   "boyut": 1000,
+   "ipucu": []
+  }
+ ],
+ "istekler": [
+  {
+   "url": "https://actiomobilite.com/bayiler",
+   "method": "GET",
+   "basliklar": {
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/store/menus?type=header_menu",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "x-publishable-api-key": "pk_856e935d5de1cc753b322fc824428ddc379db2c947e8bdc16c52bb05f2362580",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/store/dealers",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "x-publishable-api-key": "pk_856e935d5de1cc753b322fc824428ddc379db2c947e8bdc16c52bb05f2362580",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/store/site-settings",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "x-publishable-api-key": "pk_856e935d5de1cc753b322fc824428ddc379db2c947e8bdc16c52bb05f2362580",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/store/menus?type=footer_corporate_menu",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "x-publishable-api-key": "pk_856e935d5de1cc753b322fc824428ddc379db2c947e8bdc16c52bb05f2362580",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/store/menus?type=footer_quick_menu",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "x-publishable-api-key": "pk_856e935d5de1cc753b322fc824428ddc379db2c947e8bdc16c52bb05f2362580",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/store/menus?type=footer_support_menu",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "x-publishable-api-key": "pk_856e935d5de1cc753b322fc824428ddc379db2c947e8bdc16c52bb05f2362580",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/store/menus?type=footer_legal_menu",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "x-publishable-api-key": "pk_856e935d5de1cc753b322fc824428ddc379db2c947e8bdc16c52bb05f2362580",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/gizlilik-politikasi?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/sss?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/on-siparis?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/actio-mobilite?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/iletisim?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/bayiler?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/brosurler?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/filo-cozumleri?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/actio-ulti?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/?_rsc=1tnh7",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_tree",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/iletisim?_rsc=1lr8z",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-router-state-tree": "%5B%22%22%2C%7B%7D%2Cnull%2C%22metadata-only%22%5D",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/bayiler?_rsc=1lr8z",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-router-state-tree": "%5B%22%22%2C%7B%7D%2Cnull%2C%22metadata-only%22%5D",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/actio-mobilite?_rsc=1lr8z",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-router-state-tree": "%5B%22%22%2C%7B%7D%2Cnull%2C%22metadata-only%22%5D",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/on-siparis?_rsc=1mzao",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_head",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/on-siparis?_rsc=pkf2b",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_index",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/on-siparis?_rsc=wnp6s",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/!KHRlc3QtZHJpdmUp",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/on-siparis?_rsc=xrfmf",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/!KHRlc3QtZHJpdmUp/on-siparis",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/on-siparis?_rsc=oq9vz",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/!KHRlc3QtZHJpdmUp/on-siparis/__PAGE__",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/brosurler?_rsc=1lr8z",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-router-state-tree": "%5B%22%22%2C%7B%7D%2Cnull%2C%22metadata-only%22%5D",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/filo-cozumleri?_rsc=1lr8z",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-router-state-tree": "%5B%22%22%2C%7B%7D%2Cnull%2C%22metadata-only%22%5D",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/actio-ulti?_rsc=1lr8z",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-router-state-tree": "%5B%22%22%2C%7B%7D%2Cnull%2C%22metadata-only%22%5D",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/gizlilik-politikasi?_rsc=1lr8z",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-router-state-tree": "%5B%22%22%2C%7B%7D%2Cnull%2C%22metadata-only%22%5D",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/?_rsc=1mzao",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/_head",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/?_rsc=nugqf",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/!KG1haW4p",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/?_rsc=1r9qu",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "next-router-segment-prefetch": "/!KG1haW4p/__PAGE__",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-prefetch": "1",
+    "next-url": "/bayiler"
+   }
+  },
+  {
+   "url": "https://actiomobilite.com/bayiler?_rsc=1niaw",
+   "method": "GET",
+   "basliklar": {
+    "rsc": "1",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://actiomobilite.com/bayiler",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-state-tree": "%5B%22%22%2C%7B%22children%22%3A%5B%22(main)%22%2C%7B%22children%22%3A%5B%5B%22slug%22%2C%22bayiler%22%2C%22d%22%5D%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%2Cnull%2C%22refetch%22%2Cfalse%5D%7D%2Cnull%2Cnull%2Cfalse%5D%7D%2Cnull%2Cnull%2Cfalse%5D%7D%2Cnull%2Cnull%2Ctrue%5D",
+    "next-url": "/bayiler"
+   }
+  }
+ ],
+ "tiklanan": [
+  "select:İstanbul",
+  "button:Bul",
+  "Servis",
+  "Yedek"
+ ],
+ "sayfa_boyut": 97472
+}

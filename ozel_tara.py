@@ -25,6 +25,11 @@ import requests
 
 from bayiradar.normalize import ILLER, fold, tr_upper
 from bayiradar.parse import finalize
+# Kodlama secimi TEK NOKTADAN: bu dosya kendi cekme kodunu kullaniyordu
+# ve requests'in varsayilani (baslikta charset yoksa ISO-8859-1) Turkce
+# harfleri bozuyordu. 29 ozel modullu marka fetch.py'deki duzeltmeyi
+# hic gormuyordu.
+from bayiradar.fetch import _en_iyi_coz
 from bayiradar.store import commit_tarama, db, now
 
 BASLIK = {
@@ -40,6 +45,20 @@ PLAKA = {ad: f"{i + 1:02d}" for i, ad in enumerate(ILLER)}
 GEZINME = {
     "falcon": "tek", "nanok": "tek", "meka": "tek",
     "kral": "tek", "vespa": "tek", "suzuki": "tek", "isotlar": "tek",
+    # Akeso: Elementor akordeonu, il başlıkları altında düz h2 satırları
+    "akeso": "tek",
+    # Voge: tek sayfa, il grupları ve kart sınıfında rol
+    "voge": "tek",
+    # TVS: modül kendi POST isteğini atıyor (getir)
+    "tvs": "tek",
+    # Yenilenen siteler: liste artık JSON uçlarından geliyor
+    "rutec": "tek", "acco": "tek", "taktas": "tek",
+    # Arora: 8 Eylul'de il secimi zorunlu oldu; liste sayfaya gomulu JSON'da
+    "arora": "tek",
+    # Honda: Qwik sayfa durumundan (qwik/json) okunuyor
+    "honda": "tek",
+    # FCM: il il sekmeler, il bilgisi sekme başlığında
+    "fcm": "tek",
     "zelsun": "il_adi", "motolux": "il_adi", "csn": "il_adi",
     "musatti": "il_kodu",
     "leksas": "tek", "indian": "tek",
@@ -56,6 +75,9 @@ GEZINME = {
     "bmw": "adres_listesi",
     # Kuralkan tek sayfada hem Bajaj hem Kanuni ağını veriyor
     "kuralkan": "cok_marka",
+    # Spormoto: KTM + Husqvarna. Bayiler gömülü JS dizisinde, servisler
+    # düz HTML tabloda; ikisi de tek sayfa, il gezmiyor.
+    "spormoto": "marka_bazli",
     # STMax: seçenek değeri zaten tam adres
     "stmax": "adres_listesi",
     # ASP.NET WebForms: il seçimi URL'e yansımıyor, ViewState ile POST
@@ -84,6 +106,15 @@ def _hedefler(mod_ad: str, mod) -> list[tuple[str, str, str, str]]:
                 out.append((mod.MARKA, anahtar, url, ""))
         return out
 
+    if bicim == "marka_bazli":
+        # Birden çok marka, HER MARKANIN KENDİ adresleri:
+        #   KAYNAKLAR = {"KTM": {"satis": url, "servis": url}, ...}
+        # cok_marka biçimi tek kaynağı paylaştırıyor, burada olmaz.
+        for marka, roller in mod.KAYNAKLAR.items():
+            for rol, url in roller.items():
+                out.append((marka, rol, url, ""))
+        return out
+
     if bicim == "cok_marka":
         # Tek kaynak, birden çok marka (Bajaj ve Kanuni aynı ağ).
         for marka in mod.MARKALAR:
@@ -97,7 +128,7 @@ def _hedefler(mod_ad: str, mod) -> list[tuple[str, str, str, str]]:
         for rol, kok in mod.KAYNAKLAR.items():
             try:
                 y = _r.get(kok, headers=BASLIK, timeout=45)
-                iller = mod.il_sluglari(y.text)
+                iller = mod.il_sluglari(_en_iyi_coz(y, None))
             except Exception:  # noqa: BLE001
                 iller = []
             for adres, ad in iller:
@@ -111,7 +142,7 @@ def _hedefler(mod_ad: str, mod) -> list[tuple[str, str, str, str]]:
         for rol, kok in mod.KAYNAKLAR.items():
             try:
                 y = _r.get(kok, headers=BASLIK, timeout=45)
-                iller = mod.il_sluglari(y.text)
+                iller = mod.il_sluglari(_en_iyi_coz(y, None))
             except Exception:  # noqa: BLE001
                 iller = []
             for slug, ad in iller:
@@ -128,7 +159,7 @@ def _hedefler(mod_ad: str, mod) -> list[tuple[str, str, str, str]]:
                 kok = kalip.format(taban=taban, slug="").rstrip("/")
                 try:
                     y = _r.get(kok + "/", headers=BASLIK, timeout=45)
-                    iller = mod.il_sluglari(y.text)
+                    iller = mod.il_sluglari(_en_iyi_coz(y, None))
                 except Exception:  # noqa: BLE001
                     iller = []
                 for slug, ad in iller:
@@ -166,7 +197,7 @@ def _postback_tara(mod_ad: str, mod, log=print) -> tuple[dict, float]:
         try:
             ilk = oturum.get(url, timeout=60)
             ilk.raise_for_status()
-            govde = ilk.text
+            govde = _en_iyi_coz(ilk, None)
         except Exception as e:  # noqa: BLE001
             log(f"    ✗ {mod.MARKA}/{rol}: {str(e)[:60]}")
             continue
@@ -177,7 +208,7 @@ def _postback_tara(mod_ad: str, mod, log=print) -> tuple[dict, float]:
                 y = oturum.post(url, data=mod.post_govdesi(govde, deger),
                                 timeout=60, headers={"Referer": url})
                 y.raise_for_status()
-                govde = y.text          # zincir: sonraki ViewState
+                govde = _en_iyi_coz(y, None)   # zincir: sonraki ViewState
                 basarili += 1
             except Exception as e:  # noqa: BLE001
                 log(f"    ✗ {mod.MARKA}/{rol}/{il_adi}: {str(e)[:50]}")
@@ -195,7 +226,28 @@ def _postback_tara(mod_ad: str, mod, log=print) -> tuple[dict, float]:
     return toplam, (basarili / denendi if denendi else 0.0)
 
 
+def _uyar(metin: str) -> None:
+    """GitHub Actions iş uyarısı: günlüğe erişemediğimizde tek okunur kanal."""
+    print(f"::warning::[ozel_tara] {metin}", flush=True)
+
+
 def marka_tara(mod_ad: str, log=print) -> dict[str, list[dict]]:
+    """Modülü tarar; modül son_isle() tanımladıysa sonucu ondan geçirir.
+
+    son_isle marka bazında, satış ve servis listelerinin İKİSİ de
+    toplandıktan sonra çalışır (ör. Kuralkan'da ada göre rol birleştirme).
+    """
+    toplam = _marka_tara(mod_ad, log)
+    mod = importlib.import_module(f"ozel.{mod_ad}")
+    if hasattr(mod, "son_isle"):
+        for marka in list(toplam):
+            once = len(toplam[marka])
+            toplam[marka] = mod.son_isle(toplam[marka])
+            log(f"  {marka}: son işlem {once} -> {len(toplam[marka])} kayıt")
+    return toplam
+
+
+def _marka_tara(mod_ad: str, log=print) -> dict[str, list[dict]]:
     mod = importlib.import_module(f"ozel.{mod_ad}")
     if GEZINME.get(mod_ad) == "postback":
         toplam, kapsam = _postback_tara(mod_ad, mod, log)
@@ -205,10 +257,37 @@ def marka_tara(mod_ad: str, log=print) -> dict[str, list[dict]]:
     kodlama = getattr(mod, "KODLAMA", None)
     oturum = requests.Session()
     oturum.headers.update(BASLIK)
+    # JSON uçları için: bazı API'ler (Next.js) Accept başlığına göre HTML
+    # ya da JSON döndürüyor. Modül JSON_UC=True derse JSON istiyoruz.
+    if getattr(mod, "JSON_UC", False):
+        oturum.headers.update({"Accept": "application/json, text/plain, */*",
+                               "X-Requested-With": "XMLHttpRequest"})
+    # Modülün istediği ek başlıklar (ör. Acco'nun genel mağaza anahtarı)
+    oturum.headers.update(getattr(mod, "BASLIKLAR", {}) or {})
 
     toplam: dict[str, list[dict]] = {}
     denendi = basarili = 0
     ilk_il_kotu = 0
+
+    # KENDİ İSTEĞİNİ ATAN MODÜL: bazı uçlar GET değil POST + JSON gövde
+    # istiyor (TVS'nin dealer-search ucu kategoriyi gövdede alıyor).
+    # Modül getir(oturum) tanımladıysa çekme işi ona bırakılıyor.
+    if hasattr(mod, "getir"):
+        marka = getattr(mod, "MARKA", mod_ad)
+        try:
+            ham = mod.getir(oturum)
+        except Exception as e:  # noqa: BLE001
+            log(f"    ✗ {marka}: {str(e)[:80]}")
+            return {}
+        # FINALIZE ŞART: normalleştirme, il/ilçe çözümü, metin temizliği ve
+        # telefon biçimi burada yapılıyor. Atlanırsa yazma aşaması patlıyor.
+        kayitlar = []
+        for r in ham:
+            k = finalize(dict(r), marka, getattr(mod, "UC", ""), {})
+            if k:
+                kayitlar.append(k)
+        log(f"    → {marka}: {len(kayitlar)} kayıt (modül kendi çekti)")
+        return {marka: kayitlar} if kayitlar else {}
 
     for marka, rol, url, il in _hedefler(mod_ad, mod):
         denendi += 1
@@ -216,9 +295,10 @@ def marka_tara(mod_ad: str, log=print) -> dict[str, list[dict]]:
             y = oturum.get(url, timeout=60)
             if y.status_code >= 400:
                 raise RuntimeError(f"HTTP {y.status_code}")
-            govde = y.content.decode(kodlama, "replace") if kodlama else y.text
+            govde = _en_iyi_coz(y, kodlama)
         except Exception as e:  # noqa: BLE001
             log(f"    ✗ {marka}/{rol}/{il or '-'}: {str(e)[:50]}")
+            _uyar(f"{marka}/{rol}/{il or '-'} çekilemedi: {str(e)[:120]}")
             ilk_il_kotu += 1
             if ilk_il_kotu > 12:
                 log("    ✗ çok fazla hata, bu marka bırakılıyor")
@@ -234,8 +314,14 @@ def marka_tara(mod_ad: str, log=print) -> dict[str, list[dict]]:
             ham = mod.coz(rol, govde, url, **ek)
         except Exception as e:  # noqa: BLE001
             log(f"    ✗ ayrıştırma {marka}/{il}: {str(e)[:60]}")
+            _uyar(f"{marka}/{il or '-'} ayrıştırma hatası: {str(e)[:120]}")
             continue
 
+        if not ham:
+            # Sayfa geldi ama kayıt çıkmadı: en sık karşılaşılan sessiz hata.
+            # Gövdenin başını uyarıya koyuyoruz ki ne döndüğü görülsün.
+            _uyar(f"{marka}/{rol}/{il or '-'} sayfa geldi ({len(govde)} karakter) ama "
+                  f"kayıt çıkmadı. Başı: {govde[:160]!r}")
         cfg = {"il_ilce_birlesik": "konum"} if ham and "konum" in ham[0] else {}
         for r in ham:
             k = finalize(dict(r), marka, url, cfg)
@@ -254,7 +340,14 @@ def marka_tara(mod_ad: str, log=print) -> dict[str, list[dict]]:
 
 def main() -> None:
     kuru = "--kuru" in sys.argv
-    istenen = [a for a in sys.argv[1:] if not a.startswith("-")]
+    # --db ile başka veritabanına yazılabilir. Gece taraması sonucu
+    # canlıya değil bayiler_yeni.db'ye gidiyor; önizlemede kontrol
+    # edildikten sonra canlıya alınıyor.
+    db_yolu = "bayiler.db"
+    if "--db" in sys.argv:
+        db_yolu = sys.argv[sys.argv.index("--db") + 1]
+    istenen = [a for a in sys.argv[1:]
+               if not a.startswith("-") and a != db_yolu]
     moduller = istenen or MODULLER
 
     rapor: dict = {}
@@ -274,7 +367,7 @@ def main() -> None:
             r = {"kayit": len(kayitlar), "il": len(iller),
                  "ilsiz": sum(1 for k in kayitlar if not k.get("il"))}
             if not kuru and kayitlar:
-                with db() as con:
+                with db(db_yolu) as con:
                     r["db"] = str(commit_tarama(con, marka, kayitlar, 1.0, basladi))[:180]
             rapor[marka] = r
             print(f"  → {marka}: {json.dumps(r, ensure_ascii=False)[:150]}")

@@ -1,0 +1,20 @@
+{
+ "Kuba": {
+  "kayit": 1336,
+  "satis": 506,
+  "servis": 830,
+  "il": 77,
+  "ilsiz": 0,
+  "kapsam": 1.0,
+  "db": "{'durum': 'basarili', 'adet': 1336, 'yeni': 1018, 'guncel': 318, 'supheli': 0, 'mesaj': ''}"
+ },
+ "RKS": {
+  "kayit": 741,
+  "satis": 253,
+  "servis": 488,
+  "il": 76,
+  "ilsiz": 0,
+  "kapsam": 1.0,
+  "db": "{'durum': 'basarili', 'adet': 741, 'yeni': 533, 'guncel': 208, 'supheli': 0, 'mesaj': ''}"
+ }
+}

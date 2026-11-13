@@ -130,3 +130,59 @@ def coz(rol: str, govde: str, url: str) -> list[dict]:
             "rol": r,
         })
     return out
+
+
+# ---------------------------------------------------------------- ad ile birleştirme
+#
+# KULLANICI KURALI (Ekim 2026): Bajaj/Kanuni'de bir noktanın "hem bayi
+# hem servis" olup olmadığına TELEFONA DEĞİL BAYİ ADINA bakılır.
+#
+# Kuralkan aynı firmayı satış listesinde bir numarayla, teslimat/servis
+# listesinde başka bir numarayla yazabiliyor (BAYMOTO: satışta
+# 0532 487 54 86, serviste 0532 216 54 86). Telefon farklı olunca genel
+# eşleştirici bunları iki ayrı nokta sayıyor, biri "sadece bayi" öteki
+# "sadece servis" görünüyordu.
+#
+# Kural:
+#   · Aynı İL içinde aynı adla hem satış hem servis kaydı varsa → tek
+#     kayıt, rol satis_servis. Satış kaydı (showroom) korunur, servis
+#     kaydı ona katılır.
+#   · Sadece satış listesinde olan → satis, sadece servis listesinde
+#     olan → servis olarak kalır.
+#   · Aynı adla İKİ SATIŞ kaydı (şube) ayrı kalır; servis kaydı aynı
+#     ilçedeki şubeye, yoksa adresi en çok benzeyene, yoksa ilkine katılır.
+
+def _ad_anahtari(ad: str) -> str:
+    from bayiradar.normalize import fold
+    return " ".join(re.sub(r"[^0-9a-z]+", " ", fold(ad or "")).split())
+
+
+def son_isle(kayitlar: list[dict]) -> list[dict]:
+    from bayiradar.normalize import fold
+    from bayiradar.eslestir import adres_benzer
+
+    gruplar: dict[tuple, list[int]] = {}
+    for i, k in enumerate(kayitlar):
+        gruplar.setdefault((_ad_anahtari(k.get("bayi_adi", "")),
+                            fold(k.get("il", "") or "")), []).append(i)
+
+    atilacak: set[int] = set()
+    for idx in gruplar.values():
+        satislar = [i for i in idx if kayitlar[i].get("rol") in ("satis", "satis_servis")]
+        servisler = [i for i in idx if kayitlar[i].get("rol") == "servis"]
+        if not satislar or not servisler:
+            continue
+        for s in servisler:
+            sv = kayitlar[s]
+            def puan(i):
+                k = kayitlar[i]
+                return (fold(k.get("ilce", "") or "") == fold(sv.get("ilce", "") or ""),
+                        adres_benzer(k.get("adres", ""), sv.get("adres", "")),
+                        k.get("rol") == "satis")
+            hedef = max(satislar, key=puan)
+            h = kayitlar[hedef]
+            h["rol"] = "satis_servis"
+            if not h.get("email") and sv.get("email"):
+                h["email"] = sv["email"]
+            atilacak.add(s)
+    return [k for i, k in enumerate(kayitlar) if i not in atilacak]

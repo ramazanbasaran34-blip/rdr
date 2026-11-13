@@ -38,6 +38,8 @@ markalar:
 
   #  1. HONDA  ·  Japonya  ·  www.honda.com.tr
   "Honda":
+    # Site Qwik'e geçti, liste qwik/json durumunda; bkz. ozel/honda.py
+    ozel: honda
     # Sitede satış ve servis ayrı listelenmiyor; her nokta ikisini de
     # yapıyor. Kayıtlar "Satış + Servis" olarak işaretleniyor.
     beklenen: [36, 78]   # saha: ~52 bayi, ~52 servis
@@ -48,6 +50,10 @@ markalar:
 
   #  2. YAMAHA  ·  Japonya  ·  www.yamaha-motor.eu
   "Yamaha":
+    # Bayi bulucu React uygulaması; liste HTML'de yok, resmi GraphQL
+    # ucundan geliyor. Genel ayrıştırıcı hiç kayıt çıkaramıyor ve marka
+    # sürekli "hatali" damgası alıyordu. Betik ucu doğrudan okuyor.
+    betik: yamaha_tara.py
     beklenen: [27, 125]   # saha: 45 satış, 45 servis
     # Sitede satış ve servis ayrı listelenmiyor; her nokta ikisini de
     # yapıyor. Kayıtlar "Satış + Servis" olarak işaretleniyor.
@@ -171,7 +177,10 @@ markalar:
       yetkiler: {sel: "div.text-item div:nth-of-type(2) p"}
     kayit_suzgeci:
       alan: yetkiler
-      icermeli: ["RKS Motor"]
+      # "RKS Motor" tek başına yetmiyordu: sitede bazı noktalar yalnızca
+      # "RKS E-Scooter Servisi" olarak geçiyor ve eleniyorlardı
+      # (ör. Alanya / Özyiğit Motor - Ahmet Özyiğit). İkisi de RKS.
+      icermeli: ["RKS Motor", "RKS E-Scooter", "RKS Elektrikli"]
     beklenen: [500, 1200]
     kaynaklar:
       - rol: satis
@@ -182,31 +191,17 @@ markalar:
         data: {action: states, city: "{il_adi}", state: "0", category: "Servis"}
 
   "Arora":
-    # Sayfa yapısı 30.08.2026'da yakalanıp doğrulandı: 20 kayıt, hepsinde
-    # il/ilçe/adres/telefon tam. İl seçimi URL'e yansımıyor, bu yüzden
-    # sayfa gerçekten kullanılıyor (listeden seç → sonucu oku).
-    mode: browser
-    beklenen: [400, 900]
-    # Türü kart taşımıyor; sayfadaki onay kutusuyla süzülüyor.
-    # Her tür ayrı ayrı işaretlenip 81 il geziliyor.
-    tur_suzgeci:
-      secici: "input[name=yetkili-servis]"
-      degerler:
-        - {deger: "B",  rol: satis}
-        - {deger: "S",  rol: servis}
-        - {deger: "BS", rol: satis_servis}
+    # 8 Eylül 2026: sayfa il seçimi zorunlu hâle geldi, eski tür onay
+    # kutusu (B/S/BS) kalktı. Genel ayrıştırıcı 0 kayıt çekiyor. Liste
+    # sayfaya gömülü "let bayiler = [...]" dizisinde, tür creator alanında.
+    # Bkz. ozel/arora.py — tek istekle 1.247 kayıt.
+    ozel: arora
+    beklenen: [800, 1600]
     kaynaklar:
       - rol: satis_servis
-        url: "https://www.arora.com.tr/hizmet-noktalari"
-    row: "div.points-card-wrapper"
-    fields:
-      bayi_adi: "h3.points-card-title"
-      adres:    "div.points-card-address"
-      telefon:  {sel: "a.points-card-tel", attr: "href", regex: "tel:(.+)"}
-    il_ilce_birlesik: konum
-    ekstra_alanlar:
-      konum: "div.points-card-city"
+        url: "https://arora.com.tr/hizmet-noktalari"
   "Yuki":
+    ozel: yuki
     mode: browser
     kaynaklar:
       - rol: satis
@@ -216,6 +211,7 @@ markalar:
 
   # 11. VOGE  ·  Çin  ·  www.vogeturkiye.com.tr
   "Voge":
+    ozel: voge
     mode: browser
     kaynaklar:
       - rol: satis_servis
@@ -223,6 +219,7 @@ markalar:
 
   # 12. PIAGGIO  ·  İtalya  ·  www.piaggio.com.tr
   "Piaggio":
+    ozel: piaggio
     mode: browser
     beklenen: [42, 120]   # Vespa ile aynı distribütör, benzer ağ varsayıldı
     kaynaklar:
@@ -233,6 +230,7 @@ markalar:
 
   # 13. VESPA  ·  İtalya  ·  www.vespa.com.tr
   "Vespa":
+    ozel: vespa
     mode: browser
     beklenen: [42, 120]   # saha ~40 bayi ~60 servis · motorcular.com: 32 bayi 54 servis
     kaynaklar:
@@ -243,6 +241,7 @@ markalar:
 
   # 14. KYMCO  ·  Tayvan  ·  www.kymco.com.tr
   "Kymco":
+    ozel: kymco
     # Tarayıcı ve il seçimi GEREKMİYOR. Sayfa bütün ağı tek tırnaklı bir JS
     # nesnesi (GeoJSON) olarak kaynağa basıyor; harita onu okuyor. Tek GET
     # ile 75 kaydın hepsi geliyor, rol ayrımı da veride hazır.
@@ -268,6 +267,7 @@ markalar:
 
   # 15. APRILIA  ·  İtalya-Çin  ·  www.aprilia.com.tr
   "Aprilia":
+    ozel: aprilia
     mode: browser
     beklenen: [28, 78]   # Vespa/Piaggio'dan küçük ağ varsayıldı
     kaynaklar:
@@ -278,6 +278,10 @@ markalar:
 
   # 16. HERO  ·  Hindistan  ·  www.heromotor.com.tr
   "Hero":
+    # Veri elle/hero.json'dan geliyor. elle_dosya işareti olmadan tarama
+    # bu markaya hiç dokunmuyordu; dosyada yapılan düzeltmeler (ör. EYMEN
+    # MOTOR yanına "(Önder Motor)") veriye hiç yansımıyordu.
+    elle_dosya: hero
     # TARANMIYOR. Site Cloudflare korumalı; GitHub Actions IP'lerinden
     # her PHP isteği 403 dönüyor (statik dosyalar 200 — ölçüldü).
     # Veri elle/hero.json'da; kullanıcının kendi tarayıcısında
@@ -292,6 +296,7 @@ markalar:
 
   # 17. BMW  ·  Almanya-Çin  ·  www.bmw-motorrad.com.tr
   "BMW":
+    ozel: bmw
     beklenen: [10, 44]   # saha: 14 satış, 18 servis
     mode: browser
     kaynaklar:
@@ -300,8 +305,10 @@ markalar:
 
   # 18. FALCON  ·  Türkiye-Çin  ·  falconmotosiklet.com
   "Falcon":
-    etkilesim: il_secimi
-    mode: browser
+    # ozel/falcon.py: tek JSON isteğiyle tüm ağ.
+    # Tarayıcıyla 81 il × 2 rol geziliyordu ve 80 dakikalık
+    # sınıra takılıp her turda zaman aşımına uğruyordu.
+    ozel: falcon
     kaynaklar:
       - rol: satis
         url: "https://falconmotosiklet.com/bayi-servis-agi/motosiklet"
@@ -311,7 +318,21 @@ markalar:
   # 19. VOLTA  ·  Türkiye-Çin  ·  volta.com.tr
   "Volta":
     mode: browser
-    beklenen: [140, 360]   # saha: ~100 bayi, ~200 servis
+    # Eski aralık (140-360) tarama eksik toplarken konmuştu: servis
+    # sayfasından yalnızca 39 kayıt geliyordu, tam tarama 480 buluyor.
+    # Volta kendi sitesinde "600'den fazla yetkili servis ve bayi
+    # noktası" diyor; toplam 643 çıkıyor, aralık ona göre.
+    beklenen: [500, 800]
+    # Volta'nın kendi mağazaları listede hep aynı tabela adıyla geliyor
+    # ("Fabrika Satış Mağazası / Satış", 32 kez). Telefon, adres ve il
+    # farklı olduğundan bunlar ayrı bayiler; adın başına yer adını
+    # koyup ayırt edilir yapıyoruz:
+    #   -> "Develi Fabrika Satış Mağazası"
+    # Aynı yerde birden çok nokta varsa mahalle adı parantezle ekleniyor.
+    genel_adlar:
+      - "Fabrika Satış Mağazası"
+      - "Benzinli Araç Servisi"
+      - "Elektrikli Bisiklet Servisi"
     kaynaklar:
       - rol: satis
         url: "https://volta.com.tr/pages/bayiler"
@@ -332,6 +353,7 @@ markalar:
 
   # 21. SUZUKI  ·  Japonya  ·  www.suzuki.com.tr
   "Suzuki":
+    ozel: suzuki
     mode: browser
     kaynaklar:
       - rol: satis
@@ -341,6 +363,7 @@ markalar:
 
   # 22. PEUGEOT  ·  Fransa  ·  www.isotlarmotor.com
   "Peugeot":
+    ozel: isotlar
     mode: browser
     tur_suzgeci:
       secici: "input"
@@ -353,6 +376,7 @@ markalar:
 
   # 23. HORWIN  ·  Çin  ·  www.isotlarmotor.com
   "Horwin":
+    ozel: isotlar
     mode: browser
     tur_suzgeci:
       secici: "input"
@@ -365,6 +389,7 @@ markalar:
 
   # 24. LAMBRETTA  ·  İtalya  ·  www.isotlarmotor.com
   "Lambretta":
+    ozel: isotlar
     mode: browser
     tur_suzgeci:
       secici: "input"
@@ -377,6 +402,7 @@ markalar:
 
   # 25. MOTOLUX  ·  Türkiye-Çin  ·  motolux.com.tr
   "Motolux":
+    ozel: motolux
     beklenen: [210, 450]   # saha: ~300 bayi, ~300 servis
     bekleme: 2.0
     kaynaklar:
@@ -387,6 +413,7 @@ markalar:
 
   # 26. KRAL  ·  Türkiye-Çin  ·  kralmotor.tr
   "Kral":
+    ozel: kral
     etkilesim: il_secimi
     mode: browser
     kaynaklar:
@@ -397,6 +424,7 @@ markalar:
 
   # 27. ALTAI  ·  Türkiye-Çin  ·  www.altai.com.tr
   "Altai":
+    ozel: altai
     etkilesim: il_secimi
     mode: browser
     kaynaklar:
@@ -407,6 +435,11 @@ markalar:
 
   # 28. DUCATI  ·  İtalya  ·  korlas.com.tr
   "Ducati":
+    # korlas.com.tr Cloudflare korumalı; GitHub Actions IP'lerinden 403
+    # dönüyor ve her tarama 0 kayıt çekip markayı "hatali" yapıyordu.
+    # Veri sitenin resmi sayfalarından elle/korlas.json'a alınıyor.
+    elle: true
+    elle_dosya: korlas
     beklenen: [18, 60]   # saha: 12 satış, 31 servis
     mode: browser
     kaynaklar:
@@ -416,7 +449,24 @@ markalar:
         url: "https://korlas.com.tr/servis/"
 
   # 29. TRIUMPH  ·  İngiltere  ·  korlas.com.tr
+  "TVS":
+    # Bayi bulucu ayrı bir uygulamada (location.tvsmotor.com); veri resmî
+    # API'den geliyor, modül POST atıyor. Üç kategoriden yalnızca satış ve
+    # servis alınıyor, TWO_WHEELER_APS (yedek parça) listeye girmez.
+    ozel: tvs
+    # İlk tam tarama 655 kayıt verdi (263 satış, 528 servis; kesişim
+    # 136 satış+servis). Aralık ona göre.
+    beklenen: [500, 800]
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://apim.tvsmotor.com/location-master/api/v1/dealer-search"
+
   "Triumph":
+    # korlas.com.tr Cloudflare korumalı; GitHub Actions IP'lerinden 403
+    # dönüyor ve her tarama 0 kayıt çekip markayı "hatali" yapıyordu.
+    # Veri sitenin resmi sayfalarından elle/korlas.json'a alınıyor.
+    elle: true
+    elle_dosya: korlas
     beklenen: [18, 60]   # saha: 12 satış, 31 servis
     mode: browser
     kaynaklar:
@@ -427,6 +477,7 @@ markalar:
 
   # 30. KTM  ·  Avusturya  ·  www.spormoto.com
   "KTM":
+    ozel: spormoto
     beklenen: [20, 95]   # saha: 34 satış, 34 servis
     kaynaklar:
       - rol: satis
@@ -436,6 +487,7 @@ markalar:
 
   # 31. HUSQVARNA  ·  Avusturya  ·  www.spormoto.com
   "Husqvarna":
+    ozel: spormoto
     beklenen: [20, 95]   # saha: 34 satış, 34 servis
     mode: browser
     kaynaklar:
@@ -446,6 +498,7 @@ markalar:
 
   # 32. CSN  ·  Türkiye-Çin  ·  csnmotor.com.tr
   "CSN":
+    ozel: csn
     kaynaklar:
       - rol: satis
         url: "https://csnmotor.com.tr/satis-noktalarimiz/"
@@ -465,6 +518,7 @@ markalar:
 
   # 34. STMAX  ·  Türkiye-Çin  ·  stmax.com.tr
   "STMax":
+    ozel: stmax
     etkilesim: il_secimi
     mode: browser
     kaynaklar:
@@ -485,8 +539,27 @@ markalar:
 
   # 36. REGAL RAPTOR  ·  Çin  ·  regalraptor.com.tr
   "Regal Raptor":
+    ozel: regal
     etkilesim: il_secimi
     mode: browser
+    # TARİF ŞART: tarif yokken otomatik yapı tespiti devreye giriyordu ve
+    # karttaki "Adres" / "Telefon" ETİKETLERİNİ bayi adı sanıyordu.
+    # 456 kaydın 75'inin adı "Telefon", adresi de telefon numarasıydı.
+    # Kart yapısı: div.col-address > b.title (ad) + li'ler (adres, telefon).
+    # Ad "ATALAY YIĞMAN Bayi" diye geliyor; rol zaten ayrı alanda, eki atıyoruz.
+    row: "div.col-address"
+    fields:
+      bayi_adi:
+        sel: "b.title"
+        regex: "^(.*?)\\s*(?:Bayi|Servis)\\s*$"
+      adres:
+        sel: "li"
+        index: 0
+        regex: "^Adres\\s*(.*)$"
+      telefon:
+        sel: "a[href^='tel:']"
+        attr: "href"
+        regex: "tel:\\s*([0-9+ ()]+)"
     kaynaklar:
       - rol: satis
         url: "https://regalraptor.com.tr/tr/bayiler"
@@ -495,6 +568,8 @@ markalar:
 
   # 37. HARLEY DAVIDSON  ·  ABD  ·  www.harley-davidson.com
   "Harley-Davidson":
+    # Veri elle/harley-davidson.json'dan geliyor
+    elle_dosya: harley-davidson
     # TARANMIYOR. Site Cloudflare korumalı ve GitHub Actions IP'lerinden
     # 403 dönüyor. Veri elle/harley-davidson.json dosyasında tutuluyor ve
     # elle_tara.py ile işleniyor. Güncelleme sayfadaki düzenleme
@@ -506,6 +581,7 @@ markalar:
 
   # 38. INDIAN  ·  ABD  ·  www.indianmotorcycle.com.tr
   "Indian":
+    ozel: indian
     mode: browser
     kaynaklar:
       - rol: satis
@@ -524,15 +600,13 @@ markalar:
 
   # 40. REWACO  ·  Almanya  ·  rewaco.com.tr
   "Rewaco":
-    mode: browser
-    kaynaklar:
-      - rol: satis
-        url: "https://rewaco.com.tr/bayiler/"
-      - rol: servis
-        url: "https://rewaco.com.tr/servis/"
-
-  # 41. NANOK  ·  Türkiye-Çin  ·  nanok.com.tr
+    # Trike markası, Türkiye'de tek temsilci (Aydos Karavan). Otomatik
+    # tarama bölgesel servis ortaklarını da sayıp 10 kayıt çıkarıyordu;
+    # gerçekte 1 satış + 1 servis. Elle dosyadan geliyor.
+    elle: true
+    elle_dosya: rewaco
   "Nanok":
+    ozel: nanok
     tur_suzgeci:
       secici: "select[name=service]"
       degerler:
@@ -561,6 +635,8 @@ markalar:
 
   # 44. RUTEC  ·  Türkiye-Çin  ·  www.rutec.com.tr
   "Rutec":
+    # Site yenilendi (Eylül 2026): liste JSON ucundan geliyor, bkz. ozel/rutec.py
+    ozel: rutec
     tur_suzgeci:
       secici: "select[name=turSel]"
       degerler:
@@ -575,12 +651,15 @@ markalar:
 
   # 45. ACCO  ·  Türkiye-Çin  ·  actiomobilite.com
   "Acco":
+    # Site yenilendi (Eylül 2026): liste JSON ucundan geliyor, bkz. ozel/acco.py
+    ozel: acco
     kaynaklar:
       - rol: satis_servis
         url: "https://actiomobilite.com/bayiler"
 
   # 46. MUSATTI  ·  Türkiye-Çin  ·  musattimotor.com
   "Musatti":
+    ozel: musatti
     etkilesim: il_secimi
     mode: browser
     beklenen: [210, 720]   # saha: ~300 bayi, ~300 servis
@@ -599,6 +678,7 @@ markalar:
 
   # 48. MEKA MOTOR  ·  Türkiye-Çin  ·  www.mekamotor.com.tr
   "Meka Motor":
+    ozel: meka
     tur_suzgeci:
       secici: "input"
       degerler:
@@ -612,6 +692,7 @@ markalar:
 
   # 49. ZELSUN  ·  Türkiye-Çin  ·  www.zelsunmotor.com
   "Zelsun":
+    ozel: zelsun
     etkilesim: il_secimi
     mode: browser
     kaynaklar:
@@ -639,6 +720,19 @@ markalar:
 
   # 52. FCM  ·  Türkiye-Çin  ·  fcmmotor.com
   "FCM":
+    ozel: fcm
+    # TARİF ŞART: kartta önce semt etiketi (HURMALI, MERKEZ, EMİRDAĞ),
+    # sonra firma adı geliyor. Tarif yokken otomatik tespit ilk <p>'yi ad
+    # sanıyordu: 407 kaydın 57'sinin adı ilçe/semt adıydı ("MERKEZ" 29 kez)
+    # ve gerçek firma adı adres alanına düşüyordu.
+    row: "div.card"
+    fields:
+      bayi_adi: "p.text-black"
+      adres: "p.c-7a"
+      telefon:
+        sel: "a[href^='tel:']"
+        attr: "href"
+        regex: "tel:\\s*([0-9+ ()]+)"
     kaynaklar:
       - rol: satis
         url: "https://fcmmotor.com/bayiler"
@@ -647,12 +741,14 @@ markalar:
 
   # 53. AKESO  ·  Türkiye-Çin  ·  www.akesomotors.com
   "Akeso":
+    ozel: akeso
     kaynaklar:
       - rol: satis_servis
         url: "https://www.akesomotors.com/bayilerimiz/"
 
   # 54. YİBEN  ·  Türkiye-Çin  ·  yibenmotosiklet.com.tr
   "Yiben":
+    ozel: yiben
     mode: browser
     kaynaklar:
       - rol: satis
@@ -662,6 +758,7 @@ markalar:
 
   # 55. KİMMİ  ·  Türkiye-Çin  ·  www.kimmimotor.com
   "Kimmi":
+    ozel: kimmi_lifan
     mode: browser
     kaynaklar:
       - rol: satis
@@ -684,6 +781,7 @@ markalar:
 
   # 57. REBAT  ·  Türkiye-Çin  ·  rebatmotor.com
   "Rebat":
+    ozel: rebat
     mode: browser
     kaynaklar:
       - rol: satis_servis
@@ -691,6 +789,7 @@ markalar:
 
   # 58. LİFAN  ·  Türkiye-Çin  ·  www.lifanmotor.com.tr
   "Lifan":
+    ozel: kimmi_lifan
     mode: browser
     kaynaklar:
       - rol: satis
@@ -719,6 +818,7 @@ markalar:
         url: "https://arnicamotor.com/servisler?lang=tr&sehir_id={sayi}"
         iterate: {type: sayi, bitis: 81}
   "Leksas":
+    ozel: leksas
     tur_suzgeci:
       secici: "select[name=f-type]"
       degerler:
@@ -732,6 +832,8 @@ markalar:
 
   # 62. TAKTAS  ·  Türkiye-Çin  ·  taktas.com.tr
   "Taktas":
+    # Site yenilendi (Eylül 2026): liste JSON ucundan geliyor, bkz. ozel/taktas.py
+    ozel: taktas
     kaynaklar:
       - rol: satis
         url: "https://taktas.com.tr/bayi-ve-servis"

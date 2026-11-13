@@ -1,0 +1,994 @@
+{
+ "honda-satis-servis": {
+  "marka": "Honda",
+  "rol": "satis_servis",
+  "url": "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler",
+  "boyut": 1473924,
+  "telefon": 64,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 147452
+ },
+ "yamaha-satis-servis": {
+  "marka": "Yamaha",
+  "rol": "satis_servis",
+  "url": "https://www.yamaha-motor.eu/tr/tr/dealer-locator/",
+  "boyut": 1010425,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 41583
+ },
+ "bajaj-satis": {
+  "marka": "Bajaj",
+  "rol": "satis",
+  "url": "https://www.ekuralkan.com/motosiklet-satis-noktalari?city=",
+  "boyut": 837915,
+  "telefon": 102,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 189216
+ },
+ "bajaj-servis": {
+  "marka": "Bajaj",
+  "rol": "servis",
+  "url": "https://www.ekuralkan.com/motosiklet-servis-noktalari?city=",
+  "boyut": 49342,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 6600
+ },
+ "kanuni-satis": {
+  "marka": "Kanuni",
+  "rol": "satis",
+  "url": "https://www.ekuralkan.com/motosiklet-satis-noktalari?city=",
+  "boyut": 838489,
+  "telefon": 102,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 189216
+ },
+ "kanuni-servis": {
+  "marka": "Kanuni",
+  "rol": "servis",
+  "url": "https://www.ekuralkan.com/motosiklet-servis-noktalari?city=",
+  "boyut": 49342,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 6600
+ },
+ "mondial-satis": {
+  "marka": "Mondial",
+  "rol": "satis",
+  "url": "https://www.mondialmotor.com.tr/bayilerimiz?sehir=",
+  "boyut": 928773,
+  "telefon": 31,
+  "il_secici": 71,
+  "il_dizini": 0,
+  "ornek_il_url": "https://www.mondialmotor.com.tr/bayilerimiz?sehir=istanbul",
+  "kaydedilen": 6163
+ },
+ "mondial-servis": {
+  "marka": "Mondial",
+  "rol": "servis",
+  "url": "https://www.mondialmotor.com.tr/servis-noktalari?sehir=",
+  "boyut": 930736,
+  "telefon": 36,
+  "il_secici": 77,
+  "il_dizini": 0,
+  "ornek_il_url": "https://www.mondialmotor.com.tr/servis-noktalari?sehir=istanbul",
+  "kaydedilen": 6650
+ },
+ "cfmoto-satis": {
+  "marka": "CFMoto",
+  "rol": "satis",
+  "url": "https://www.cfmoto.com.tr/satis-noktalari",
+  "boyut": 964008,
+  "telefon": 29,
+  "il_secici": 65,
+  "il_dizini": 0,
+  "ornek_il_url": "https://www.cfmoto.com.tr/satis-noktalari?sehir=istanbul",
+  "kaydedilen": 5632
+ },
+ "cfmoto-servis": {
+  "marka": "CFMoto",
+  "rol": "servis",
+  "url": "https://www.cfmoto.com.tr/servis-noktalari",
+  "boyut": 964224,
+  "telefon": 30,
+  "il_secici": 72,
+  "il_dizini": 0,
+  "ornek_il_url": "https://www.cfmoto.com.tr/servis-noktalari?sehir=istanbul",
+  "kaydedilen": 5601
+ },
+ "kuba-satis-servis": {
+  "marka": "Kuba",
+  "rol": "satis_servis",
+  "url": "https://www.kubamotor.com.tr/bayi-servis/kubamotor",
+  "boyut": 215120,
+  "telefon": 0,
+  "il_secici": 78,
+  "il_dizini": 0,
+  "kaydedilen": 58320
+ },
+ "rks-satis-servis": {
+  "marka": "RKS",
+  "rol": "satis_servis",
+  "url": "https://www.rksmotor.com.tr/bayi-servis/rksmotor.html",
+  "boyut": 247833,
+  "telefon": 0,
+  "il_secici": 77,
+  "il_dizini": 0,
+  "kaydedilen": 66879
+ },
+ "arora-satis-servis": {
+  "marka": "Arora",
+  "rol": "satis_servis",
+  "url": "https://arora.com.tr/hizmet-noktalari",
+  "boyut": 725092,
+  "telefon": 20,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 15060
+ },
+ "yuki-satis": {
+  "marka": "Yuki",
+  "rol": "satis",
+  "url": "https://yukimotor.com.tr/satis-noktalari/",
+  "boyut": 135807,
+  "telefon": 2,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 1701
+ },
+ "yuki-servis": {
+  "marka": "Yuki",
+  "rol": "servis",
+  "url": "https://yukimotor.com.tr/servis-noktalari/",
+  "boyut": 172849,
+  "telefon": 2,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 1701
+ },
+ "voge-satis-servis": {
+  "marka": "Voge",
+  "rol": "satis_servis",
+  "url": "https://www.vogeturkiye.com.tr/yetkili-satici/",
+  "boyut": 290256,
+  "telefon": 187,
+  "il_secici": 42,
+  "il_dizini": 0,
+  "kaydedilen": 83002
+ },
+ "piaggio-satis": {
+  "marka": "Piaggio",
+  "rol": "satis",
+  "url": "https://www.piaggio.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 210153,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 50521
+ },
+ "piaggio-servis": {
+  "marka": "Piaggio",
+  "rol": "servis",
+  "url": "https://www.piaggio.com.tr/tr/yetkili-servisler.html",
+  "boyut": 228923,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 60349
+ },
+ "vespa-satis": {
+  "marka": "Vespa",
+  "rol": "satis",
+  "url": "https://www.vespa.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 210323,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 53049
+ },
+ "vespa-servis": {
+  "marka": "Vespa",
+  "rol": "servis",
+  "url": "https://www.vespa.com.tr/tr/yetkili-servisler.html",
+  "boyut": 218483,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 55013
+ },
+ "kymco-satis-servis": {
+  "marka": "Kymco",
+  "rol": "satis_servis",
+  "url": "https://www.kymco.com.tr/tr/satis-servis-agi.html",
+  "boyut": 297974,
+  "telefon": 1,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 75438
+ },
+ "aprilia-satis": {
+  "marka": "Aprilia",
+  "rol": "satis",
+  "url": "https://www.aprilia.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 258403,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 67614
+ },
+ "aprilia-servis": {
+  "marka": "Aprilia",
+  "rol": "servis",
+  "url": "https://www.aprilia.com.tr/tr/yetkili-servisler.html",
+  "boyut": 268921,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 70196
+ },
+ "hero-satis": {
+  "marka": "Hero",
+  "rol": "satis",
+  "url": "https://www.heromotor.com.tr/bayiler/",
+  "boyut": 54586,
+  "telefon": 1,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 27003
+ },
+ "hero-servis": {
+  "marka": "Hero",
+  "rol": "servis",
+  "url": "https://www.heromotor.com.tr/servisler/",
+  "boyut": 54762,
+  "telefon": 1,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 27071
+ },
+ "bmw-satis-servis": {
+  "marka": "BMW",
+  "rol": "satis_servis",
+  "url": "https://www.bmw-motorrad.com.tr/tr/ssl/yetkili-satici-ve-servisler.html",
+  "boyut": 220600,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 77383
+ },
+ "falcon-satis": {
+  "marka": "Falcon",
+  "rol": "satis",
+  "url": "https://falconmotosiklet.com/bayi-servis-agi/motosiklet",
+  "boyut": 292735,
+  "telefon": 1,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 53126
+ },
+ "falcon-servis": {
+  "marka": "Falcon",
+  "rol": "servis",
+  "url": "https://falconmotosiklet.com/bayi-servis-agi/servis",
+  "boyut": 292711,
+  "telefon": 1,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 53110
+ },
+ "volta-satis": {
+  "marka": "Volta",
+  "rol": "satis",
+  "url": "https://volta.com.tr/pages/bayiler",
+  "boyut": 291676,
+  "telefon": 2,
+  "il_secici": 68,
+  "il_dizini": 0,
+  "kaydedilen": 7076
+ },
+ "volta-servis": {
+  "marka": "Volta",
+  "rol": "servis",
+  "url": "https://volta.com.tr/pages/servis-noktalari",
+  "boyut": 292319,
+  "telefon": 2,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 7076
+ },
+ "sym-satis": {
+  "marka": "SYM",
+  "rol": "satis",
+  "url": "https://www.sym-tr.com/bayiler/",
+  "boyut": 188014,
+  "telefon": 179,
+  "il_secici": 0,
+  "il_dizini": 45,
+  "kaydedilen": 97774
+ },
+ "sym-servis": {
+  "marka": "SYM",
+  "rol": "servis",
+  "url": "https://www.sym-tr.com/servis/",
+  "boyut": 235173,
+  "telefon": 242,
+  "il_secici": 0,
+  "il_dizini": 58,
+  "kaydedilen": 143530
+ },
+ "suzuki-satis": {
+  "marka": "Suzuki",
+  "rol": "satis",
+  "url": "https://www.suzuki.com.tr/tr/motosiklet/satis.html",
+  "boyut": 146876,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 28110
+ },
+ "suzuki-servis": {
+  "marka": "Suzuki",
+  "rol": "servis",
+  "url": "https://www.suzuki.com.tr/tr/motosiklet/yetkili-servisler.html",
+  "boyut": 199553,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 42087
+ },
+ "peugeot-satis-servis": {
+  "marka": "Peugeot",
+  "rol": "satis_servis",
+  "url": "https://www.isotlarmotor.com/bayiler/",
+  "boyut": 69756,
+  "telefon": 89,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 33609
+ },
+ "horwin-satis-servis": {
+  "marka": "Horwin",
+  "rol": "satis_servis",
+  "url": "https://www.isotlarmotor.com/bayiler/",
+  "boyut": 69747,
+  "telefon": 89,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 33609
+ },
+ "lambretta-satis-servis": {
+  "marka": "Lambretta",
+  "rol": "satis_servis",
+  "url": "https://www.isotlarmotor.com/bayiler/",
+  "boyut": 69737,
+  "telefon": 89,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 33609
+ },
+ "motolux-satis-servis": {
+  "marka": "Motolux",
+  "rol": "satis_servis",
+  "url": "https://motolux.com.tr/bayiler/sehir/",
+  "boyut": 624069,
+  "telefon": 2,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 145466
+ },
+ "kral-satis": {
+  "marka": "Kral",
+  "rol": "satis",
+  "url": "https://kralmotor.tr/SalesDealer",
+  "boyut": 1144216,
+  "telefon": 0,
+  "il_secici": 75,
+  "il_dizini": 0,
+  "kaydedilen": 400000
+ },
+ "kral-servis": {
+  "marka": "Kral",
+  "rol": "servis",
+  "url": "https://kralmotor.tr/Service",
+  "boyut": 1045393,
+  "telefon": 0,
+  "il_secici": 77,
+  "il_dizini": 0,
+  "kaydedilen": 400000
+ },
+ "altai-satis": {
+  "marka": "Altai",
+  "rol": "satis",
+  "url": "https://www.altai.com.tr/tr/bayiler",
+  "boyut": 67429,
+  "telefon": 1,
+  "il_secici": 45,
+  "il_dizini": 0,
+  "kaydedilen": 27096
+ },
+ "altai-servis": {
+  "marka": "Altai",
+  "rol": "servis",
+  "url": "https://www.altai.com.tr/tr/servisler",
+  "boyut": 68055,
+  "telefon": 1,
+  "il_secici": 52,
+  "il_dizini": 0,
+  "kaydedilen": 27706
+ },
+ "ducati-satis": {
+  "marka": "Ducati",
+  "rol": "satis",
+  "url": "https://korlas.com.tr/servis/",
+  "boyut": 27444,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 1281
+ },
+ "ducati-servis": {
+  "marka": "Ducati",
+  "rol": "servis",
+  "url": "https://korlas.com.tr/servis/",
+  "boyut": 27465,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 1281
+ },
+ "triumph-satis": {
+  "marka": "Triumph",
+  "rol": "satis",
+  "url": "https://korlas.com.tr/servis/",
+  "boyut": 27465,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 1281
+ },
+ "triumph-servis": {
+  "marka": "Triumph",
+  "rol": "servis",
+  "url": "https://korlas.com.tr/servis/",
+  "boyut": 27444,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 1281
+ },
+ "ktm-satis": {
+  "marka": "KTM",
+  "rol": "satis",
+  "url": "https://www.spormoto.com/ktm/bayiler/",
+  "boyut": 365228,
+  "telefon": 38,
+  "il_secici": 26,
+  "il_dizini": 0,
+  "kaydedilen": 40657
+ },
+ "ktm-servis": {
+  "marka": "KTM",
+  "rol": "servis",
+  "url": "https://www.spormoto.com/ktm/ktm-servisler/",
+  "boyut": 238521,
+  "telefon": 38,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 7695
+ },
+ "husqvarna-satis": {
+  "marka": "Husqvarna",
+  "rol": "satis",
+  "url": "https://www.spormoto.com/husqvarna/bayiler/",
+  "boyut": 323128,
+  "telefon": 24,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 23531
+ },
+ "husqvarna-servis": {
+  "marka": "Husqvarna",
+  "rol": "servis",
+  "url": "https://www.spormoto.com/husqvarna/husqvarna-servisler/",
+  "boyut": 238911,
+  "telefon": 38,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 7695
+ },
+ "csn-satis": {
+  "marka": "CSN",
+  "rol": "satis",
+  "url": "https://csnmotor.com.tr/satis-noktalarimiz/",
+  "boyut": 340244,
+  "telefon": 1,
+  "il_secici": 0,
+  "il_dizini": 81,
+  "kaydedilen": 37981
+ },
+ "csn-servis": {
+  "marka": "CSN",
+  "rol": "servis",
+  "url": "https://csnmotor.com.tr/servis-noktalarimiz/",
+  "boyut": 341495,
+  "telefon": 1,
+  "il_secici": 0,
+  "il_dizini": 81,
+  "kaydedilen": 37961
+ },
+ "kawasaki-satis": {
+  "marka": "Kawasaki",
+  "rol": "satis",
+  "url": "https://www.kawasaki.com.tr/Home/YetkiliSatici",
+  "boyut": 71506,
+  "telefon": 36,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 36988
+ },
+ "kawasaki-servis": {
+  "marka": "Kawasaki",
+  "rol": "servis",
+  "url": "https://www.kawasaki.com.tr/Home/YetkiliServis",
+  "boyut": 138795,
+  "telefon": 81,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 70994
+ },
+ "stmax-satis-servis": {
+  "marka": "STMax",
+  "rol": "satis_servis",
+  "url": "https://stmax.com.tr/yetkili-servisler/",
+  "boyut": 212276,
+  "telefon": 2,
+  "il_secici": 63,
+  "il_dizini": 0,
+  "kaydedilen": 1548
+ },
+ "abush-satis-servis": {
+  "marka": "Abush",
+  "rol": "satis_servis",
+  "url": "https://abush.com.tr/tr/bayiler",
+  "boyut": 361401,
+  "telefon": 0,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 22047
+ },
+ "regal-raptor-satis": {
+  "marka": "Regal Raptor",
+  "rol": "satis",
+  "url": "https://regalraptor.com.tr/tr/bayiler",
+  "boyut": 103269,
+  "telefon": 0,
+  "il_secici": 59,
+  "il_dizini": 0,
+  "kaydedilen": 40475
+ },
+ "regal-raptor-servis": {
+  "marka": "Regal Raptor",
+  "rol": "servis",
+  "url": "https://regalraptor.com.tr/tr/servisler",
+  "boyut": 103615,
+  "telefon": 0,
+  "il_secici": 63,
+  "il_dizini": 0,
+  "kaydedilen": 40824
+ },
+ "harley-davidson-satis-servis": {
+  "marka": "Harley-Davidson",
+  "rol": "satis_servis",
+  "url": "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html",
+  "boyut": 1963769,
+  "telefon": 0,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 193274
+ },
+ "indian-satis": {
+  "marka": "Indian",
+  "rol": "satis",
+  "url": "https://www.indianmotorcycle.com.tr/find-a-dealer/map-view/",
+  "boyut": 83604,
+  "telefon": 1,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 19239
+ },
+ "indian-servis": {
+  "marka": "Indian",
+  "rol": "servis",
+  "url": "https://www.indianmotorcycle.com.tr/find-a-dealer/list-teknik-servisler/",
+  "boyut": 88553,
+  "telefon": 6,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 7568
+ },
+ "apachi-satis": {
+  "marka": "Apachi",
+  "rol": "satis",
+  "url": "https://www.isildar.com.tr/Bayiler",
+  "boyut": 329528,
+  "telefon": 5,
+  "il_secici": 80,
+  "il_dizini": 0,
+  "ornek_il_url": "https://www.isildar.com.tr/Bayiler?id=3",
+  "kaydedilen": 1584
+ },
+ "apachi-servis": {
+  "marka": "Apachi",
+  "rol": "servis",
+  "url": "https://www.isildar.com.tr/Servisler/",
+  "boyut": 318520,
+  "telefon": 5,
+  "il_secici": 80,
+  "il_dizini": 0,
+  "ornek_il_url": "https://www.isildar.com.tr/Servisler/?id=3",
+  "kaydedilen": 1462
+ },
+ "rewaco-satis": {
+  "marka": "Rewaco",
+  "rol": "satis",
+  "url": "https://rewaco.com.tr/bayiler/",
+  "boyut": 164439,
+  "telefon": 1,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 41280
+ },
+ "rewaco-servis": {
+  "marka": "Rewaco",
+  "rol": "servis",
+  "url": "https://rewaco.com.tr/servis/",
+  "boyut": 207472,
+  "telefon": 9,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 62860
+ },
+ "nanok-satis-servis": {
+  "marka": "Nanok",
+  "rol": "satis_servis",
+  "url": "https://nanok.com.tr/bayilerimiz",
+  "boyut": 207781,
+  "telefon": 1,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 29297
+ },
+ "mobilette-satis": {
+  "marka": "Mobilette",
+  "rol": "satis",
+  "url": "https://www.mobilette.com.tr/tr/bayiler",
+  "boyut": 357141,
+  "telefon": 91,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 47737
+ },
+ "mobilette-servis": {
+  "marka": "Mobilette",
+  "rol": "servis",
+  "url": "https://www.mobilette.com.tr/tr/servisler",
+  "boyut": 350680,
+  "telefon": 77,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 41319
+ },
+ "aodes-satis": {
+  "marka": "Aodes",
+  "rol": "satis",
+  "url": "https://www.aodes.com.tr/tr/bayiler",
+  "boyut": 313656,
+  "telefon": 9,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 5366
+ },
+ "aodes-servis": {
+  "marka": "Aodes",
+  "rol": "servis",
+  "url": "https://www.aodes.com.tr/tr/servisler",
+  "boyut": 330658,
+  "telefon": 38,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 21657
+ },
+ "rutec-satis-servis": {
+  "marka": "Rutec",
+  "rol": "satis_servis",
+  "url": "https://www.rutec.com.tr/satis-noktalari.html",
+  "boyut": 148498,
+  "telefon": 158,
+  "il_secici": 43,
+  "il_dizini": 0,
+  "kaydedilen": 72662
+ },
+ "acco-satis-servis": {
+  "marka": "Acco",
+  "rol": "satis_servis",
+  "url": "https://actiomobilite.com/bayiler",
+  "boyut": 108571,
+  "telefon": 5,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 4971
+ },
+ "musatti-satis": {
+  "marka": "Musatti",
+  "rol": "satis",
+  "url": "https://musattimotor.com/bayi-bul",
+  "boyut": 366054,
+  "telefon": 1,
+  "il_secici": 80,
+  "il_dizini": 0,
+  "kaydedilen": 12331
+ },
+ "musatti-servis": {
+  "marka": "Musatti",
+  "rol": "servis",
+  "url": "https://musattimotor.com/servis-bul",
+  "boyut": 366780,
+  "telefon": 1,
+  "il_secici": 80,
+  "il_dizini": 0,
+  "kaydedilen": 12301
+ },
+ "goe-satis-servis": {
+  "marka": "GOE",
+  "rol": "satis_servis",
+  "url": "https://www.goemobility.com/satis-noktalari",
+  "boyut": 838821,
+  "telefon": 24,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 71103
+ },
+ "meka-motor-satis-servis": {
+  "marka": "Meka Motor",
+  "rol": "satis_servis",
+  "url": "https://www.mekamotor.com.tr/bayi-ve-servis",
+  "boyut": 392060,
+  "telefon": 16,
+  "il_secici": 31,
+  "il_dizini": 0,
+  "kaydedilen": 31991
+ },
+ "zelsun-satis": {
+  "marka": "Zelsun",
+  "rol": "satis",
+  "url": "https://www.zelsunmotor.com/Bayilerimiz.aspx",
+  "boyut": 981040,
+  "telefon": 4,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 35940
+ },
+ "zelsun-servis": {
+  "marka": "Zelsun",
+  "rol": "servis",
+  "url": "https://www.zelsunmotor.com/Servislerimiz.aspx",
+  "boyut": 974475,
+  "telefon": 4,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 33758
+ },
+ "sfm-satis-servis": {
+  "marka": "SFM",
+  "rol": "satis_servis",
+  "url": "https://www.sfmmotor.com.tr/bayi-servis/",
+  "boyut": 1106744,
+  "telefon": 410,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 237967
+ },
+ "kove-satis": {
+  "marka": "Kove",
+  "rol": "satis",
+  "url": "https://www.kovemoto.com.tr/yetkilisat%C4%B1c%C4%B1lar",
+  "boyut": 830492,
+  "telefon": 11,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 6214
+ },
+ "kove-servis": {
+  "marka": "Kove",
+  "rol": "servis",
+  "url": "https://www.kovemoto.com.tr/yetkiliservisler",
+  "boyut": 853448,
+  "telefon": 44,
+  "il_secici": 29,
+  "il_dizini": 0,
+  "kaydedilen": 23129
+ },
+ "fcm-satis": {
+  "marka": "FCM",
+  "rol": "satis",
+  "url": "https://fcmmotor.com/bayiler",
+  "boyut": 717856,
+  "telefon": 278,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 148092
+ },
+ "fcm-servis": {
+  "marka": "FCM",
+  "rol": "servis",
+  "url": "https://fcmmotor.com/yetkili-servisler",
+  "boyut": 631753,
+  "telefon": 199,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 102827
+ },
+ "akeso-satis-servis": {
+  "marka": "Akeso",
+  "rol": "satis_servis",
+  "url": "https://www.akesomotors.com/bayilerimiz/",
+  "boyut": 130159,
+  "telefon": 17,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 6698
+ },
+ "yiben-satis": {
+  "marka": "Yiben",
+  "rol": "satis",
+  "url": "https://yibenmotosiklet.com.tr/tr/sayfa/bayi-agi",
+  "boyut": 185200,
+  "telefon": 2,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 20520
+ },
+ "yiben-servis": {
+  "marka": "Yiben",
+  "rol": "servis",
+  "url": "https://yibenmotosiklet.com.tr/tr/sayfa/servis-agi",
+  "boyut": 81410,
+  "telefon": 2,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 15712
+ },
+ "kimmi-satis": {
+  "marka": "Kimmi",
+  "rol": "satis",
+  "url": "https://www.kimmimotor.com/bayiler/",
+  "boyut": 950090,
+  "telefon": 1,
+  "il_secici": 52,
+  "il_dizini": 52,
+  "kaydedilen": 39243
+ },
+ "kimmi-servis": {
+  "marka": "Kimmi",
+  "rol": "servis",
+  "url": "https://www.kimmimotor.com/servisler/",
+  "boyut": 949969,
+  "telefon": 1,
+  "il_secici": 50,
+  "il_dizini": 49,
+  "kaydedilen": 39172
+ },
+ "axion-motor-satis-servis": {
+  "marka": "Axion Motor",
+  "rol": "satis_servis",
+  "url": "https://axionmotor.com.tr/hizmet-noktalarimiz/",
+  "boyut": 735207,
+  "telefon": 50,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 114012
+ },
+ "rebat-satis-servis": {
+  "marka": "Rebat",
+  "rol": "satis_servis",
+  "url": "https://rebatmotor.com/satis-ve-servisler-cloned-111-2/",
+  "boyut": 59393,
+  "telefon": 2,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 17174
+ },
+ "lifan-satis": {
+  "marka": "Lifan",
+  "rol": "satis",
+  "url": "https://www.lifanmotor.com.tr/bayiler/",
+  "hata": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.lifanmotor.com.tr/bayiler/\", waiting until \"domcontentloaded\"\n"
+ },
+ "lifan-servis": {
+  "marka": "Lifan",
+  "rol": "servis",
+  "url": "https://www.lifanmotor.com.tr/servisler/",
+  "boyut": 939084,
+  "telefon": 1,
+  "il_secici": 34,
+  "il_dizini": 34,
+  "kaydedilen": 30425
+ },
+ "karoval-motor-satis": {
+  "marka": "Karoval Motor",
+  "rol": "satis",
+  "url": "https://karoval.com/satis-noktalarimiz/",
+  "boyut": 209996,
+  "telefon": 22,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 19015
+ },
+ "karoval-motor-servis": {
+  "marka": "Karoval Motor",
+  "rol": "servis",
+  "url": "https://karoval.com/servis-noktalarimiz/",
+  "boyut": 243457,
+  "telefon": 44,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 39899
+ },
+ "arnica-satis": {
+  "marka": "Arnica",
+  "rol": "satis",
+  "url": "https://arnicamotor.com/bayiler?lang=tr",
+  "boyut": 36695,
+  "telefon": 9,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 4278
+ },
+ "arnica-servis": {
+  "marka": "Arnica",
+  "rol": "servis",
+  "url": "https://arnicamotor.com/servisler?lang=tr&sehir_id=3&sehir_id=6&sehir_id=3&sehir_id=2",
+  "boyut": 33178,
+  "telefon": 2,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 10967
+ },
+ "leksas-satis-servis": {
+  "marka": "Leksas",
+  "rol": "satis_servis",
+  "url": "https://www.leksas.com.tr/bayi-servis/",
+  "boyut": 183070,
+  "telefon": 3,
+  "il_secici": 81,
+  "il_dizini": 0,
+  "kaydedilen": 1231
+ },
+ "taktas-satis": {
+  "marka": "Taktas",
+  "rol": "satis",
+  "url": "https://taktas.com.tr/bayi-ve-servis",
+  "boyut": 434116,
+  "telefon": 48,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 30668
+ },
+ "taktas-servis": {
+  "marka": "Taktas",
+  "rol": "servis",
+  "url": "https://taktas.com.tr/servislerimiz",
+  "boyut": 434200,
+  "telefon": 48,
+  "il_secici": 0,
+  "il_dizini": 0,
+  "kaydedilen": 30668
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "url": "https://motolux.com.tr/bayiler/sehir/eskisehir/",
+ "yanitlar": [
+  {
+   "dosya": "motolux-esk-json-01.json",
+   "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+   "boyut": 32737,
+   "ipucu": []
+  },
+  {
+   "dosya": "motolux-esk-json-02.json",
+   "url": "https://www.google.com/maps/vt?pb=!1m4!1m3!1i16!2i38324!3i24862!1m4!1m3!1i16!2i38324!3i24863!1m4!1m3!1i16!2i38325!3i24862!1m4!1m3!1i16!2i38325!3i24863!1m4!1m3!1i16!2i38326!3i24862!",
+   "boyut": 7595,
+   "ipucu": []
+  },
+  {
+   "dosya": "motolux-esk-json-03.json",
+   "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+   "boyut": 5014,
+   "ipucu": []
+  }
+ ],
+ "istekler": [
+  {
+   "url": "https://motolux.com.tr/bayiler/sehir/eskisehir/",
+   "method": "GET",
+   "basliklar": {
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"HeadlessChrome\";v=\"153\", \"Not_A Brand\";v=\"8\", \"Chromium\";v=\"153\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  },
+  {
+   "url": "https://motolux.com.tr/wp-content/uploads/2024/05/Enter-the-Grid-2.ttf",
+   "method": "GET",
+   "basliklar": {
+    "origin": "https://motolux.com.tr",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://motolux.com.tr/wp-content/uploads/zn_dynamic.css?ver=1750413918",
+    "sec-ch-ua": "\"HeadlessChrome\";v=\"153\", \"Not_A Brand\";v=\"8\", \"Chromium\";v=\"153\"",
+    "sec-ch-ua-mobile": "?0"
+   }
+  }
+ ],
+ "tiklanan": [
+  "İstanbul"
+ ],
+ "sayfa_boyut": 643197
+}

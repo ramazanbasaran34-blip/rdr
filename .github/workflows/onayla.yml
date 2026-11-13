@@ -1,0 +1,86 @@
+name: Önizlemeyi canlıya al
+
+# Önizleme sayfasında kontrol edilen veriyi canlıya taşır.
+#
+#   bayiler_yeni.db  (tarama sonucu, önizlemede görünür)
+#        ↓  bu akış
+#   bayiler.db       (canlı sayfa)
+#
+# Onaylamadan önce ÖNİZLEME adresine bakın:
+#   ramazanbasaran34-blip.github.io/rdr/onizleme/
+
+on:
+  workflow_dispatch:
+  # tetik/onayla dosyası değişince önizleme canlıya alınır (sohbetten tetik).
+  push:
+    paths: ["tetik/onayla"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bayi-onizleme-yazma  # taramalarla aynı grup: çakışmasın
+  cancel-in-progress: false
+
+jobs:
+  onayla:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+
+      - name: Bağımlılıklar
+        run: pip install -r requirements.txt
+
+      - name: Güvenlik denetimi
+        run: |
+          test -f bayiler_yeni.db || { echo "bayiler_yeni.db yok — önce tarama çalıştırın"; exit 1; }
+          python - <<'PY'
+          import sqlite3, sys
+          def say(y):
+              c = sqlite3.connect(y)
+              t = c.execute("select count(*) from bayiler where durum!='kaldirildi'").fetchone()[0]
+              m = c.execute("select count(distinct marka) from bayiler where durum!='kaldirildi'").fetchone()[0]
+              k = c.execute("""select count(*) from (select marka,bayi_adi,il,ilce
+                   from bayiler where durum!='kaldirildi'
+                   group by marka,bayi_adi,il,ilce having count(*)>1)""").fetchone()[0]
+              return t, m, k
+          ct, cm, _ = say("bayiler.db")
+          yt, ym, yk = say("bayiler_yeni.db")
+          print(f"canlı  : {ct} kayıt, {cm} marka")
+          print(f"yeni   : {yt} kayıt, {ym} marka, {yk} çift kayıt grubu")
+          # ŞİŞME FRENİ: kayıt %25'ten fazla arttıysa bir şey ters gitmiştir
+          if yt > ct * 1.25:
+              sys.exit(f"DUR: kayıt sayısı %{100*yt//ct-100} arttı, çift kayıt olabilir")
+          if yt < ct * 0.75:
+              sys.exit(f"DUR: kayıt sayısı %{100-100*yt//ct} düştü")
+          if ym < cm:
+              sys.exit(f"DUR: marka sayısı {cm} -> {ym} düştü")
+          print("denetim geçti")
+          PY
+
+      - name: Canlıya al
+        run: |
+          git config user.name  "bayi-radar-bot"
+          git config user.email "bot@users.noreply.github.com"
+          cp bayiler_yeni.db bayiler.db
+          python cari_kod.py || true
+          # DONDURULMUŞ CANLI SAYFAYI YENİLE. Canlı sayfa yalnızca burada
+          # güncelleniyor: hem veri hem görünüm bu anda sabitleniyor.
+          mkdir -p canli
+          python uret_index.py canli/index.html
+          test -s canli/index.html || { echo "canlı sayfa üretilemedi"; exit 1; }
+          # DAL ÜZERİNDEN YAYIN: kök index.html canlı sayfadır, eşitle.
+          cp canli/index.html index.html
+          git add -f bayiler.db cari_kodlar.json canli/index.html index.html
+          git diff --staged --quiet && { echo "değişiklik yok"; exit 0; }
+          git commit -m "Önizleme canlıya alındı: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase -X ours "origin/${GITHUB_REF_NAME}" || git rebase --skip
+            git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 5
+          done
+          exit 1

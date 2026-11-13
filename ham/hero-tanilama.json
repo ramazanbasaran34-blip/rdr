@@ -1,0 +1,34 @@
+{
+ "ilk_engel": false,
+ "engel_gecildi": true,
+ "baslik": "Hero Motosiklet - Scooter Satılık Motor - Sıfır Motosiklet",
+ "form": {
+  "formVar": true,
+  "eylem": "bayiler/",
+  "yontem": "POST",
+  "alanlar": [
+   {
+    "etiket": "INPUT",
+    "tur": "submit",
+    "ad": "ara",
+    "deger": "Ara"
+   }
+  ],
+  "secenekSayisi": 82
+ },
+ "A_insan": {
+  "boyut": 27389,
+  "tel": 0,
+  "engel": true
+ },
+ "B_xhr": {
+  "boyut": 6096,
+  "tel": 0,
+  "engel": true
+ },
+ "C_get": {
+  "boyut": 28276,
+  "tel": 0,
+  "engel": true
+ }
+}

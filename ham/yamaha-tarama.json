@@ -1,0 +1,9 @@
+{
+ "ham": 55,
+ "kayit": 55,
+ "il": 29,
+ "ilsiz": 0,
+ "ilcesiz": 9,
+ "telefonsuz": 0,
+ "db": "{'durum': 'basarili', 'adet': 55, 'yeni': 55, 'guncel': 0, 'supheli': 0, 'mesaj': ''}"
+}

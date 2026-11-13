@@ -15,6 +15,8 @@ from __future__ import annotations
 
 import re
 
+from .tipler import tip_rol
+
 KAYIT = re.compile(
     r"\{\s*'type':\s*'(yetkili-[a-z]+)'.*?'properties':\s*\{(.*?)\}\s*\}", re.S)
 
@@ -33,6 +35,11 @@ def coz_stores(rol_varsayilan: str, govde: str) -> list[dict]:
         ad = _al(p, "name")
         if not ad:
             continue
+        # Tanınmayan kategori satış sayılmaz; rol_varsayilan yalnızca
+        # tipin hiç bulunmadığı eski sayfalar için geçerli.
+        rol_ = tip_rol(tip, ROL, "geojson")
+        if not rol_:
+            continue
         out.append({
             "bayi_adi": ad,
             "il": "",
@@ -42,6 +49,6 @@ def coz_stores(rol_varsayilan: str, govde: str) -> list[dict]:
             "email": _al(p, "mail1"),
             "website": "",
             "konum": _al(p, "city"),          # "İl - İlçe" birleşik
-            "rol": ROL.get(tip, rol_varsayilan),
+            "rol": rol_,
         })
     return out

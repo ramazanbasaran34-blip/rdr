@@ -25,6 +25,18 @@ def agirlik(cfg):
 
 def bol(sayi):
     c = load_config()["markalar"]
+
+    # ÖZEL MODÜLLÜ MARKALARI GENEL TARAMAYA VERME.
+    #
+    # cli.py "ozel:" alanını tanımıyor; bu markaları brands.yaml'deki
+    # eski tarifle tarıyor ve kayıtları HER İLE bir kez yazıyordu.
+    # SYM 295'ten 2.886'ya, Voge 138'den 1.136'ya çıkmıştı (13.701 -> 21.303).
+    # Onlar ozel-tara.yml akışıyla, kendi modülleriyle taranıyor.
+    atlanan = sorted(m for m, cfg in c.items() if cfg.get("ozel"))
+    if atlanan:
+        print(f"# genel taramaya girmiyor (özel modüllü): {', '.join(atlanan)}",
+              file=sys.stderr)
+    c = {m: cfg for m, cfg in c.items() if not cfg.get("ozel")}
     sirali = sorted(c.items(), key=lambda kv: -agirlik(kv[1]))
     kovalar = [[] for _ in range(sayi)]
     yuk = [0] * sayi

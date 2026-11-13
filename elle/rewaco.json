@@ -1,0 +1,29 @@
+{
+ "_aciklama": "Rewaco Türkiye (Aydos Karavan / Öz Ankara). Trike markası, Türkiye'de tek yetkili nokta var: bir satış (Yenimahalle) ve bir servis (Etimesgut merkez). Site bayi aramasında bölgesel servis ORTAKLARINI da listelediği için otomatik tarama 10 kayıt çıkarıyordu; gerçekte marka tek temsilciye bağlı. Kullanıcı talebiyle elle iki kayda indirildi.",
+ "_kaynak": ["https://rewaco.com.tr/bayiler/", "https://rewaco.com.tr/servis/", "https://rewaco.com.tr/iletisim/"],
+ "_tarih": "2026-09-19",
+ "kayitlar": [
+  {
+   "marka": "Rewaco",
+   "rol": "satis",
+   "bayi_adi": "Rewaco Türkiye (Aydos Karavan)",
+   "il": "Ankara",
+   "ilce": "Yenimahalle",
+   "adres": "Öz Ankara Sitesi, İvedik OSB, 1475. Sk. No: 16, 06378 Yenimahalle/Ankara",
+   "telefon": "0532 357 24 75",
+   "email": "",
+   "website": "https://rewaco.com.tr"
+  },
+  {
+   "marka": "Rewaco",
+   "rol": "servis",
+   "bayi_adi": "Rewaco Türkiye Yetkili Servis (Aydos Karavan)",
+   "il": "Ankara",
+   "ilce": "Etimesgut",
+   "adres": "Bahçekapı Mah. Şaşmaz Oto Sanayi Sitesi, Şaşmaz Blv. No:15/15, 06105 Etimesgut/Ankara",
+   "telefon": "0532 357 24 75",
+   "email": "",
+   "website": "https://rewaco.com.tr"
+  }
+ ]
+}

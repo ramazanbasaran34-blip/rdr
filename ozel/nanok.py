@@ -13,6 +13,8 @@ from __future__ import annotations
 import json
 import re
 
+from .tipler import tip_rol
+
 MARKA = "Nanok"
 UC = "https://nanok.com.tr/api/dealers"
 KAYNAKLAR = {"hepsi": UC}
@@ -42,6 +44,9 @@ def coz(rol: str, govde: str, url: str) -> list[dict]:
                 ilce = ham_ilce.split("/")[-1].strip()
             elif ham_ilce and ham_ilce.casefold() != il.casefold():
                 ilce = ham_ilce
+            rol_ = tip_rol(x.get("type"), ROL, "Nanok")
+            if not rol_:
+                continue          # yedek parça / tanınmayan kategori
             out.append({
                 "bayi_adi": ad,
                 "il": il,
@@ -50,6 +55,6 @@ def coz(rol: str, govde: str, url: str) -> list[dict]:
                 "telefon": _sade(x.get("phone")),
                 "email": "",
                 "website": "",
-                "rol": ROL.get(_sade(x.get("type")).casefold(), "satis"),
+                "rol": rol_,
             })
     return out

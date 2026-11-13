@@ -1,0 +1,1470 @@
+{
+ "ktm-servis": {
+  "url": "https://spormoto.com/ktm/ktm-servisler/",
+  "kod": 200,
+  "son_url": "https://www.spormoto.com/ktm/ktm-servisler/",
+  "boyut": 234836,
+  "tel_toplam": 50,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "ktm-satis": {
+  "url": "https://spormoto.com/ktm/bayiler/",
+  "kod": 200,
+  "son_url": "https://www.spormoto.com/ktm/bayiler/",
+  "boyut": 260451,
+  "tel_toplam": 49,
+  "tel_script_ici": 34,
+  "yonlendi": true
+ },
+ "husqvarna-servis": {
+  "url": "https://spormoto.com/husqvarna/husqvarna-servisler/",
+  "kod": 200,
+  "son_url": "https://www.spormoto.com/husqvarna/husqvarna-servisler/",
+  "boyut": 235226,
+  "tel_toplam": 50,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "husqvarna-satis": {
+  "url": "https://spormoto.com/husqvarna/bayiler/",
+  "kod": 200,
+  "son_url": "https://www.spormoto.com/husqvarna/bayiler/",
+  "boyut": 259337,
+  "tel_toplam": 35,
+  "tel_script_ici": 20,
+  "yonlendi": true
+ },
+ "m-hero": {
+  "url": "https://www.heromotor.com.tr/bayiler/",
+  "kod": 403,
+  "son_url": "https://www.heromotor.com.tr/bayiler/",
+  "boyut": 5648,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "m-hero-ana": {
+  "url": "https://www.heromotor.com.tr/anasayfa/",
+  "kod": 403,
+  "son_url": "https://www.heromotor.com.tr/anasayfa/",
+  "boyut": 5651,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "m-musatti": {
+  "url": "https://musattimotor.com/bayi-bul",
+  "kod": 200,
+  "son_url": "https://musattimotor.com/bayi-bul",
+  "boyut": 47761,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "m-musatti-ana": {
+  "url": "https://musattimotor.com/",
+  "kod": 200,
+  "son_url": "https://musattimotor.com/",
+  "boyut": 128893,
+  "tel_toplam": 43,
+  "tel_script_ici": 0
+ },
+ "m-csn": {
+  "url": "https://csnmotor.com.tr/satis-noktalarimiz/",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/satis-noktalarimiz/",
+  "boyut": 338506,
+  "tel_toplam": 169,
+  "tel_script_ici": 2
+ },
+ "m-csn-ana": {
+  "url": "https://csnmotor.com.tr/",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/",
+  "boyut": 294707,
+  "tel_toplam": 11,
+  "tel_script_ici": 5
+ },
+ "m-vespa": {
+  "url": "https://www.vespa.com.tr/tr/yetkili-saticilar.html",
+  "kod": 200,
+  "son_url": "https://www.vespa.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 85786,
+  "tel_toplam": 265,
+  "tel_script_ici": 262
+ },
+ "m-vespa-ana": {
+  "url": "https://www.vespa.com.tr/tr/",
+  "kod": 200,
+  "son_url": "https://www.vespa.com.tr/tr/",
+  "boyut": 72938,
+  "tel_toplam": 3,
+  "tel_script_ici": 0
+ },
+ "m-suzuki": {
+  "url": "https://www.suzuki.com.tr/tr/motosiklet/satis.html",
+  "kod": 200,
+  "son_url": "https://www.suzuki.com.tr/tr/motosiklet/satis.html",
+  "boyut": 23474,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "m-suzuki-ana": {
+  "url": "https://www.suzuki.com.tr/tr/motosiklet/",
+  "kod": 200,
+  "son_url": "https://www.suzuki.com.tr/tr/motosiklet/",
+  "boyut": 39851,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "m-zelsun": {
+  "url": "https://www.zelsunmotor.com/Bayilerimiz.aspx",
+  "kod": 200,
+  "son_url": "https://www.zelsunmotor.com/Bayilerimiz.aspx",
+  "boyut": 75028,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "m-zelsun-ana": {
+  "url": "https://www.zelsunmotor.com/Default.aspx",
+  "kod": 200,
+  "son_url": "https://www.zelsunmotor.com/Default.aspx",
+  "boyut": 124062,
+  "tel_toplam": 10,
+  "tel_script_ici": 0
+ },
+ "m-falcon": {
+  "url": "https://falconmotosiklet.com/bayi-servis-agi/motosiklet",
+  "kod": 200,
+  "son_url": "https://falconmotosiklet.com/bayi-servis-agi/motosiklet",
+  "boyut": 288099,
+  "tel_toplam": 12,
+  "tel_script_ici": 2
+ },
+ "m-falcon-ana": {
+  "url": "https://falconmotosiklet.com/",
+  "kod": 200,
+  "son_url": "https://falconmotosiklet.com/",
+  "boyut": 376156,
+  "tel_toplam": 10,
+  "tel_script_ici": 2
+ },
+ "m-kral": {
+  "url": "https://kralmotor.tr/SalesDealer",
+  "kod": 200,
+  "son_url": "https://kralmotor.tr/SalesDealer",
+  "boyut": 199372,
+  "tel_toplam": 435,
+  "tel_script_ici": 433
+ },
+ "m-kral-ana": {
+  "url": "https://kralmotor.tr/",
+  "kod": 200,
+  "son_url": "https://kralmotor.tr/",
+  "boyut": 354150,
+  "tel_toplam": 903,
+  "tel_script_ici": 900
+ },
+ "m-kymco": {
+  "url": "https://www.kymco.com.tr/tr/satis-servis-agi.html",
+  "kod": 200,
+  "son_url": "https://www.kymco.com.tr/tr/satis-servis-agi.html",
+  "boyut": 177860,
+  "tel_toplam": 558,
+  "tel_script_ici": 554
+ },
+ "m-kymco-ana": {
+  "url": "https://www.kymco.com.tr/tr/",
+  "kod": 200,
+  "son_url": "https://www.kymco.com.tr/tr/",
+  "boyut": 350899,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "m-nanok": {
+  "url": "https://nanok.com.tr/bayilerimiz",
+  "kod": 200,
+  "son_url": "https://nanok.com.tr/bayilerimiz",
+  "boyut": 176562,
+  "tel_toplam": 1,
+  "tel_script_ici": 0
+ },
+ "m-nanok-ana": {
+  "url": "https://nanok.com.tr/",
+  "kod": 200,
+  "son_url": "https://nanok.com.tr/",
+  "boyut": 64408,
+  "tel_toplam": 2,
+  "tel_script_ici": 1
+ },
+ "m-milyon": {
+  "url": "https://www.milyonmoto.com.tr/bayi-servisler.html",
+  "kod": 200,
+  "son_url": "https://www.milyonmoto.com.tr/bayi-servisler.html",
+  "boyut": 177948,
+  "tel_toplam": 3,
+  "tel_script_ici": 0
+ },
+ "m-milyon-ana": {
+  "url": "https://www.milyonmoto.com.tr/index.html",
+  "kod": 200,
+  "son_url": "https://www.milyonmoto.com.tr/index.html",
+  "boyut": 140799,
+  "tel_toplam": 3,
+  "tel_script_ici": 0
+ },
+ "m-yuki": {
+  "url": "https://yukimotor.com.tr/satis-noktalari/",
+  "kod": 200,
+  "son_url": "https://yukimotor.com.tr/satis-noktalari/",
+  "boyut": 135956,
+  "tel_toplam": 6,
+  "tel_script_ici": 0
+ },
+ "m-yuki-ana": {
+  "url": "https://www.yukimotor.com.tr",
+  "kod": 200,
+  "son_url": "https://yukimotor.com.tr/",
+  "boyut": 264064,
+  "tel_toplam": 12,
+  "tel_script_ici": 3,
+  "yonlendi": true
+ },
+ "m-yiben": {
+  "url": "https://yibenmotosiklet.com.tr/tr/sayfa/bayi-agi",
+  "hata": "ConnectTimeout: HTTPSConnectionPool(host='yibenmotosiklet.com.tr', port=443): Max retries exceeded with url: /tr/sayfa/bayi-agi (Caused by ConnectTimeoutError(<HTTPSConnection(host='yibenmotosiklet.co"
+ },
+ "m-yiben-ana": {
+  "url": "https://yibenmotosiklet.com.tr/tr",
+  "hata": "ConnectTimeout: HTTPSConnectionPool(host='yibenmotosiklet.com.tr', port=443): Max retries exceeded with url: /tr (Caused by ConnectTimeoutError(<HTTPSConnection(host='yibenmotosiklet.com.tr', port=443"
+ },
+ "m-altai": {
+  "url": "https://www.altai.com.tr/tr/bayiler",
+  "kod": 200,
+  "son_url": "https://www.altai.com.tr/tr/bayiler",
+  "boyut": 68241,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "m-altai-ana": {
+  "url": "https://www.altai.com.tr/",
+  "kod": 200,
+  "son_url": "https://www.altai.com.tr/",
+  "boyut": 104268,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "m-aprilia": {
+  "url": "https://www.aprilia.com.tr/tr/yetkili-saticilar.html",
+  "kod": 200,
+  "son_url": "https://www.aprilia.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 89511,
+  "tel_toplam": 242,
+  "tel_script_ici": 240
+ },
+ "m-aprilia-ana": {
+  "url": "https://www.aprilia.com.tr/tr/",
+  "kod": 200,
+  "son_url": "https://www.aprilia.com.tr/tr/",
+  "boyut": 110788,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "m-piaggio": {
+  "url": "https://www.piaggio.com.tr/tr/yetkili-saticilar.html",
+  "kod": 200,
+  "son_url": "https://www.piaggio.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 49829,
+  "tel_toplam": 264,
+  "tel_script_ici": 262
+ },
+ "m-piaggio-ana": {
+  "url": "https://www.piaggio.com.tr/tr/",
+  "kod": 200,
+  "son_url": "https://www.piaggio.com.tr/tr/",
+  "boyut": 41894,
+  "tel_toplam": 14,
+  "tel_script_ici": 0
+ },
+ "m-rebat": {
+  "url": "https://rebatmotor.com/satis-ve-servisler-cloned-111-2/",
+  "kod": 200,
+  "son_url": "https://rebatmotor.com/satis-ve-servisler-cloned-111-2/",
+  "boyut": 60391,
+  "tel_toplam": 7,
+  "tel_script_ici": 1
+ },
+ "m-rebat-ana": {
+  "url": "https://rebatmotor.com/",
+  "kod": 200,
+  "son_url": "https://rebatmotor.com/",
+  "boyut": 151909,
+  "tel_toplam": 8,
+  "tel_script_ici": 1
+ },
+ "m-regal-raptor": {
+  "url": "https://regalraptor.com.tr/tr/bayiler",
+  "kod": 200,
+  "son_url": "https://regalraptor.com.tr/tr/bayiler",
+  "boyut": 102356,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "m-regal-raptor-ana": {
+  "url": "https://regalraptor.com.tr/",
+  "kod": 200,
+  "son_url": "https://regalraptor.com.tr/",
+  "boyut": 159874,
+  "tel_toplam": 5,
+  "tel_script_ici": 0
+ },
+ "m-rewaco": {
+  "url": "https://rewaco.com.tr/bayiler/",
+  "kod": 403,
+  "son_url": "https://rewaco.com.tr/bayiler/",
+  "boyut": 5619,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "m-rewaco-ana": {
+  "url": "https://rewaco.com.tr/",
+  "kod": 403,
+  "son_url": "https://rewaco.com.tr/",
+  "boyut": 5595,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "m-stmax": {
+  "url": "https://stmax.com.tr/yetkili-servisler/",
+  "kod": 200,
+  "son_url": "https://stmax.com.tr/yetkili-servisler/",
+  "boyut": 204798,
+  "tel_toplam": 9,
+  "tel_script_ici": 1
+ },
+ "m-stmax-ana": {
+  "url": "https://stmax.com.tr/",
+  "kod": 200,
+  "son_url": "https://stmax.com.tr/",
+  "boyut": 290511,
+  "tel_toplam": 9,
+  "tel_script_ici": 1
+ },
+ "m-harley-davidson": {
+  "url": "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html",
+  "kod": 403,
+  "son_url": "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html",
+  "boyut": 5845,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "m-harley-davidson-ana": {
+  "url": "https://www.harley-davidson.com/tr",
+  "kod": 403,
+  "son_url": "https://www.harley-davidson.com/tr",
+  "boyut": 5718,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "m-bmw": {
+  "url": "https://www.bmw-motorrad.com.tr/tr/ssl/yetkili-satici-ve-servisler.html",
+  "hata": "ReadTimeout: HTTPSConnectionPool(host='www.bmw-motorrad.com.tr', port=443): Read timed out. (read timeout=45)"
+ },
+ "m-bmw-ana": {
+  "url": "https://www.bmw-motorrad.com.tr/tr/home.html#/filter-tuemue",
+  "hata": "ReadTimeout: HTTPSConnectionPool(host='www.bmw-motorrad.com.tr', port=443): Read timed out. (read timeout=45)"
+ },
+ "vespa-servis": {
+  "url": "https://www.vespa.com.tr/tr/yetkili-servisler.html",
+  "kod": 200,
+  "son_url": "https://www.vespa.com.tr/tr/yetkili-servisler.html",
+  "boyut": 90950,
+  "tel_toplam": 317,
+  "tel_script_ici": 314
+ },
+ "aprilia-servis": {
+  "url": "https://www.aprilia.com.tr/tr/yetkili-servisler.html",
+  "kod": 200,
+  "son_url": "https://www.aprilia.com.tr/tr/yetkili-servisler.html",
+  "boyut": 96054,
+  "tel_toplam": 306,
+  "tel_script_ici": 304
+ },
+ "piaggio-servis": {
+  "url": "https://www.piaggio.com.tr/tr/yetkili-servisler.html",
+  "kod": 200,
+  "son_url": "https://www.piaggio.com.tr/tr/yetkili-servisler.html",
+  "boyut": 64783,
+  "tel_toplam": 316,
+  "tel_script_ici": 314
+ },
+ "suzuki-servis": {
+  "url": "https://www.suzuki.com.tr/tr/motosiklet/yetkili-servisler.html",
+  "kod": 200,
+  "son_url": "https://www.suzuki.com.tr/tr/motosiklet/yetkili-servisler.html",
+  "boyut": 54963,
+  "tel_toplam": 298,
+  "tel_script_ici": 296
+ },
+ "mj-kuba-servis": {
+  "url": "https://www.mj.com.tr/bayi-servis-agi/kuba-motor-servis-agi/",
+  "kod": 200,
+  "son_url": "https://www.kubamotor.com.tr",
+  "boyut": 207909,
+  "tel_toplam": 519,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "mj-rks-servis": {
+  "url": "https://www.mj.com.tr/bayi-servis-agi/rks-motor-servis-agi/",
+  "kod": 200,
+  "son_url": "https://www.kubamotor.com.tr",
+  "boyut": 207909,
+  "tel_toplam": 519,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "csn": {
+  "url": "https://csnmotor.com.tr/servis-noktalarimiz/",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/servis-noktalarimiz/",
+  "boyut": 339757,
+  "tel_toplam": 169,
+  "tel_script_ici": 2
+ },
+ "falcon-api": {
+  "url": "https://falconmotosiklet.com/api/bayiler.php",
+  "kod": 200,
+  "son_url": "https://falconmotosiklet.com/api/bayiler.php",
+  "boyut": 1225040,
+  "tel_toplam": 7342,
+  "tel_script_ici": 0
+ },
+ "musatti-bayi06": {
+  "url": "https://musattimotor.com/ajax-bayi-listesi.php?city=06",
+  "kod": 200,
+  "son_url": "https://musattimotor.com/ajax-bayi-listesi.php?city=06",
+  "boyut": 9346,
+  "tel_toplam": 22,
+  "tel_script_ici": 0
+ },
+ "musatti-srv06": {
+  "url": "https://musattimotor.com/ajax-servis-listesi.php?city=06",
+  "kod": 200,
+  "son_url": "https://musattimotor.com/ajax-servis-listesi.php?city=06",
+  "boyut": 11335,
+  "tel_toplam": 26,
+  "tel_script_ici": 0
+ },
+ "kral-satis": {
+  "url": "https://kralmotor.tr/SalesDealer",
+  "kod": 200,
+  "son_url": "https://kralmotor.tr/SalesDealer",
+  "boyut": 199372,
+  "tel_toplam": 435,
+  "tel_script_ici": 433
+ },
+ "kral-servis": {
+  "url": "https://kralmotor.tr/Service",
+  "kod": 200,
+  "son_url": "https://kralmotor.tr/Service",
+  "boyut": 181980,
+  "tel_toplam": 469,
+  "tel_script_ici": 467
+ },
+ "vespa-satis": {
+  "url": "https://www.vespa.com.tr/tr/yetkili-saticilar.html",
+  "kod": 200,
+  "son_url": "https://www.vespa.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 85786,
+  "tel_toplam": 265,
+  "tel_script_ici": 262
+ },
+ "suzuki-satis": {
+  "url": "https://www.suzuki.com.tr/tr/motosiklet/satis.html",
+  "kod": 200,
+  "son_url": "https://www.suzuki.com.tr/tr/motosiklet/satis.html",
+  "boyut": 23474,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "zelsun-satis34": {
+  "url": "https://www.zelsunmotor.com/Bayilerimiz.aspx?sehir=%C4%B0STANBUL&ilce=%C4%B0l%C3%A7e%20Se%C3%A7iniz",
+  "kod": 200,
+  "son_url": "https://www.zelsunmotor.com/Bayilerimiz.aspx?sehir=%C4%B0STANBUL&ilce=%C4%B0l%C3%A7e%20Se%C3%A7iniz",
+  "boyut": 80086,
+  "tel_toplam": 10,
+  "tel_script_ici": 0
+ },
+ "zelsun-srv34": {
+  "url": "https://www.zelsunmotor.com/Servislerimiz.aspx?sehir=%C4%B0STANBUL&ilce=%C4%B0l%C3%A7e%20Se%C3%A7iniz",
+  "kod": 200,
+  "son_url": "https://www.zelsunmotor.com/Servislerimiz.aspx?sehir=%C4%B0STANBUL&ilce=%C4%B0l%C3%A7e%20Se%C3%A7iniz",
+  "boyut": 76656,
+  "tel_toplam": 11,
+  "tel_script_ici": 0
+ },
+ "csn-satis2": {
+  "url": "https://csnmotor.com.tr/satis-noktalarimiz/",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/satis-noktalarimiz/",
+  "boyut": 338506,
+  "tel_toplam": 169,
+  "tel_script_ici": 2
+ },
+ "csn-servis2": {
+  "url": "https://csnmotor.com.tr/servis-noktalarimiz/",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/servis-noktalarimiz/",
+  "boyut": 339757,
+  "tel_toplam": 169,
+  "tel_script_ici": 2
+ },
+ "hero-satis": {
+  "url": "https://www.heromotor.com.tr/bayiler/",
+  "kod": 403,
+  "son_url": "https://www.heromotor.com.tr/bayiler/",
+  "boyut": 5648,
+  "tel_toplam": 9,
+  "tel_script_ici": 9
+ },
+ "hero-servis": {
+  "url": "https://www.heromotor.com.tr/servisler/",
+  "kod": 403,
+  "son_url": "https://www.heromotor.com.tr/servisler/",
+  "boyut": 5654,
+  "tel_toplam": 8,
+  "tel_script_ici": 8
+ },
+ "musatti-sayfa": {
+  "url": "https://musattimotor.com/bayi-bul",
+  "kod": 200,
+  "son_url": "https://musattimotor.com/bayi-bul",
+  "boyut": 47761,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "zelsun-satis": {
+  "url": "https://www.zelsunmotor.com/Bayilerimiz.aspx",
+  "kod": 200,
+  "son_url": "https://www.zelsunmotor.com/Bayilerimiz.aspx",
+  "boyut": 75028,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "zelsun-servis": {
+  "url": "https://www.zelsunmotor.com/Servislerimiz.aspx",
+  "kod": 200,
+  "son_url": "https://www.zelsunmotor.com/Servislerimiz.aspx",
+  "boyut": 71226,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "zelsun-ist": {
+  "url": "https://www.zelsunmotor.com/Bayilerimiz.aspx?sehir=%c4%b0STANBUL&ilce=",
+  "kod": 200,
+  "son_url": "https://www.zelsunmotor.com/Bayilerimiz.aspx?sehir=%C4%B0STANBUL&ilce=",
+  "boyut": 80059,
+  "tel_toplam": 10,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "csn-satis": {
+  "url": "https://csnmotor.com.tr/satis-noktalarimiz/",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/satis-noktalarimiz/",
+  "boyut": 338506,
+  "tel_toplam": 169,
+  "tel_script_ici": 2
+ },
+ "csn-servis-ank": {
+  "url": "https://csnmotor.com.tr/servis-noktalarimiz/ankara",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/servis-noktalarimiz/ankara/",
+  "boyut": 185462,
+  "tel_toplam": 11,
+  "tel_script_ici": 2,
+  "yonlendi": true
+ },
+ "csn-satis-ank": {
+  "url": "https://csnmotor.com.tr/satis-noktalarimiz/ankara",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/satis-noktalarimiz/ankara/",
+  "boyut": 182604,
+  "tel_toplam": 9,
+  "tel_script_ici": 2,
+  "yonlendi": true
+ },
+ "csn-srv-ankara": {
+  "url": "https://csnmotor.com.tr/servis-noktalarimiz/ankara",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/servis-noktalarimiz/ankara/",
+  "boyut": 185462,
+  "tel_toplam": 11,
+  "tel_script_ici": 2,
+  "yonlendi": true
+ },
+ "csn-sat-ankara": {
+  "url": "https://csnmotor.com.tr/ankara",
+  "kod": 200,
+  "son_url": "https://csnmotor.com.tr/satis-noktalarimiz/ankara/",
+  "boyut": 182604,
+  "tel_toplam": 9,
+  "tel_script_ici": 2,
+  "yonlendi": true
+ },
+ "motolux-adana": {
+  "url": "https://motolux.com.tr/bayiler/sehir/adana/",
+  "kod": 200,
+  "son_url": "https://motolux.com.tr/bayiler/sehir/adana/",
+  "boyut": 655120,
+  "tel_toplam": 109,
+  "tel_script_ici": 0
+ },
+ "motolux-agri": {
+  "url": "https://motolux.com.tr/bayiler/sehir/agri/",
+  "kod": 200,
+  "son_url": "https://motolux.com.tr/bayiler/sehir/agri/",
+  "boyut": 626998,
+  "tel_toplam": 14,
+  "tel_script_ici": 0
+ },
+ "motolux-izmir": {
+  "url": "https://motolux.com.tr/bayiler/sehir/izmir/",
+  "kod": 200,
+  "son_url": "https://motolux.com.tr/bayiler/sehir/izmir/",
+  "boyut": 681702,
+  "tel_toplam": 202,
+  "tel_script_ici": 0
+ },
+ "leksas": {
+  "url": "https://www.leksas.com.tr/bayi-servis/",
+  "kod": 200,
+  "son_url": "https://www.leksas.com.tr/bayi-servis/",
+  "boyut": 176101,
+  "tel_toplam": 23,
+  "tel_script_ici": 2
+ },
+ "kimmi": {
+  "url": "https://kimmimotor.com/servisler/",
+  "kod": 200,
+  "son_url": "https://www.kimmimotor.com/servisler/",
+  "boyut": 925657,
+  "tel_toplam": 8,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "taktas": {
+  "url": "https://taktas.com.tr/servislerimiz",
+  "kod": 200,
+  "son_url": "https://taktas.com.tr/servislerimiz",
+  "boyut": 310514,
+  "tel_toplam": 5,
+  "tel_script_ici": 0
+ },
+ "nanok-api": {
+  "url": "https://nanok.com.tr/api/dealers",
+  "kod": 200,
+  "son_url": "https://nanok.com.tr/api/dealers",
+  "boyut": 103691,
+  "tel_toplam": 353,
+  "tel_script_ici": 0
+ },
+ "meka-maps": {
+  "url": "https://www.mekamotor.com.tr/resman/uploads/maps.xml",
+  "kod": 200,
+  "son_url": "https://www.mekamotor.com.tr/resman/uploads/maps.xml",
+  "boyut": 142498,
+  "tel_toplam": 309,
+  "tel_script_ici": 0
+ },
+ "arnica-satis": {
+  "url": "https://arnicamotor.com/bayiler?lang=tr",
+  "kod": 200,
+  "son_url": "https://arnicamotor.com/bayiler?lang=tr",
+  "boyut": 36659,
+  "tel_toplam": 13,
+  "tel_script_ici": 0
+ },
+ "arnica-servis": {
+  "url": "https://arnicamotor.com/servisler?lang=tr",
+  "kod": 200,
+  "son_url": "https://arnicamotor.com/servisler?lang=tr",
+  "boyut": 35157,
+  "tel_toplam": 10,
+  "tel_script_ici": 0
+ },
+ "kimmi-bayi": {
+  "url": "https://www.kimmimotor.com/bayiler/",
+  "kod": 200,
+  "son_url": "https://www.kimmimotor.com/bayiler/",
+  "boyut": 925783,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "kimmi-servis": {
+  "url": "https://www.kimmimotor.com/servisler/",
+  "kod": 200,
+  "son_url": "https://www.kimmimotor.com/servisler/",
+  "boyut": 925657,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "leksas-bs": {
+  "url": "https://www.leksas.com.tr/bayi-servis/",
+  "kod": 200,
+  "son_url": "https://www.leksas.com.tr/bayi-servis/",
+  "boyut": 176101,
+  "tel_toplam": 23,
+  "tel_script_ici": 2
+ },
+ "taktas-bs": {
+  "url": "https://taktas.com.tr/bayi-ve-servis",
+  "kod": 200,
+  "son_url": "https://taktas.com.tr/bayi-ve-servis",
+  "boyut": 310420,
+  "tel_toplam": 5,
+  "tel_script_ici": 0
+ },
+ "taktas-servis2": {
+  "url": "https://taktas.com.tr/servislerimiz",
+  "kod": 200,
+  "son_url": "https://taktas.com.tr/servislerimiz",
+  "boyut": 310514,
+  "tel_toplam": 5,
+  "tel_script_ici": 0
+ },
+ "meka-bs": {
+  "url": "https://www.mekamotor.com.tr/bayi-ve-servis",
+  "kod": 200,
+  "son_url": "https://www.mekamotor.com.tr/bayi-ve-servis",
+  "boyut": 177675,
+  "tel_toplam": 8,
+  "tel_script_ici": 4
+ },
+ "milyon-bs": {
+  "url": "https://www.milyonmoto.com.tr/bayi-servisler.html",
+  "kod": 200,
+  "son_url": "https://www.milyonmoto.com.tr/bayi-servisler.html",
+  "boyut": 177948,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "isotlar-bayi": {
+  "url": "https://www.isotlarmotor.com/bayiler/",
+  "kod": 200,
+  "son_url": "https://www.isotlarmotor.com/bayiler/",
+  "boyut": 68443,
+  "tel_toplam": 102,
+  "tel_script_ici": 2
+ },
+ "nanok-sayfa": {
+  "url": "https://nanok.com.tr/bayilerimiz",
+  "kod": 200,
+  "son_url": "https://nanok.com.tr/bayilerimiz",
+  "boyut": 176562,
+  "tel_toplam": 1,
+  "tel_script_ici": 0
+ },
+ "isotlar-peugeot": {
+  "url": "https://www.isotlarmotor.com/bayiler/peugeot-motosiklet/",
+  "kod": 200,
+  "son_url": "https://www.isotlarmotor.com/bayiler/peugeot-motosiklet/",
+  "boyut": 68495,
+  "tel_toplam": 102,
+  "tel_script_ici": 2
+ },
+ "isotlar-horwin": {
+  "url": "https://www.isotlarmotor.com/bayiler/horwin-motosiklet/",
+  "kod": 200,
+  "son_url": "https://www.isotlarmotor.com/bayiler/horwin-motosiklet/",
+  "boyut": 68408,
+  "tel_toplam": 102,
+  "tel_script_ici": 2
+ },
+ "isotlar-lambretta": {
+  "url": "https://www.isotlarmotor.com/bayiler/lambretta-motosiklet/",
+  "kod": 200,
+  "son_url": "https://www.isotlarmotor.com/bayiler/lambretta-motosiklet/",
+  "boyut": 68669,
+  "tel_toplam": 102,
+  "tel_script_ici": 2
+ },
+ "arnica-bayi1": {
+  "url": "https://arnicamotor.com/bayiler?lang=tr&sehir_id=1",
+  "kod": 200,
+  "son_url": "https://arnicamotor.com/bayiler?lang=tr&sehir_id=1",
+  "boyut": 36659,
+  "tel_toplam": 13,
+  "tel_script_ici": 0
+ },
+ "arnica-servis1": {
+  "url": "https://arnicamotor.com/servisler?lang=tr&sehir_id=1",
+  "kod": 200,
+  "son_url": "https://arnicamotor.com/servisler?lang=tr&sehir_id=1",
+  "boyut": 35157,
+  "tel_toplam": 10,
+  "tel_script_ici": 0
+ },
+ "suzuki-satici": {
+  "url": "https://www.suzuki.com.tr/tr/motosiklet/yetkili-saticilar.html",
+  "kod": 200,
+  "son_url": "https://www.suzuki.com.tr/tr/motosiklet/yetkili-saticilar.html",
+  "boyut": 50044,
+  "tel_toplam": 272,
+  "tel_script_ici": 270
+ },
+ "kimmi-srv": {
+  "url": "https://www.kimmimotor.com/servisler/",
+  "kod": 200,
+  "son_url": "https://www.kimmimotor.com/servisler/",
+  "boyut": 925657,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "taktas-srv": {
+  "url": "https://taktas.com.tr/servislerimiz",
+  "kod": 200,
+  "son_url": "https://taktas.com.tr/servislerimiz",
+  "boyut": 310514,
+  "tel_toplam": 5,
+  "tel_script_ici": 0
+ },
+ "arnica-bayi06": {
+  "url": "https://arnicamotor.com/bayiler?lang=tr&sehir_id=6",
+  "kod": 200,
+  "son_url": "https://arnicamotor.com/bayiler?lang=tr&sehir_id=6",
+  "boyut": 33140,
+  "tel_toplam": 6,
+  "tel_script_ici": 0
+ },
+ "arnica-srv06": {
+  "url": "https://arnicamotor.com/servisler?lang=tr&sehir_id=6",
+  "kod": 200,
+  "son_url": "https://arnicamotor.com/servisler?lang=tr&sehir_id=6",
+  "boyut": 33142,
+  "tel_toplam": 6,
+  "tel_script_ici": 0
+ },
+ "lifan-bayi": {
+  "url": "https://www.lifanmotor.com.tr/bayiler/",
+  "kod": 200,
+  "son_url": "https://www.lifanmotor.com.tr/bayiler/",
+  "boyut": 912704,
+  "tel_toplam": 9,
+  "tel_script_ici": 0
+ },
+ "lifan-srv": {
+  "url": "https://www.lifanmotor.com.tr/servisler/",
+  "kod": 200,
+  "son_url": "https://www.lifanmotor.com.tr/servisler/",
+  "boyut": 912403,
+  "tel_toplam": 9,
+  "tel_script_ici": 0
+ },
+ "acco-bayi": {
+  "url": "https://actiomobilite.com/bayiler",
+  "kod": 200,
+  "son_url": "https://actiomobilite.com/bayiler",
+  "boyut": 57282,
+  "tel_toplam": 3,
+  "tel_script_ici": 2
+ },
+ "indian-srv": {
+  "url": "https://www.indianmotorcycle.com.tr/find-a-dealer/list-teknik-servisler/",
+  "kod": 200,
+  "son_url": "https://www.indianmotorcycle.com.tr/find-a-dealer/list-teknik-servisler/",
+  "boyut": 82957,
+  "tel_toplam": 42,
+  "tel_script_ici": 0
+ },
+ "kimmi-rest": {
+  "url": "https://www.kimmimotor.com/wp-json/wp/v2/pages/850",
+  "kod": 200,
+  "son_url": "https://www.kimmimotor.com/wp-json/wp/v2/pages/850",
+  "boyut": 10602,
+  "tel_toplam": 0,
+  "tel_script_ici": 0
+ },
+ "lifan-rest": {
+  "url": "https://www.lifanmotor.com.tr/wp-json/wp/v2/pages/1383",
+  "kod": 200,
+  "son_url": "https://www.lifanmotor.com.tr/wp-json/wp/v2/pages/1383",
+  "boyut": 5821,
+  "tel_toplam": 0,
+  "tel_script_ici": 0
+ },
+ "leksas-rest": {
+  "url": "https://www.leksas.com.tr/wp-json/wp/v2/pages/72",
+  "kod": 200,
+  "son_url": "https://www.leksas.com.tr/wp-json/wp/v2/pages/72",
+  "boyut": 95557,
+  "tel_toplam": 439,
+  "tel_script_ici": 0
+ },
+ "indian-satis": {
+  "url": "https://www.indianmotorcycle.com.tr/find-a-dealer/list-bayiler/",
+  "kod": 404,
+  "son_url": "https://www.indianmotorcycle.com.tr/find-a-dealer/list-bayiler/",
+  "boyut": 751,
+  "tel_toplam": 0,
+  "tel_script_ici": 0
+ },
+ "kimmi-srv-ank": {
+  "url": "https://www.kimmimotor.com/servisler/ankara",
+  "kod": 200,
+  "son_url": "https://www.kimmimotor.com/servisler/ankara/",
+  "boyut": 958061,
+  "tel_toplam": 14,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "kimmi-bayi-ank": {
+  "url": "https://www.kimmimotor.com/bayiler/ankara",
+  "kod": 200,
+  "son_url": "https://www.kimmimotor.com/bayiler/ankara/",
+  "boyut": 951982,
+  "tel_toplam": 14,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "lifan-srv-ank": {
+  "url": "https://www.lifanmotor.com.tr/servisler/ankara",
+  "kod": 200,
+  "son_url": "https://www.lifanmotor.com.tr/servisler/ankara/",
+  "boyut": 927622,
+  "tel_toplam": 13,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "aprilia-satis": {
+  "url": "https://www.aprilia.com.tr/tr/yetkili-saticilar.html",
+  "kod": 200,
+  "son_url": "https://www.aprilia.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 89511,
+  "tel_toplam": 242,
+  "tel_script_ici": 240
+ },
+ "piaggio-satis": {
+  "url": "https://www.piaggio.com.tr/tr/yetkili-saticilar.html",
+  "kod": 200,
+  "son_url": "https://www.piaggio.com.tr/tr/yetkili-saticilar.html",
+  "boyut": 49829,
+  "tel_toplam": 264,
+  "tel_script_ici": 262
+ },
+ "kymco-agi": {
+  "url": "https://www.kymco.com.tr/tr/satis-servis-agi.html",
+  "kod": 200,
+  "son_url": "https://www.kymco.com.tr/tr/satis-servis-agi.html",
+  "boyut": 177860,
+  "tel_toplam": 558,
+  "tel_script_ici": 554
+ },
+ "altai-satis": {
+  "url": "https://www.altai.com.tr/tr/bayiler",
+  "kod": 200,
+  "son_url": "https://www.altai.com.tr/tr/bayiler",
+  "boyut": 68241,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "altai-servis": {
+  "url": "https://www.altai.com.tr/tr/servisler",
+  "kod": 200,
+  "son_url": "https://www.altai.com.tr/tr/servisler",
+  "boyut": 68885,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "regal-satis": {
+  "url": "https://regalraptor.com.tr/tr/bayiler",
+  "kod": 200,
+  "son_url": "https://regalraptor.com.tr/tr/bayiler",
+  "boyut": 102432,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "regal-servis": {
+  "url": "https://regalraptor.com.tr/tr/servisler",
+  "kod": 200,
+  "son_url": "https://regalraptor.com.tr/tr/servisler",
+  "boyut": 102708,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "yiben-satis": {
+  "url": "https://yibenmotosiklet.com.tr/tr/sayfa/bayi-agi",
+  "kod": 200,
+  "son_url": "https://yibenmotosiklet.com.tr/tr/sayfa/bayi-agi",
+  "boyut": 149642,
+  "tel_toplam": 199,
+  "tel_script_ici": 188
+ },
+ "yiben-servis": {
+  "url": "https://yibenmotosiklet.com.tr/tr/sayfa/servis-agi",
+  "kod": 200,
+  "son_url": "https://yibenmotosiklet.com.tr/tr/sayfa/servis-agi",
+  "boyut": 53091,
+  "tel_toplam": 15,
+  "tel_script_ici": 4
+ },
+ "yuki-satis": {
+  "url": "https://yukimotor.com.tr/satis-noktalari/",
+  "kod": 200,
+  "son_url": "https://yukimotor.com.tr/satis-noktalari/",
+  "boyut": 135956,
+  "tel_toplam": 6,
+  "tel_script_ici": 0
+ },
+ "yuki-servis": {
+  "url": "https://yukimotor.com.tr/servis-noktalari/",
+  "kod": 200,
+  "son_url": "https://yukimotor.com.tr/servis-noktalari/",
+  "boyut": 172984,
+  "tel_toplam": 7,
+  "tel_script_ici": 0
+ },
+ "rewaco-satis": {
+  "url": "https://rewaco.com.tr/bayiler/",
+  "kod": 200,
+  "son_url": "https://rewaco.com.tr/bayiler/",
+  "boyut": 138141,
+  "tel_toplam": 20,
+  "tel_script_ici": 1
+ },
+ "rewaco-servis": {
+  "url": "https://rewaco.com.tr/servis/",
+  "kod": 200,
+  "son_url": "https://rewaco.com.tr/servis/",
+  "boyut": 181350,
+  "tel_toplam": 93,
+  "tel_script_ici": 1
+ },
+ "stmax-servis": {
+  "url": "https://stmax.com.tr/yetkili-servisler/",
+  "kod": 200,
+  "son_url": "https://stmax.com.tr/yetkili-servisler/",
+  "boyut": 204798,
+  "tel_toplam": 9,
+  "tel_script_ici": 1
+ },
+ "korlas-bayi": {
+  "url": "https://korlas.com.tr/bayi/",
+  "kod": 403,
+  "son_url": "https://korlas.com.tr/bayi/",
+  "boyut": 5738,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "korlas-servis": {
+  "url": "https://korlas.com.tr/servis/",
+  "kod": 403,
+  "son_url": "https://korlas.com.tr/servis/",
+  "boyut": 5744,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "bmw-moto": {
+  "url": "https://www.bmw-motorrad.com.tr/tr/ssl/yetkili-satici-ve-servisler.html",
+  "hata": "ReadTimeout: HTTPSConnectionPool(host='www.bmw-motorrad.com.tr', port=443): Read timed out. (read timeout=120)"
+ },
+ "yuki-satis-ank": {
+  "url": "https://yukimotor.com.tr/satis-noktalari/?province=ankara",
+  "kod": 200,
+  "son_url": "https://yukimotor.com.tr/satis-noktalari/?province=ankara",
+  "boyut": 143223,
+  "tel_toplam": 13,
+  "tel_script_ici": 0
+ },
+ "yuki-servis-ank": {
+  "url": "https://yukimotor.com.tr/servis-noktalari/?province=ankara",
+  "kod": 200,
+  "son_url": "https://yukimotor.com.tr/servis-noktalari/?province=ankara",
+  "boyut": 198756,
+  "tel_toplam": 29,
+  "tel_script_ici": 0
+ },
+ "rebat": {
+  "url": "https://rebatmotor.com/satis-ve-servisler-cloned-1111/",
+  "kod": 404,
+  "son_url": "https://rebatmotor.com/satis-ve-servisler-cloned-1111/",
+  "boyut": 58014,
+  "tel_toplam": 6,
+  "tel_script_ici": 1
+ },
+ "harley": {
+  "url": "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html",
+  "kod": 403,
+  "son_url": "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html",
+  "boyut": 5845,
+  "tel_toplam": 7,
+  "tel_script_ici": 7
+ },
+ "stmax-srv": {
+  "url": "https://stmax.com.tr/yetkili-servisler/",
+  "kod": 200,
+  "son_url": "https://stmax.com.tr/yetkili-servisler/",
+  "boyut": 204798,
+  "tel_toplam": 9,
+  "tel_script_ici": 1
+ },
+ "rewaco-srv2": {
+  "url": "https://rewaco.com.tr/servis/",
+  "kod": 200,
+  "son_url": "https://rewaco.com.tr/servis/",
+  "boyut": 181350,
+  "tel_toplam": 93,
+  "tel_script_ici": 1
+ },
+ "bmw-api": {
+  "url": "https://c2b-services-i.bmw.com/c2b-localsearch/services/cache/v4/ShowAll?country=tr&category=BD&clientid=UX_NICCE_FORM_DLO",
+  "kod": 200,
+  "son_url": "https://c2b-services-i.bmw.com/c2b-localsearch/services/cache/v4/ShowAll?country=tr&category=BD&clientid=UX_NICCE_FORM_DLO",
+  "boyut": 24599,
+  "tel_toplam": 86,
+  "tel_script_ici": 0
+ },
+ "stmax-ankara": {
+  "url": "https://stmax.com.tr/iller/ankara/",
+  "kod": 200,
+  "son_url": "https://stmax.com.tr/iller/ankara/",
+  "boyut": 271753,
+  "tel_toplam": 28,
+  "tel_script_ici": 1
+ },
+ "stmax-adana": {
+  "url": "https://stmax.com.tr/iller/adana/",
+  "kod": 200,
+  "son_url": "https://stmax.com.tr/iller/adana/",
+  "boyut": 268158,
+  "tel_toplam": 18,
+  "tel_script_ici": 1
+ },
+ "kuralkan-satis-hepsi": {
+  "url": "https://www.ekuralkan.com/motosiklet-satis-noktalari",
+  "kod": 200,
+  "son_url": "https://www.ekuralkan.com/motosiklet-satis-noktalari",
+  "boyut": 154018,
+  "tel_toplam": 182,
+  "tel_script_ici": 171
+ },
+ "kuralkan-satis-34": {
+  "url": "https://www.ekuralkan.com/motosiklet-satis-noktalari?city=34",
+  "kod": 200,
+  "son_url": "https://www.ekuralkan.com/motosiklet-satis-noktalari?city=34",
+  "boyut": 154018,
+  "tel_toplam": 182,
+  "tel_script_ici": 171
+ },
+ "kuralkan-satis-6": {
+  "url": "https://www.ekuralkan.com/motosiklet-satis-noktalari?city=6",
+  "kod": 200,
+  "son_url": "https://www.ekuralkan.com/motosiklet-satis-noktalari?city=6",
+  "boyut": 154018,
+  "tel_toplam": 182,
+  "tel_script_ici": 171
+ },
+ "kuralkan-servis": {
+  "url": "https://www.ekuralkan.com/motosiklet-teslimat-noktalari",
+  "kod": 200,
+  "son_url": "https://www.ekuralkan.com/motosiklet-teslimat-noktalari",
+  "boyut": 199416,
+  "tel_toplam": 341,
+  "tel_script_ici": 330
+ },
+ "rebat-servis": {
+  "url": "https://rebatmotor.com/servis/",
+  "kod": 200,
+  "son_url": "https://rebatmotor.com/servis/",
+  "boyut": 473091,
+  "tel_toplam": 130,
+  "tel_script_ici": 0
+ },
+ "rebat-bayi": {
+  "url": "https://rebatmotor.com/bayi/",
+  "kod": 200,
+  "son_url": "https://rebatmotor.com/bayi-ekleme-paneli/",
+  "boyut": 59551,
+  "tel_toplam": 6,
+  "tel_script_ici": 1,
+  "yonlendi": true
+ },
+ "bmw-yeni": {
+  "url": "https://www.bmw-motorrad.com.tr/tr/ssl/yetkili-satici-ve-servisler.html",
+  "hata": "ReadTimeout: HTTPSConnectionPool(host='www.bmw-motorrad.com.tr', port=443): Read timed out. (read timeout=120)"
+ },
+ "borusan-istanbul": {
+  "url": "https://www.borusanotomotiv.com/yetkili-satici-ve-servisler/arama?city=istanbul",
+  "kod": 200,
+  "son_url": "https://www.borusanotomotiv.com/yetkili-satici-ve-servisler/arama?city=istanbul",
+  "boyut": 35662,
+  "tel_toplam": 31,
+  "tel_script_ici": 30
+ },
+ "borusan-bursa": {
+  "url": "https://www.borusanotomotiv.com/yetkili-satici-ve-servisler/arama?city=Bursa",
+  "kod": 200,
+  "son_url": "https://www.borusanotomotiv.com/yetkili-satici-ve-servisler/arama?city=Bursa",
+  "boyut": 27800,
+  "tel_toplam": 10,
+  "tel_script_ici": 9
+ },
+ "borusan-harita": {
+  "url": "https://www.borusanotomotiv.com/yetkili-satici-ve-servisler/harita",
+  "kod": 200,
+  "son_url": "https://www.borusanotomotiv.com/yetkili-satici-ve-servisler/harita",
+  "boyut": 19520,
+  "tel_toplam": 2,
+  "tel_script_ici": 1
+ },
+ "sym-bayiler": {
+  "url": "https://www.sym-tr.com/bayiler/",
+  "kod": 200,
+  "son_url": "https://www.sym-tr.com/bayiler/",
+  "boyut": 187371,
+  "tel_toplam": 311,
+  "tel_script_ici": 0
+ },
+ "sym-servis": {
+  "url": "https://www.sym-tr.com/servis/",
+  "kod": 200,
+  "son_url": "https://www.sym-tr.com/servis/",
+  "boyut": 234782,
+  "tel_toplam": 377,
+  "tel_script_ici": 0
+ },
+ "kawasaki-satis": {
+  "url": "https://www.kawasaki.com.tr/Home/YetkiliSatici",
+  "kod": 200,
+  "son_url": "https://www.kawasaki.com.tr/Home/YetkiliSatici",
+  "boyut": 72031,
+  "tel_toplam": 69,
+  "tel_script_ici": 0
+ },
+ "kawasaki-servis": {
+  "url": "https://www.kawasaki.com.tr/Home/YetkiliServis",
+  "kod": 200,
+  "son_url": "https://www.kawasaki.com.tr/Home/YetkiliServis",
+  "boyut": 139688,
+  "tel_toplam": 170,
+  "tel_script_ici": 0
+ },
+ "abush-liste": {
+  "url": "https://abush.com.tr/tr/bayiler",
+  "kod": 200,
+  "son_url": "https://abush.com.tr/tr/bayiler",
+  "boyut": 367219,
+  "tel_toplam": 1,
+  "tel_script_ici": 0
+ },
+ "m-fcm": {
+  "url": "https://fcmmotor.com/bayiler",
+  "kod": 200,
+  "son_url": "https://fcmmotor.com/bayiler",
+  "boyut": 739637,
+  "tel_toplam": 566,
+  "tel_script_ici": 1
+ },
+ "m-fcm-ana": {
+  "url": "https://fcmmotor.com/",
+  "kod": 200,
+  "son_url": "https://fcmmotor.com/",
+  "boyut": 153133,
+  "tel_toplam": 4,
+  "tel_script_ici": 1
+ },
+ "m-apachi": {
+  "url": "https://www.isildar.com.tr/Bayiler",
+  "kod": 200,
+  "son_url": "https://www.isildar.com.tr/Bayiler",
+  "boyut": 340324,
+  "tel_toplam": 1,
+  "tel_script_ici": 0
+ },
+ "m-apachi-ana": {
+  "url": "https://apachi.com.tr/",
+  "kod": 200,
+  "son_url": "https://apachi.com.tr/",
+  "boyut": 231673,
+  "tel_toplam": 37,
+  "tel_script_ici": 0
+ },
+ "m-mondial": {
+  "url": "https://www.mondialmotor.com.tr/bayilerimiz",
+  "kod": 200,
+  "son_url": "https://www.mondialmotor.com.tr/bayilerimiz",
+  "boyut": 31058,
+  "tel_toplam": 1,
+  "tel_script_ici": 0
+ },
+ "m-mondial-ana": {
+  "url": "https://www.mondialmotor.com.tr/",
+  "kod": 200,
+  "son_url": "https://www.mondialmotor.com.tr/",
+  "boyut": 25969,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "m-akeso": {
+  "url": "https://www.akesomotors.com/bayilerimiz/",
+  "kod": 200,
+  "son_url": "https://www.akesomotors.com/bayilerimiz/",
+  "boyut": 128562,
+  "tel_toplam": 28,
+  "tel_script_ici": 2
+ },
+ "m-akeso-ana": {
+  "url": "https://www.akesomotors.com/",
+  "kod": 200,
+  "son_url": "https://www.akesomotors.com/",
+  "boyut": 191025,
+  "tel_toplam": 40,
+  "tel_script_ici": 2
+ },
+ "m-voge": {
+  "url": "https://www.vogeturkiye.com.tr/yetkili-satici/",
+  "kod": 200,
+  "son_url": "https://www.vogeturkiye.com.tr/yetkili-satici/",
+  "boyut": 289668,
+  "tel_toplam": 390,
+  "tel_script_ici": 5
+ },
+ "m-voge-ana": {
+  "url": "https://www.vogeturkiye.com.tr/",
+  "kod": 200,
+  "son_url": "https://www.vogeturkiye.com.tr/",
+  "boyut": 155929,
+  "tel_toplam": 16,
+  "tel_script_ici": 6
+ },
+ "m-taktas": {
+  "url": "https://taktas.com.tr/bayi-ve-servis",
+  "kod": 200,
+  "son_url": "https://taktas.com.tr/bayi-ve-servis",
+  "boyut": 310420,
+  "tel_toplam": 5,
+  "tel_script_ici": 0
+ },
+ "m-taktas-ana": {
+  "url": "https://taktas.com.tr/index",
+  "kod": 200,
+  "son_url": "https://taktas.com.tr/index",
+  "boyut": 60408,
+  "tel_toplam": 8,
+  "tel_script_ici": 0
+ },
+ "m-acco": {
+  "url": "https://actiomobilite.com/bayiler",
+  "kod": 200,
+  "son_url": "https://actiomobilite.com/bayiler",
+  "boyut": 57282,
+  "tel_toplam": 3,
+  "tel_script_ici": 2
+ },
+ "m-acco-ana": {
+  "url": "https://actiomobilite.com/",
+  "kod": 200,
+  "son_url": "https://actiomobilite.com/",
+  "boyut": 107203,
+  "tel_toplam": 126,
+  "tel_script_ici": 23
+ },
+ "m-rutec": {
+  "url": "https://www.rutec.com.tr/satis-noktalari.html",
+  "kod": 200,
+  "son_url": "https://www.rutec.com.tr/satis-noktalari.html",
+  "boyut": 13385,
+  "tel_toplam": 1,
+  "tel_script_ici": 0
+ },
+ "m-rutec-ana": {
+  "url": "https://www.rutec.com.tr/",
+  "kod": 200,
+  "son_url": "https://www.rutec.com.tr/",
+  "boyut": 58209,
+  "tel_toplam": 4,
+  "tel_script_ici": 1
+ },
+ "m-cfmoto": {
+  "url": "https://www.cfmoto.com.tr/satis-noktalari",
+  "kod": 200,
+  "son_url": "https://www.cfmoto.com.tr/satis-noktalari",
+  "boyut": 67444,
+  "tel_toplam": 0,
+  "tel_script_ici": 0
+ },
+ "m-cfmoto-ana": {
+  "url": "https://www.cfmoto.com.tr",
+  "kod": 200,
+  "son_url": "https://www.cfmoto.com.tr/",
+  "boyut": 103536,
+  "tel_toplam": 0,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ },
+ "m-arora": {
+  "url": "https://arora.com.tr/hizmet-noktalari",
+  "kod": 200,
+  "son_url": "https://arora.com.tr/hizmet-noktalari",
+  "boyut": 624221,
+  "tel_toplam": 3646,
+  "tel_script_ici": 3644
+ },
+ "m-arora-ana": {
+  "url": "https://www.arora.com.tr",
+  "kod": 200,
+  "son_url": "https://arora.com.tr/",
+  "boyut": 266235,
+  "tel_toplam": 2,
+  "tel_script_ici": 1,
+  "yonlendi": true
+ },
+ "m-sfm": {
+  "url": "https://www.sfmmotor.com.tr/bayi-servis/",
+  "kod": 200,
+  "son_url": "https://www.sfmmotor.com.tr/bayi-servis/",
+  "boyut": 482049,
+  "tel_toplam": 413,
+  "tel_script_ici": 0
+ },
+ "m-sfm-ana": {
+  "url": "https://www.sfmmotor.com.tr/",
+  "kod": 200,
+  "son_url": "https://www.sfmmotor.com.tr/",
+  "boyut": 335822,
+  "tel_toplam": 2,
+  "tel_script_ici": 0
+ },
+ "m-honda": {
+  "url": "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler",
+  "kod": 200,
+  "son_url": "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler",
+  "boyut": 604912,
+  "tel_toplam": 181,
+  "tel_script_ici": 168
+ },
+ "m-honda-ana": {
+  "url": "https://www.honda.com.tr/motosiklet",
+  "kod": 200,
+  "son_url": "https://www.honda.com.tr/motosiklet",
+  "boyut": 1024937,
+  "tel_toplam": 181,
+  "tel_script_ici": 19
+ },
+ "m-motolux": {
+  "url": "https://motolux.com.tr/bayiler/sehir/",
+  "kod": 200,
+  "son_url": "https://motolux.com.tr/bayiler/sehir/",
+  "boyut": 626648,
+  "tel_toplam": 4,
+  "tel_script_ici": 0
+ },
+ "m-motolux-ana": {
+  "url": "https://www.motolux.com.tr",
+  "kod": 200,
+  "son_url": "https://motolux.com.tr/",
+  "boyut": 470249,
+  "tel_toplam": 4,
+  "tel_script_ici": 0,
+  "yonlendi": true
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "url": "https://arora.com.tr/hizmet-noktalari",
+ "yanitlar": [
+  {
+   "dosya": "arora-json-01.json",
+   "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+   "boyut": 58562,
+   "ipucu": []
+  },
+  {
+   "dosya": "arora-json-02.json",
+   "url": "https://www.googleadservices.com/pagead/conversion/10840633036/?random=1788926131082&cv=11&fst=1788926131082&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45je6930v9170711448z8",
+   "boyut": 3528,
+   "ipucu": []
+  },
+  {
+   "dosya": "arora-json-03.json",
+   "url": "https://www.googleadservices.com/pagead/conversion/10840633036/?random=1788926139191&cv=11&fst=1788926139191&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45je6930v9170711448z8",
+   "boyut": 3708,
+   "ipucu": []
+  },
+  {
+   "dosya": "arora-json-04.json",
+   "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+   "boyut": 62642,
+   "ipucu": []
+  },
+  {
+   "dosya": "arora-json-05.json",
+   "url": "https://www.googleadservices.com/pagead/conversion/10840633036/?random=1788926144959&cv=11&fst=1788926144959&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45je6930v9170711448z8",
+   "boyut": 3700,
+   "ipucu": []
+  },
+  {
+   "dosya": "arora-json-06.json",
+   "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+   "boyut": 58562,
+   "ipucu": []
+  }
+ ],
+ "istekler": [
+  {
+   "url": "https://arora.com.tr/hizmet-noktalari",
+   "method": "GET",
+   "basliklar": {
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  },
+  {
+   "url": "https://arora.com.tr/img/uploads/big/8-98_731.webp",
+   "method": "GET",
+   "basliklar": {
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://arora.com.tr/hizmet-noktalari",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0"
+   }
+  },
+  {
+   "url": "https://arora.com.tr/hizmet-noktalari/adana",
+   "method": "GET",
+   "basliklar": {
+    "referer": "https://arora.com.tr/hizmet-noktalari",
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  },
+  {
+   "url": "https://arora.com.tr/img/uploads/big/8-98_731.webp",
+   "method": "GET",
+   "basliklar": {
+    "referer": "https://arora.com.tr/hizmet-noktalari/adana"
+   }
+  },
+  {
+   "url": "https://arora.com.tr/hizmet-noktalari",
+   "method": "GET",
+   "basliklar": {
+    "referer": "https://arora.com.tr/hizmet-noktalari/adana",
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  },
+  {
+   "url": "https://arora.com.tr/img/uploads/big/8-98_731.webp",
+   "method": "GET",
+   "basliklar": {
+    "referer": "https://arora.com.tr/hizmet-noktalari"
+   }
+  }
+ ],
+ "tiklanan": [
+  "select:Adana",
+  "button:Ara",
+  "Servis"
+ ],
+ "sayfa_boyut": 727611
+}

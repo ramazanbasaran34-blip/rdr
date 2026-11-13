@@ -109,8 +109,13 @@ EK_SUTUNLAR = [
 ]
 
 
-def _goc(con):
-    """Eksik sütunları ekler ve indeksleri kurar."""
+def _goc(con, anahtar_gocu=True):
+    """Eksik sütunları ekler ve indeksleri kurar.
+
+    anahtar_gocu=False: sadece okuma amaçlı açılışlarda (sayfa üretimi)
+    veriye dokunulmasın diye anahtar göçü atlanır. Canlı veritabanı
+    yalnızca onay akışıyla değişmeli.
+    """
     var = {r[1] for r in con.execute("PRAGMA table_info(bayiler)")}
     if not var:
         return          # tablo henüz yok, SCHEMA zaten kuracak
@@ -118,15 +123,80 @@ def _goc(con):
         if ad not in var:
             con.execute(f"ALTER TABLE bayiler ADD COLUMN {ad} {tanim}")
     con.execute("CREATE INDEX IF NOT EXISTS ix_rol ON bayiler(rol)")
+    if anahtar_gocu:
+        _anahtar_gocu(con)
+
+
+ANAHTAR_SURUM = 3          # 1: marka|tel[|ilce]  2: +adres  3: +ad
+
+
+def _anahtar_gocu(con):
+    """tekil_key tanımı değişince eski satırların anahtarını yeniler.
+
+    Anahtar tanımını değiştirmek tek başına yetmiyor: depodaki satırlar
+    eski anahtarla duruyor, tarama yeni anahtarı üretiyor, ikisi
+    tutmayınca çakışma görülmüyor ve aynı bayi ikinci kez ekleniyor.
+    RKS "Özer Center" bu yüzden düzeltmeden sonra da 8 satırdı.
+
+    Yeni anahtarda çakışan satırlar tek satıra indiriliyor: rol
+    birleştiriliyor (satis + servis = satis_servis), en eski ilk_gorulme
+    ve en yeni son_gorulme korunuyor, boş alanlar dolu olandan alınıyor.
+    """
+    try:
+        surum = con.execute("PRAGMA user_version").fetchone()[0]
+    except sqlite3.Error:
+        return
+    if surum >= ANAHTAR_SURUM:
+        return
+
+    cur = con.execute("SELECT * FROM bayiler")
+    sutun = [c[0] for c in cur.description]
+    satirlar = [dict(zip(sutun, r)) for r in cur.fetchall()]
+
+    gruplar = {}
+    for s in satirlar:
+        gruplar.setdefault(tekil_key(s), []).append(s)
+
+    silinen = 0
+    for k, grup in gruplar.items():
+        # Kalacak satır: en eski kayıt (ilk_gorulme'si en erken olan)
+        grup.sort(key=lambda s: (s.get("ilk_gorulme") or "9999", s["id"]))
+        kalan = grup[0]
+        roller = {s.get("rol") for s in grup if s.get("rol")}
+        rol = ("satis_servis"
+               if ("satis_servis" in roller
+                   or ({"satis", "servis"} <= roller)) else
+               (kalan.get("rol") or (roller.pop() if roller else "satis")))
+        for alan in ("bayi_adi", "il", "ilce", "adres", "telefon", "email",
+                     "website", "kaynak_satis", "kaynak_servis"):
+            if not kalan.get(alan):
+                for s in grup[1:]:
+                    if s.get(alan):
+                        kalan[alan] = s[alan]
+                        break
+        son = max((s.get("son_gorulme") or "") for s in grup)
+        con.execute(
+            "UPDATE bayiler SET tekil_key=?, rol=?, son_gorulme=?, "
+            "bayi_adi=?, il=?, ilce=?, adres=?, telefon=? WHERE id=?",
+            (k, rol, son, kalan["bayi_adi"], kalan["il"], kalan["ilce"],
+             kalan["adres"], kalan["telefon"], kalan["id"]))
+        for s in grup[1:]:
+            con.execute("DELETE FROM bayiler WHERE id=?", (s["id"],))
+            silinen += 1
+
+    con.execute(f"PRAGMA user_version = {ANAHTAR_SURUM}")
+    if silinen:
+        print(f"anahtar göçü: {len(satirlar)} satır -> {len(gruplar)} "
+              f"({silinen} tekrar birleştirildi)")
 
 
 @contextmanager
-def db(path=DB_PATH):
+def db(path=DB_PATH, salt_oku=False):
     con = sqlite3.connect(path)
     con.row_factory = sqlite3.Row
     try:
         con.executescript(SCHEMA)
-        _goc(con)
+        _goc(con, anahtar_gocu=not salt_oku)
         con.commit()
         yield con
         con.commit()
@@ -145,10 +215,24 @@ def tekil_key(rec: dict) -> str:
     İstanbul/Mustafa Oktay, Denizli/Yiğitler).
     """
     marka = fold(rec["marka"])
-    ilce = fold(rec.get("ilce", ""))
+    # İLÇE DEĞİL ADRES: il seçmeli siteler filtreyi uygulamadan tüm listeyi
+    # döndürüyor, aynı bayi her il turunda tekrar geliyor ve ilçesi her
+    # turda farklı doluyor (çoğu zaman il adıyla). İmza değişince kayıt
+    # yeni sanılıyordu — RKS "Özer Center" 8 kez, Kuba 1009 bayi 1727
+    # satır. Adres şubeden şubeye gerçekten değişir ama il sorgusuna göre
+    # değişmez, dolayısıyla yukarıdaki Bajaj şubelerini de ayrı tutar.
+    adres = fold(rec.get("adres", ""))[:80]
+    # AD DA ANAHTARDA: aynı adreste, aynı telefonla ÇALIŞAN İKİ AYRI FİRMA
+    # olabiliyor. Niğde'de birkaç bayi aynı otomotiv sitesinin adresini
+    # yazıyor; Hero'nun Nazilli kaydında EYMEN MOTOR ile ÖNDER MOTOR aynı
+    # adres ve numarayı paylaşıyor. Ad anahtarda olmazsa bunlar tek kayda
+    # iniyordu. Hero elle giriliyor, o yapı bozulmamalı.
+    # Aynı firmanın yazım farkları (MOYO MOTOR / MOYO MOTORLU ARAÇLAR)
+    # buradan kaçarsa _ayni_firmayi_bul benzerlikten yakalıyor.
+    ad = fold(rec.get("bayi_adi", ""))[:40]
     if rec.get("telefon"):
-        return f"{marka}|{rec['telefon']}|{ilce}"
-    return f"{marka}|{fold(rec['bayi_adi'])}|{ilce}"
+        return f"{marka}|{rec['telefon']}|{adres}|{ad}"
+    return f"{marka}|{ad}|{adres}"
 
 
 def _log_degisim(con, marka, tip, rec, detay=""):
@@ -192,7 +276,10 @@ def commit_tarama(con, marka: str, kayitlar: list[dict], kapsam: float,
     kismi = kapsam < KAPSAM_ORANI
     saglikli = not karantina and not kismi
 
-    yeni, guncel, gorulen = _upsert(con, kayitlar, marka, t)
+    # saglikli=True ise rol GERÇEĞE ÇEKİLİR: bir bayi artık yalnızca servis
+    # listesinde görünüyorsa eski bayilik izi düşürülür (ve tersi). Kısmi/
+    # karantinada bu YAPILMAZ, çünkü eksik veri yanlış düşürme yapar.
+    yeni, guncel, gorulen = _upsert(con, kayitlar, marka, t, saglikli)
 
     supheli = 0
     if saglikli:
@@ -273,10 +360,26 @@ def _ayni_firmayi_bul(con, rec, marka):
     return None
 
 
-def _upsert(con, kayitlar, marka, t):
+def _upsert(con, kayitlar, marka, t, saglikli=False):
     yeni = guncel = birlesen = 0
     gorulen = set()
+    elenen_rolsuz = 0
+    # Bu taramada aynı firma hem satış hem servis listesinde gelebilir.
+    # Her tekil_key için bu taramanın GERÇEK (birleşik) rolünü önceden
+    # çıkarıyoruz ki DB'de eski rolle yanlış birleşme olmasın.
+    tarama_rol = {}
     for rec in kayitlar:
+        if rec.get("rol") not in ("satis", "servis", "satis_servis"):
+            continue
+        tk = tekil_key(rec)
+        tarama_rol[tk] = rolleri_birlestir(tarama_rol.get(tk, ""), rec["rol"])
+    for rec in kayitlar:
+        # SON EMNİYET: rolü belli olmayan kayıt yazılmaz. Ayrıştırıcılar
+        # yedek parça noktalarını ve tanımadıkları kategorileri boş rolle
+        # eliyor; buraya sızarsa eskisi gibi sessizce satış sayılmasın.
+        if rec.get("rol") not in ("satis", "servis", "satis_servis"):
+            elenen_rolsuz += 1
+            continue
         k = tekil_key(rec)
         gorulen.add(k)
         row = con.execute(
@@ -300,17 +403,34 @@ def _upsert(con, kayitlar, marka, t):
                              f"önceki durum: {row['durum']}")
             elif row["adres"] != rec["adres"] or row["telefon"] != rec["telefon"]:
                 _log_degisim(con, marka, "guncellendi", rec, "adres/telefon değişti")
-            yeni_rol = rolleri_birlestir(row["rol"] or "", rol)
-            if yeni_rol != (row["rol"] or ""):
-                _log_degisim(con, marka, "rol_degisti", rec,
-                             f"{row['rol']} → {yeni_rol}")
-            con.execute(
-                """UPDATE bayiler SET marka=?,bayi_adi=?,il=?,ilce=?,adres=?,
-                   telefon=?,email=?,website=?,kaynak_url=?,il_key=?,ilce_key=?,
-                   son_gorulme=?, durum='aktif', kayip_sayaci=0, rol=?,
-                   kaynak_satis=COALESCE(?,kaynak_satis),
-                   kaynak_servis=COALESCE(?,kaynak_servis) WHERE id=?""",
-                vals + (t, yeni_rol, ks, kv, row["id"]))
+            if saglikli:
+                # Rol bu taramanın gerçeğine çekilir (düşürme dahil).
+                yeni_rol = tarama_rol.get(k) or rol
+                # Kaynak izleri de gerçek role göre; kaybolan rolün izi silinir.
+                nks = rec.get("kaynak_url","") if yeni_rol in ("satis","satis_servis") else ""
+                nkv = rec.get("kaynak_url","") if yeni_rol in ("servis","satis_servis") else ""
+                if yeni_rol != (row["rol"] or ""):
+                    _log_degisim(con, marka, "rol_degisti", rec,
+                                 f"{row['rol']} → {yeni_rol}")
+                con.execute(
+                    """UPDATE bayiler SET marka=?,bayi_adi=?,il=?,ilce=?,adres=?,
+                       telefon=?,email=?,website=?,kaynak_url=?,il_key=?,ilce_key=?,
+                       son_gorulme=?, durum='aktif', kayip_sayaci=0, rol=?,
+                       kaynak_satis=?, kaynak_servis=? WHERE id=?""",
+                    vals + (t, yeni_rol, nks, nkv, row["id"]))
+            else:
+                # Kısmi/karantina: eski davranış, rol yalnızca YÜKSELİR.
+                yeni_rol = rolleri_birlestir(row["rol"] or "", rol)
+                if yeni_rol != (row["rol"] or ""):
+                    _log_degisim(con, marka, "rol_degisti", rec,
+                                 f"{row['rol']} → {yeni_rol}")
+                con.execute(
+                    """UPDATE bayiler SET marka=?,bayi_adi=?,il=?,ilce=?,adres=?,
+                       telefon=?,email=?,website=?,kaynak_url=?,il_key=?,ilce_key=?,
+                       son_gorulme=?, durum='aktif', kayip_sayaci=0, rol=?,
+                       kaynak_satis=COALESCE(?,kaynak_satis),
+                       kaynak_servis=COALESCE(?,kaynak_servis) WHERE id=?""",
+                    vals + (t, yeni_rol, ks, kv, row["id"]))
             guncel += 1
         else:
             con.execute(
@@ -321,6 +441,9 @@ def _upsert(con, kayitlar, marka, t):
                 vals + (k, t, t, rol, ks, kv))
             _log_degisim(con, marka, "eklendi", rec)
             yeni += 1
+    if elenen_rolsuz:
+        print(f"  {marka}: {elenen_rolsuz} kayıt rolü belirsiz olduğu için "
+              f"yazılmadı (yedek parça / tanınmayan kategori)")
     return yeni, guncel, gorulen
 
 

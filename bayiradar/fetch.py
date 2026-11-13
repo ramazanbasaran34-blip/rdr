@@ -10,6 +10,7 @@ Nazik davranıyoruz: istekler arası bekleme, retry, gerçek User-Agent.
 
 import hashlib
 import random
+import re
 import time
 from pathlib import Path
 
@@ -19,6 +20,68 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 
 CACHE_DIR = Path(".cache")
+
+
+
+# Türkçe karakter bozulmalarının KÖK SEBEBİ burasıydı.
+# Eskiden: r.encoding = encoding or r.apparent_encoding or r.encoding
+# apparent_encoding istatistiksel bir TAHMİN (chardet) ve Türkçe metinde
+# sık sık latin-1 diye yanlış tahmin ediyor; üstelik sayfanın kendi
+# <meta charset> bildirimini hiç okumuyordu. Tarayıcıların kullandığı
+# sıra artık burada uygulanıyor.
+_META_CHARSET = re.compile(rb'charset\s*=\s*["\']?\s*([\w-]+)', re.I)
+_BASLIK_CHARSET = re.compile(r'charset\s*=\s*["\']?\s*([\w-]+)', re.I)
+# Bozulma izleri: seçilen kodlama yanlışsa bunlar ortaya çıkar
+_IZ = re.compile(r'[ÃÄÅ][\x80-\xbf]|[ýþðÝÞÐ]|\ufffd')
+_TR_HARF = re.compile(r'[çğıöşüÇĞİÖŞÜ]')
+
+
+def _aday_kodlamalar(r, istenen):
+    """Denenecek kodlamalar, güvenilirlik sırasıyla."""
+    adaylar = []
+    if istenen:
+        adaylar.append(istenen)
+    # 1. HTTP başlığı AÇIKÇA charset bildirdiyse
+    m = _BASLIK_CHARSET.search(r.headers.get("content-type", ""))
+    if m:
+        adaylar.append(m.group(1))
+    # 2. Sayfanın kendi <meta charset> bildirimi (tarayıcının kullandığı)
+    m = _META_CHARSET.search(r.content[:4096])
+    if m:
+        try:
+            adaylar.append(m.group(1).decode("ascii"))
+        except UnicodeDecodeError:
+            pass
+    # 3. Türk sitelerinde en sık ikili
+    adaylar += ["utf-8", "cp1254"]
+    # 4. Son çare: istatistiksel tahmin
+    if r.apparent_encoding:
+        adaylar.append(r.apparent_encoding)
+    # tekrarları at, sırayı koru
+    return list(dict.fromkeys(a.strip().lower() for a in adaylar if a))
+
+
+def _en_iyi_coz(r, istenen):
+    """Adayları deneyip EN AZ bozulma izi olanı seçer.
+
+    Yalnızca sıraya güvenmek yetmiyor: bazı siteler <meta charset=utf-8>
+    yazıp gövdeyi cp1254 gönderiyor. Bu yüzden her aday puanlanıyor:
+    bozulma izi ceza, Türkçe harf ödül.
+    """
+    en_iyi, en_puan = None, None
+    for kod in _aday_kodlamalar(r, istenen):
+        try:
+            metin = r.content.decode(kod, errors="strict")
+        except (UnicodeDecodeError, LookupError):
+            continue
+        puan = len(_TR_HARF.findall(metin)) - 5 * len(_IZ.findall(metin))
+        if en_puan is None or puan > en_puan:
+            en_iyi, en_puan = metin, puan
+        if istenen and kod == istenen.strip().lower():
+            return metin          # elle verilmişse tartışma yok
+    if en_iyi is not None:
+        return en_iyi
+    return r.content.decode("utf-8", errors="replace")
 
 
 class Fetcher:
@@ -72,11 +135,11 @@ class Fetcher:
                     timeout=self.timeout,
                 )
                 r.raise_for_status()
-                # Türk siteleri sık sık windows-1254 kullanır ve bunu doğru
-                # bildirmez; yanlış kodlama "İstanbul" yerine "�stanbul" verir.
-                r.encoding = encoding or r.apparent_encoding or r.encoding
-                self._store(key, r.text)
-                return r.text
+                # Kodlama seçimi: başlık > <meta charset> > utf-8/cp1254 >
+                # tahmin. Adaylar puanlanıp en az bozulan seçiliyor.
+                metin = _en_iyi_coz(r, encoding)
+                self._store(key, metin)
+                return metin
             except Exception as e:          # noqa: BLE001
                 last = e
                 time.sleep(2 ** attempt)

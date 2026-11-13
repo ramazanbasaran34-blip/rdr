@@ -1,0 +1,18 @@
+{
+ "satis": {
+  "il_sayisi": 47,
+  "iller": {
+   "Ankara": 17,
+   "İstanbul (Avrupa)": 13,
+   "İzmir": 5
+  }
+ },
+ "servis": {
+  "il_sayisi": 54,
+  "iller": {
+   "Ankara": 15,
+   "İstanbul (Avrupa)": 21,
+   "İzmir": 13
+  }
+ }
+}

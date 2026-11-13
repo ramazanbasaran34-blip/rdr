@@ -33,7 +33,7 @@ jobs:
         run: pip install requests
 
       - name: Tarayıcı kur
-        if: contains(inputs.hedefler, 'tarayici')
+        if: contains(inputs.hedefler, 'tarayici') || contains(inputs.hedefler, 'tvs') || contains(inputs.hedefler, 'sonda3') || contains(inputs.hedefler, 'arora-sonda') || contains(inputs.hedefler, 'honda-sonda') || contains(inputs.hedefler, 'motolux-esk')
         run: |
           pip install playwright
           python -m playwright install --with-deps chromium
@@ -41,6 +41,29 @@ jobs:
       - name: Yamaha tarayıcı sondası
         if: contains(inputs.hedefler, 'tarayici')
         run: python yamaha_tarayici.py || true
+
+      - name: TVS sondası
+        if: contains(inputs.hedefler, 'tvs')
+        run: python tvs_sonda.py || true
+
+      - name: Yenilenen siteler için sonda (Taktas, Rutec, Acco)
+        if: contains(inputs.hedefler, 'sonda3') || contains(inputs.hedefler, 'arora-sonda')
+        run: |
+          python tvs_sonda.py taktas https://taktas.com.tr/bayi-ve-servis || true
+          python tvs_sonda.py rutec  https://www.rutec.com.tr/satis-noktalari.html || true
+          python tvs_sonda.py acco   https://actiomobilite.com/bayiler || true
+
+      - name: Arora sondası
+        if: contains(inputs.hedefler, 'arora-sonda')
+        run: python tvs_sonda.py arora https://arora.com.tr/hizmet-noktalari || true
+
+      - name: Honda sondası
+        if: contains(inputs.hedefler, 'honda-sonda')
+        run: python tvs_sonda.py honda https://www.honda.com.tr/motosiklet/bayiler-ve-servisler || true
+
+      - name: Motolux Eskisehir sondasi
+        if: contains(inputs.hedefler, 'motolux-esk')
+        run: python tvs_sonda.py motolux-esk https://motolux.com.tr/bayiler/sehir/eskisehir/ || true
 
       - name: Yakala
         run: |

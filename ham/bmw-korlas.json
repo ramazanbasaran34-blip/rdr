@@ -1,0 +1,23 @@
+{
+ "bmw": {
+  "url": "https://www.bmw-motorrad.com.tr/tr/ssl/yetkili-satici-ve-servisler.html",
+  "baslik": "Yetkili Satıcı ve Servisler | BMW Motorrad Türkiye",
+  "boyut": 220814,
+  "tel": 9,
+  "ara_sayfa": false
+ },
+ "korlas-bayi": {
+  "url": "https://korlas.com.tr/bayi/",
+  "baslik": "Bir dakika lütfen...",
+  "boyut": 27438,
+  "tel": 0,
+  "ara_sayfa": true
+ },
+ "korlas-servis": {
+  "url": "https://korlas.com.tr/servis/",
+  "baslik": "Bir dakika lütfen...",
+  "boyut": 27444,
+  "tel": 0,
+  "ara_sayfa": true
+ }
+}

@@ -15,6 +15,8 @@ Dosya çift kodlanmış (UTF-8 → latin1 → UTF-8), geri sarmak gerekiyor.
 from __future__ import annotations
 
 import re
+
+from .tipler import parca_mi, rol_belirle
 import xml.etree.ElementTree as ET
 
 MARKA = "Meka Motor"
@@ -74,10 +76,16 @@ def coz(rol: str, govde: str, url: str) -> list[dict]:
             ilce, ad = _sade(m2.group(1)), _sade(m2.group(3))
 
         aciklama = _anahtar(al("ACIKLAMA"))
+        # Açıklaması boş olan kayıtlar da satış sayılıyordu: 550 kaydın
+        # 276'sı böyleydi ve Meka'yı 271'den 402'ye çıkarıyordu.
+        # Artık rolü açıkça yazmayan kayıt listeye girmiyor.
+        if parca_mi(aciklama):
+            continue
         satis = any(a in aciklama for a, r in ROL_ANAHTAR if r == "satis")
         servis = "servis" in aciklama
-        rol_ = ("satis_servis" if (satis and servis)
-                else "servis" if servis else "satis")
+        rol_ = rol_belirle(satis, servis)
+        if not rol_:
+            continue
 
         out.append({
             "bayi_adi": ad or baslik,

@@ -1,0 +1,112 @@
+{
+ "altai": {
+  "marka": "Altai",
+  "satis": {
+   "il_sayisi": 47,
+   "viewstate": true,
+   "ornek": [
+    [
+     "1",
+     "Adana"
+    ],
+    [
+     "2",
+     "Adıyaman"
+    ],
+    [
+     "5",
+     "Amasya"
+    ]
+   ],
+   "yanit_boyut": 105084,
+   "ham": 7,
+   "gecerli": 7,
+   "ornek_kayit": [
+    "ASİL GRUP MOTOSİKLET | Ankara/Yenimahalle | +905425193613",
+    "BAYHAS HKN MOTOR TİC. LTD. Ş | Ankara/Keçiören | +905433067540",
+    "BAYHAS MBK MOTOR TİC. LTD. Ş | Ankara/Ankara | +905443971539"
+   ]
+  },
+  "servis": {
+   "il_sayisi": 54,
+   "viewstate": true,
+   "ornek": [
+    [
+     "1",
+     "Adana"
+    ],
+    [
+     "2",
+     "Adıyaman"
+    ],
+    [
+     "5",
+     "Amasya"
+    ]
+   ],
+   "yanit_boyut": 95830,
+   "ham": 5,
+   "gecerli": 5,
+   "ornek_kayit": [
+    "BAYHAS HKN MOTOR TİC. LTD. Ş | Ankara/Keçiören | +905433067540",
+    "BAYHAS MOTORS OTO. VE DAY. T | Ankara/Sincan | +905464117041",
+    "BELGİN EROĞLU - GARAGE MOTO | Ankara/Çankaya | +905393964986"
+   ]
+  }
+ },
+ "regal": {
+  "marka": "Regal Raptor",
+  "satis": {
+   "il_sayisi": 62,
+   "viewstate": true,
+   "ornek": [
+    [
+     "1",
+     "Adana"
+    ],
+    [
+     "2",
+     "Adıyaman"
+    ],
+    [
+     "5",
+     "Amasya"
+    ]
+   ],
+   "yanit_boyut": 118042,
+   "ham": 9,
+   "gecerli": 9,
+   "ornek_kayit": [
+    "ATALAY YIĞMAN | Ankara/Çubuk | +905417189373",
+    "DOĞRU MOTORS - BUKET DOĞRU | Ankara/Yenimahalle | +905325811283",
+    "ELMACIOĞLU MOTOR | Ankara/Etimesgut | +905447469823"
+   ]
+  },
+  "servis": {
+   "il_sayisi": 65,
+   "viewstate": true,
+   "ornek": [
+    [
+     "1",
+     "Adana"
+    ],
+    [
+     "2",
+     "Adıyaman"
+    ],
+    [
+     "3",
+     "Afyonkarahisar"
+    ]
+   ],
+   "yanit_boyut": 135433,
+   "ham": 22,
+   "gecerli": 22,
+   "ornek_kayit": [
+    "ADK MOTORULU ARAÇLAR | Ankara/Gölbaşı | +905453246783",
+    "BEKİR ÇAKIR | Ankara/Yenimahalle | +905437851386",
+    "BUMERANG MOTO GARAGE / ERTUG | Ankara/Yenimahalle | +905551590424"
+   ]
+  }
+ }
+}

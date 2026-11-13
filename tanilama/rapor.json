@@ -1,0 +1,606 @@
+{
+ "Yamaha": [
+  {
+   "url": "https://www.yamaha-motor.eu/tr/tr/dealer-locator/",
+   "boyut": 619726,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Kuba": [
+  {
+   "url": "https://www.kubamotor.com.tr/bayi-servis/kubamotor",
+   "boyut": 214836,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 78,
+   "il_secici_ornek": [
+    "https://www.kubamotor.com.tr/bayi-servis/kubamotor?city=Adana",
+    "https://www.kubamotor.com.tr/bayi-servis/kubamotor?city=Ad%C4%B1yaman"
+   ],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "RKS": [
+  {
+   "url": "https://www.rksmotor.com.tr/bayi-servis/rksmotor.html",
+   "boyut": 247569,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 77,
+   "il_secici_ornek": [
+    "https://www.rksmotor.com.tr/bayi-servis/rksmotor.html?city=Adana",
+    "https://www.rksmotor.com.tr/bayi-servis/rksmotor.html?city=Ad%C4%B1yaman"
+   ],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Yuki": [
+  {
+   "url": "https://yukimotor.com.tr/satis-noktalari/",
+   "boyut": 135956,
+   "telefon_sayisi": 2,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [
+    {
+     "secici": "div.footer-section > address.contact-info > a",
+     "adet": 3,
+     "puan": 3.3,
+     "ornek_metin": [
+      "+90 212 407 06 60",
+      "+90 212 549 60 75 (Fax)"
+     ],
+     "ornek_html": "<a href=\"tel:+902124070660\">+90 212 407 06 60</a>"
+    }
+   ],
+   "rol": "satis"
+  },
+  {
+   "url": "https://yukimotor.com.tr/servis-noktalari/",
+   "boyut": 172984,
+   "telefon_sayisi": 2,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [
+    {
+     "secici": "div.footer-section > address.contact-info > a",
+     "adet": 3,
+     "puan": 3.3,
+     "ornek_metin": [
+      "+90 212 407 06 60",
+      "+90 212 549 60 75 (Fax)"
+     ],
+     "ornek_html": "<a href=\"tel:+902124070660\">+90 212 407 06 60</a>"
+    }
+   ],
+   "rol": "servis"
+  }
+ ],
+ "Piaggio": [
+  {
+   "url": "https://www.piaggio.com.tr/tr/yetkili-saticilar.html",
+   "boyut": 49470,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://www.piaggio.com.tr/tr/yetkili-servisler.html",
+   "boyut": 64424,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Vespa": [
+  {
+   "url": "https://www.vespa.com.tr/tr/yetkili-saticilar.html",
+   "boyut": 85427,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://www.vespa.com.tr/tr/yetkili-servisler.html",
+   "boyut": 90591,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Kymco": [
+  {
+   "url": "https://www.kymco.com.tr/tr/satis-servis-agi.html",
+   "boyut": 177501,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Aprilia": [
+  {
+   "url": "https://www.aprilia.com.tr/tr/yetkili-saticilar.html",
+   "boyut": 89152,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://www.aprilia.com.tr/tr/yetkili-servisler.html",
+   "boyut": 95695,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Hero": [
+  {
+   "rol": "satis",
+   "url": "https://www.heromotor.com.tr/bayiler/",
+   "hata": "https://www.heromotor.com.tr/bayiler/ çekilemedi: 403 Client Error: Forbidden for url: https://www.heromotor.com.tr/bayiler/"
+  },
+  {
+   "rol": "servis",
+   "url": "https://www.heromotor.com.tr/servisler/",
+   "hata": "https://www.heromotor.com.tr/servisler/ çekilemedi: 403 Client Error: Forbidden for url: https://www.heromotor.com.tr/servisler/"
+  }
+ ],
+ "BMW": [
+  {
+   "url": "https://www.bmw-motorrad.com.tr/tr/ssl/yetkili-satici-ve-servisler.html",
+   "boyut": 207940,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Falcon": [
+  {
+   "url": "https://falconmotosiklet.com/bayi-servis-agi/motosiklet",
+   "boyut": 287740,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://falconmotosiklet.com/bayi-servis-agi/servis",
+   "boyut": 287716,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Volta": [
+  {
+   "url": "https://volta.com.tr/pages/bayiler",
+   "boyut": 264250,
+   "telefon_sayisi": 2,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [
+    {
+     "secici": "footer > div.footer-support-wrapper > div.container",
+     "adet": 4,
+     "puan": 6.5,
+     "ornek_metin": [
+      "DESTEĞE HAZIRIZ! Ürününüz ile ilgili tüm detaylara sizler için özenle hazırlanmış kılavuzlardan ulaşabilirsiniz. KULLANIM & BAKIM KILAVUZLAR Ürünler ile ilgili merak ettikleriniz t",
+      "BÜLTEN ABONELİK Yeniliklerden ve kampanyalardan haberdar olmak için abone olabilirsiniz."
+     ],
+     "ornek_html": "<div class=\"container\">\n<div class=\"footer-support-header\"><span>DESTEĞE HAZIRIZ!</span></div>\n<div class=\"row footer-support-grid\">\n<div class=\"col-12 col-xl-6 order-2 order-xl-1\">\n<div class=\"row footer-support-cards\">\n<div class=\"col-12 col-md-6\">\n<div class=\"footer-support-content\"><a href=\"/pages/bakim-garanti\">\n<div class=\"footer-support-title\"><span>Ürününüz ile ilgili tüm detaylara sizler için özenle hazırlanmış kılavuzlardan ulaşabilirsiniz.</span></div>\n<div class=\"footer-support-button\">\n\n<div>\n\n<span>KULLANIM &amp; BAKIM KILAVUZLAR</span>\n</div>\n</div>\n</a></div>\n</div>\n<div class=\"col-12 col-md-6\">\n<div class=\"footer-support-content\"><a href=\"/pages/sss\">\n<div class=\"footer-support-title\"><span>Ürünler ile ilgili merak ettikleriniz talimatlar ve yedek parçalar hakkında bilgi burada olabilir.</span></div>\n<div class=\"footer-support-button\">\n\n<div>\n\n<span>SIKÇA SORULAN SORULAR</span>\n</div>\n</div>\n</a></div>\n</div>\n</div>\n</div>\n<div class=\"col-12 col-xl-6 order-1 order-xl-2\">\n<div class=\"footer-contact\">\n<div class=\"footer-contact-form\"><a href=\"/pages/iletisim\">\n<div class=\"footer-contact-svg\"></div>\n<div class=\"footer-contact-content\"><span>Tüm Sorularınız İçin</span>"
+    }
+   ],
+   "rol": "satis"
+  },
+  {
+   "url": "https://volta.com.tr/pages/servis-noktalari",
+   "boyut": 264365,
+   "telefon_sayisi": 2,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [
+    {
+     "secici": "footer > div.footer-support-wrapper > div.container",
+     "adet": 4,
+     "puan": 6.5,
+     "ornek_metin": [
+      "DESTEĞE HAZIRIZ! Ürününüz ile ilgili tüm detaylara sizler için özenle hazırlanmış kılavuzlardan ulaşabilirsiniz. KULLANIM & BAKIM KILAVUZLAR Ürünler ile ilgili merak ettikleriniz t",
+      "BÜLTEN ABONELİK Yeniliklerden ve kampanyalardan haberdar olmak için abone olabilirsiniz."
+     ],
+     "ornek_html": "<div class=\"container\">\n<div class=\"footer-support-header\"><span>DESTEĞE HAZIRIZ!</span></div>\n<div class=\"row footer-support-grid\">\n<div class=\"col-12 col-xl-6 order-2 order-xl-1\">\n<div class=\"row footer-support-cards\">\n<div class=\"col-12 col-md-6\">\n<div class=\"footer-support-content\"><a href=\"/pages/bakim-garanti\">\n<div class=\"footer-support-title\"><span>Ürününüz ile ilgili tüm detaylara sizler için özenle hazırlanmış kılavuzlardan ulaşabilirsiniz.</span></div>\n<div class=\"footer-support-button\">\n\n<div>\n\n<span>KULLANIM &amp; BAKIM KILAVUZLAR</span>\n</div>\n</div>\n</a></div>\n</div>\n<div class=\"col-12 col-md-6\">\n<div class=\"footer-support-content\"><a href=\"/pages/sss\">\n<div class=\"footer-support-title\"><span>Ürünler ile ilgili merak ettikleriniz talimatlar ve yedek parçalar hakkında bilgi burada olabilir.</span></div>\n<div class=\"footer-support-button\">\n\n<div>\n\n<span>SIKÇA SORULAN SORULAR</span>\n</div>\n</div>\n</a></div>\n</div>\n</div>\n</div>\n<div class=\"col-12 col-xl-6 order-1 order-xl-2\">\n<div class=\"footer-contact\">\n<div class=\"footer-contact-form\"><a href=\"/pages/iletisim\">\n<div class=\"footer-contact-svg\"></div>\n<div class=\"footer-contact-content\"><span>Tüm Sorularınız İçin</span>"
+    }
+   ],
+   "rol": "servis"
+  }
+ ],
+ "Suzuki": [
+  {
+   "url": "https://www.suzuki.com.tr/tr/motosiklet/satis.html",
+   "boyut": 23115,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://www.suzuki.com.tr/tr/motosiklet/yetkili-servisler.html",
+   "boyut": 54604,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Kral": [
+  {
+   "rol": "satis",
+   "url": "https://kralmotor.tr/SalesDealer",
+   "hata": "Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://kralmotor.tr/SalesDealer\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+   "rol": "servis",
+   "url": "https://kralmotor.tr/Service",
+   "hata": "Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://kralmotor.tr/Service\", waiting until \"domcontentloaded\"\n"
+  }
+ ],
+ "Altai": [
+  {
+   "url": "https://www.altai.com.tr/tr/bayiler",
+   "boyut": 68241,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 45,
+   "il_secici_ornek": [
+    "https://www.altai.com.tr/tr/bayiler?ctl00%24body%24drp_il=1",
+    "https://www.altai.com.tr/tr/bayiler?ctl00%24body%24drp_il=2"
+   ],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://www.altai.com.tr/tr/servisler",
+   "boyut": 68885,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 52,
+   "il_secici_ornek": [
+    "https://www.altai.com.tr/tr/servisler?ctl00%24body%24drp_il=1",
+    "https://www.altai.com.tr/tr/servisler?ctl00%24body%24drp_il=2"
+   ],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Ducati": [
+  {
+   "rol": "satis",
+   "url": "https://korlas.com.tr/bayi/",
+   "hata": "https://korlas.com.tr/bayi/ çekilemedi: 403 Client Error: Forbidden for url: https://korlas.com.tr/bayi/"
+  },
+  {
+   "rol": "servis",
+   "url": "https://korlas.com.tr/servis/",
+   "hata": "https://korlas.com.tr/servis/ çekilemedi: 403 Client Error: Forbidden for url: https://korlas.com.tr/servis/"
+  }
+ ],
+ "Triumph": [
+  {
+   "rol": "satis",
+   "url": "https://korlas.com.tr/bayi/",
+   "hata": "https://korlas.com.tr/bayi/ çekilemedi: 403 Client Error: Forbidden for url: https://korlas.com.tr/bayi/"
+  },
+  {
+   "rol": "servis",
+   "url": "https://korlas.com.tr/servis/",
+   "hata": "https://korlas.com.tr/servis/ çekilemedi: 403 Client Error: Forbidden for url: https://korlas.com.tr/servis/"
+  }
+ ],
+ "STMax": [
+  {
+   "url": "https://stmax.com.tr/yetkili-servisler/",
+   "boyut": 204441,
+   "telefon_sayisi": 2,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 63,
+   "il_secici_ornek": [
+    "https://stmax.com.tr/yetkili-servisler/?il-secimi=https%3A%2F%2Fstmax.com.tr%2Filler%2Fadana%2F",
+    "https://stmax.com.tr/yetkili-servisler/?il-secimi=https%3A%2F%2Fstmax.com.tr%2Filler%2Fafyonkarahisar%2F"
+   ],
+   "il_dizini": 0,
+   "kap_adaylari": [
+    {
+     "secici": "div.et_pb_module.et_pb_text.et_pb_text_2_tb_footer > div.et_pb_text_inner > p",
+     "adet": 4,
+     "puan": 4.0,
+     "ornek_metin": [
+      "Müşteri Hizmetleri 0(258) 251 51 51",
+      "Adres Organize San. Böl. 1. Kısım Vali Münir Güney Caddesi No:6 Denizli / TÜRKİYE"
+     ],
+     "ornek_html": "<p><strong>Müşteri Hizmetleri</strong><br/><strong>0(258) 251 51 51</strong></p>"
+    }
+   ],
+   "rol": "satis_servis"
+  }
+ ],
+ "Abush": [
+  {
+   "url": "https://abush.com.tr/tr/bayiler",
+   "boyut": 11821,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Harley-Davidson": [
+  {
+   "url": "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html",
+   "boyut": 1932497,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Rewaco": [
+  {
+   "url": "https://rewaco.com.tr/bayiler/",
+   "boyut": 138320,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://rewaco.com.tr/servis/",
+   "boyut": 181529,
+   "telefon_sayisi": 9,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Nanok": [
+  {
+   "url": "https://nanok.com.tr/bayilerimiz",
+   "boyut": 176562,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Musatti": [
+  {
+   "url": "https://musattimotor.com/bayi-bul",
+   "boyut": 47761,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://musattimotor.com/servis-bul",
+   "boyut": 48400,
+   "telefon_sayisi": 1,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Zelsun": [
+  {
+   "url": "https://www.zelsunmotor.com/Bayilerimiz.aspx",
+   "boyut": 75028,
+   "telefon_sayisi": 4,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 81,
+   "il_secici_ornek": [
+    "https://www.zelsunmotor.com/Bayilerimiz.aspx?ctl00%24ContentPlaceHolder1%24DropDownListilx=1",
+    "https://www.zelsunmotor.com/Bayilerimiz.aspx?ctl00%24ContentPlaceHolder1%24DropDownListilx=2"
+   ],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://www.zelsunmotor.com/Servislerimiz.aspx",
+   "boyut": 71226,
+   "telefon_sayisi": 4,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 81,
+   "il_secici_ornek": [
+    "https://www.zelsunmotor.com/Servislerimiz.aspx?ctl00%24ContentPlaceHolder1%24DropDownListilx=1",
+    "https://www.zelsunmotor.com/Servislerimiz.aspx?ctl00%24ContentPlaceHolder1%24DropDownListilx=2"
+   ],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "SFM": [
+  {
+   "url": "https://www.sfmmotor.com.tr/bayi-servis/",
+   "boyut": 481109,
+   "telefon_sayisi": 2,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Yiben": [
+  {
+   "url": "https://yibenmotosiklet.com.tr/tr/sayfa/bayi-agi",
+   "boyut": 11871,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis"
+  },
+  {
+   "url": "https://yibenmotosiklet.com.tr/tr/sayfa/servis-agi",
+   "boyut": 11877,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "servis"
+  }
+ ],
+ "Rebat": [
+  {
+   "url": "https://rebatmotor.com/satis-ve-servisler-cloned-111-2/",
+   "boyut": 11957,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ],
+ "Leksas": [
+  {
+   "url": "https://www.leksas.com.tr/bayi-servis/",
+   "boyut": 12065,
+   "telefon_sayisi": 0,
+   "gomulu_json_kayit": 0,
+   "gomulu_ornek": [],
+   "il_secici": 0,
+   "il_secici_ornek": [],
+   "il_dizini": 0,
+   "kap_adaylari": [],
+   "rol": "satis_servis"
+  }
+ ]
+}

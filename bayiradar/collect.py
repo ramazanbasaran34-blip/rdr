@@ -24,8 +24,8 @@ from .fetch import Fetcher
 from .koordinat import sorgu_noktalari
 from .normalize import IL_KODU, ILLER, fold
 from .otomatik import il_baglantilari, il_secicileri_bul, json_gomulu
-from .parse import (finalize, kayit_suzgeci, parse_gomulu, parse_html,
-                    parse_json, parse_oto)
+from .parse import (finalize, genel_adlari_yerellestir, kayit_suzgeci,
+                    parse_gomulu, parse_html, parse_json, parse_oto)
 from .store import commit_tarama, db, marka_bilgi, now, tarama_hatasi
 
 
@@ -170,7 +170,19 @@ def tara_marka_tek(marka: str, cfg: dict, fetcher: Fetcher, max_age=3600, log=No
             rec = finalize(r, marka, url, cfg)
             if not rec:
                 continue
-            imza = (rec["bayi_adi"], rec["telefon"], rec["ilce"])
+            # İMZADA İLÇE DEĞİL ADRES.
+            #
+            # İl seçmeli sitelerin çoğu filtre uygulamadan tam listeyi
+            # döndürüyor. Tarama 81 il için istek attığından aynı bayi
+            # tekrar tekrar geliyordu; ilçe her turda farklı atandığı
+            # için (çoğu zaman il adıyla dolduruluyor) imza değişiyor ve
+            # kayıt yeni sanılıyordu: Voge 138 -> 1.136, Volta 152 -> 754.
+            #
+            # Adres şubeden şubeye gerçekten değişir, il sorgusuna göre
+            # değişmez. Bajaj'ın aynı telefonu paylaşan şubeleri farklı
+            # adreste olduğu için yine ayrı kalıyor.
+            imza = (fold(rec["bayi_adi"]), rec["telefon"],
+                    fold(rec.get("adres", ""))[:60])
             if imza in gorulen:
                 continue
             gorulen.add(imza)
@@ -365,6 +377,9 @@ def tara_marka(marka: str, cfg: dict, fetcher: Fetcher, max_age=3600, log=None):
             continue
         hepsi.extend(kay)
         kapsamlar.append(kap)
+    # Tek noktada: tüm kaynaklar toplandıktan sonra, çünkü aynı ada düşen
+    # kayıtları ayırmak için markanın tamamını görmek gerekiyor.
+    hepsi = genel_adlari_yerellestir(hepsi, cfg)
     return hepsi, (sum(kapsamlar) / len(kapsamlar) if kapsamlar else 0.0)
 
 

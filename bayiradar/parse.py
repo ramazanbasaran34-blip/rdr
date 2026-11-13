@@ -10,9 +10,12 @@ import re
 from bs4 import BeautifulSoup
 
 from .ilceler import adresten_ilce, ilce_mi, ilceden_il
-from .normalize import (clean_adres, clean_phone, clean_text, fold, il_ara, resolve_il,
-                         split_il_ilce, title_tr)
+from .normalize import (ILLER, clean_adres, clean_phone, clean_text, fold,
+                         il_ara, resolve_il, split_il_ilce, title_tr)
 from .otomatik import cikar as otomatik_cikar
+
+# İl adlarının sadeleştirilmiş hali (ad/adres kayması onarımı için)
+IL_FOLD = {fold(i) for i in ILLER}
 
 ALANLAR = ["bayi_adi", "il", "ilce", "adres", "telefon", "email", "website"]
 
@@ -183,9 +186,110 @@ def kayit_suzgeci(kayitlar: list[dict], cfg: dict) -> list[dict]:
             if any(g in fold(str(k.get(alan, ""))) for g in gerekli)]
 
 
+# --------------------------------------------- genel tabela adlarını yerelleştir
+# Ad, hizmet listesiyle uzayabiliyor:
+#   "Fabrika Satış Mağazası / Satış / Teslimat Noktası / Yedek Parça"
+# Bu ekler rolde ve diğer alanlarda zaten var; addan tamamını temizliyoruz.
+_ROL_EKI = re.compile(
+    r"(?:\s*/\s*(?:satış|satis|servis|bayi|bayii|teslimat\s*noktası|"
+    r"teslimat\s*noktasi|yedek\s*parça|yedek\s*parca|aksesuar))+\s*$", re.I)
+_MAHALLE = re.compile(
+    r"^\s*([^,/]{2,30}?)\s*(?:mah\.?|mahallesi|mh\.?)\b", re.I)
+
+
+def _mahalle(adres: str) -> str:
+    m = _MAHALLE.match(adres or "")
+    return clean_text(m.group(1)) if m else ""
+
+
+def genel_adlari_yerellestir(kayitlar: list[dict], cfg: dict) -> list[dict]:
+    """Marka geneli tek tabela adı kullanan noktaları ayırt edilir yapar.
+
+    Volta'nın kendi mağazaları listede hep "Fabrika Satış Mağazası / Satış"
+    adıyla geliyor: 32 ayrı nokta, 32 kez aynı isim. Telefonu, adresi ve
+    ili farklı olduğu için bunlar gerçek ayrı bayiler; sorun yalnızca
+    isimlendirmede. Başına yer adını koyuyoruz:
+        "Fabrika Satış Mağazası / Satış"  ->  "Develi Fabrika Satış Mağazası"
+
+    İlçe çoğu kayıtta boş geldiğinden ilçe yoksa il kullanılıyor. Aynı
+    yerde birden çok nokta varsa (İstanbul'da 7 tane) mahalle adıyla
+    ayrılıyor, yoksa hepsi yine aynı isme düşerdi.
+
+    Tarif: genel_adlar: ["Fabrika Satış Mağazası", "Benzinli Araç Servisi"]
+    """
+    kaliplar = [fold(x) for x in (cfg.get("genel_adlar") or []) if x]
+    if not kaliplar:
+        return kayitlar
+
+    hedef = []
+    for r in kayitlar:
+        ad = fold(r.get("bayi_adi", ""))
+        if any(k in ad for k in kaliplar):
+            hedef.append(r)
+    if not hedef:
+        return kayitlar
+
+    # 1. tur: yer adını başa al
+    for r in hedef:
+        temel = _ROL_EKI.sub("", clean_text(r.get("bayi_adi", "")))
+        yer = clean_text(r.get("ilce", "")) or clean_text(r.get("il", ""))
+        r["_yeni_ad"] = f"{yer} {temel}".strip() if yer else temel
+
+    # 2. tur: aynı ada düşenleri mahalleyle ayır
+    sayac: dict[str, int] = {}
+    for r in hedef:
+        sayac[r["_yeni_ad"]] = sayac.get(r["_yeni_ad"], 0) + 1
+    for r in hedef:
+        ad = r.pop("_yeni_ad")
+        if sayac.get(ad, 0) > 1:
+            mah = _mahalle(r.get("adres", ""))
+            if mah:
+                ad = f"{ad} ({mah})"
+        r["bayi_adi"] = ad
+    return kayitlar
+
+
+# ------------------------------------------- ad/adres kayması onarımı
+_AD_ADRES_IZI = re.compile(
+    r"\b(mah|mahalle|mahallesi|cad|cadde|caddesi|sok|sokak|blv|bulvar|"
+    r"bulvari|no\s*:|osb|apt)\b", re.I)
+
+
+def _ad_adres_kaymasi(rec: dict) -> None:
+    """Bayi adı yerine ilçe/il adı yazılmışsa firma adını adresten alır.
+
+    Bazı sitelerde kartın başlığı İLÇE, firma adı ise bir alt satırda.
+    Tarif yoksa otomatik tespit başlığı ad sanıyor ve firma adı adres
+    alanına kayıyor. Mondial'da "SEYHAN", Apachi'de "ÇUKUROVA",
+    FCM'de "MERKEZ" 29 kez böyle yazılmıştı.
+
+    Onarım muhafazakâr: yalnızca ad GERÇEKTEN bir il/ilçe adıysa ve
+    adresin ilk parçası adres işareti (mah/cad/sok/no) TAŞIMIYORSA
+    devreye giriyor. Aksi hâlde dokunmuyor.
+    """
+    ad = (rec.get("bayi_adi") or "").strip()
+    adres = (rec.get("adres") or "").strip()
+    if not ad or not adres:
+        return
+    if fold(ad) not in IL_FOLD and not ilce_mi(ad):
+        return
+    parcalar = [p.strip() for p in re.split(r"\s{2,}|\n", adres) if p.strip()]
+    ilk = parcalar[0] if parcalar else ""
+    if len(ilk) < 6 or _AD_ADRES_IZI.search(ilk):
+        return
+    rec["bayi_adi"] = ilk[:120]
+    rec["adres"] = adres[len(ilk):].strip(" -,;\u00b7")
+    if not (rec.get("ilce") or "").strip():
+        rec["ilce"] = ad
+
+
+
 # ------------------------------------------------------------- son rötuşlar
 def finalize(rec: dict, marka: str, kaynak_url: str, cfg: dict) -> dict | None:
     """Ham kaydı standart şemaya oturtur. Adı olmayan kaydı çöpe atar."""
+    _ad_adres_kaymasi(rec)
+    # NOT: Firma adına büyük/küçük harf düzeltmesi UYGULANMIYOR. Denendi
+    # ve geri alındı: kaynaktaki yazım korunuyor, ad olduğu gibi kalıyor.
     ad = clean_text(rec.get("bayi_adi", ""))
     if not ad:
         return None
@@ -237,6 +341,16 @@ def finalize(rec: dict, marka: str, kaynak_url: str, cfg: dict) -> dict | None:
     if not ilce_ad:
         ilce_ad = adresten_ilce(rec.get("adres", ""), il_ad)
 
+    # Kaynak ilçe alanına İL ADINI yazmış olabilir: RKS/Kuba gibi il
+    # seçmeli siteler her turda ilçeyi il adıyla dolduruyor. Adreste
+    # gerçek ilçe varsa onu tercih ediyoruz ("... Alanya/Antalya" ->
+    # Alanya). Adreste yoksa il adı kalır; bazı illerde merkez ilçe
+    # gerçekten il adını taşıyor.
+    if ilce_ad and il_ad and fold(ilce_ad) == fold(il_ad):
+        adresten = adresten_ilce(rec.get("adres", ""), il_ad)
+        if adresten and fold(adresten) != fold(il_ad):
+            ilce_ad = adresten
+
     if ilce_ad and not il_ad:                              # 4
         il_ad = ilceden_il(ilce_ad)
 
@@ -250,6 +364,23 @@ def finalize(rec: dict, marka: str, kaynak_url: str, cfg: dict) -> dict | None:
     if ilce_ad and fold(ilce_ad) in ("merkez", "merkez ilce", "il merkezi",
                                      "sehir merkezi", "merkezi") and il_ad:
         ilce_ad = il_ad
+
+    # ADRESTEKİ İL, SEÇİLEN İLDEN ÖNCELİKLİ.
+    #
+    # İl seçmeli sitelerde sayfa çoğu zaman filtre uygulamadan TAM listeyi
+    # döndürüyor. Tarama her il için istek attığından aynı bayi 43 ayrı ile
+    # yazılıyordu (Voge 138 -> 1.136, Volta 152 -> 754). Adresin sonunda
+    # gerçek il yazıyorsa onu kullanıyoruz; böylece aynı bayi hangi il
+    # sorgusunda gelirse gelsin tek ve doğru ile düşüyor, kopya oluşmuyor.
+    adres_ham = rec.get("adres", "") or ""
+    if adres_ham:
+        son = re.split(r"[/,]", adres_ham)[-1].strip()
+        adres_il = il_ara(son)
+        if adres_il and fold(adres_il) != fold(il_ad or ""):
+            il_ad = adres_il
+            # İl değişti; eski ilçe artık geçersiz. Adresten yenisini çıkar.
+            if not ilce_ad or not ilce_mi(ilce_ad, il_ad):
+                ilce_ad = adresten_ilce(adres_ham, il_ad) or ""
 
     # SON KONTROL: il alanı gerçek bir il mi?
     #

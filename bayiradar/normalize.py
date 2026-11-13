@@ -6,6 +6,7 @@ vs "Afyonkarahisar", "İçel" vs "Mersin". Hepsini tek bir anahtara indirgemeden
 filtreleme çalışmaz.
 """
 
+import html
 import re
 import unicodedata
 
@@ -28,6 +29,19 @@ def tr_upper(s: str) -> str:
     if not s:
         return ""
     return s.translate(_TR_UPPER).upper()
+
+
+# ISO-8859-9 (Türkçe latin-5) baytlarını latin-1 sanan siteler: Türkçe
+# harfler İzlandaca harflere dönüşüyor. STMax'ta 13 adres böyleydi
+# ("PTT ÜZERÝ" = "PTT ÜZERİ", "ERTUÐRUL" = "ERTUĞRUL").
+_LATIN5 = str.maketrans({"ý": "ı", "þ": "ş", "ð": "ğ",
+                         "Ý": "İ", "Þ": "Ş", "Ð": "Ğ"})
+
+
+def latin5_onar(metin: str) -> str:
+    if not metin or not any(c in metin for c in "ýþðÝÞÐ"):
+        return metin
+    return metin.translate(_LATIN5)
 
 
 def mojibake_onar(metin: str) -> str:
@@ -87,7 +101,15 @@ def clean_text(s: str) -> str:
     """
     if not s:
         return ""
+    # SIRA ÖNEMLİ: önce HTML varlıkları çözülür, sonra kodlama onarımları.
+    # Üç ayrı bozulma türü var ve her biri ayrı ayrı önümüze geliyordu:
+    #   1. UTF-8'i latin-1 sanmak  : "Ä°stanbul"  -> mojibake_onar
+    #   2. latin-5'i latin-1 sanmak: "ÜZERÝ"     -> latin5_onar
+    #   3. çözülmemiş HTML varlığı : "MOTOR&#039;S" -> html.unescape
+    if "&" in s and ("&#" in s or ";" in s):
+        s = html.unescape(s)
     s = mojibake_onar(s)
+    s = latin5_onar(s)
     s = s.replace("\xa0", " ").replace("\u200b", "")
     # Türkçe "İ" sonrası kalan birleştirici nokta (U+0307) — casefold
     # artığı; anahtar üretiminde sessizce eşleşmeyi bozuyordu.
@@ -114,10 +136,41 @@ def clean_adres(s: str) -> str:
     return s.strip(" ·-–,")
 
 
+# Bir hücrede birden çok numara olabiliyor:
+#   "0539 874 04 74 - 0552 390 04 74"   "0326 512 15 80 / 0535 878 41 87"
+# Ayırıcı hiç olmadan da yapışabiliyor (Volta): 22 hanelik tek dize.
+_COK_NUMARA = re.compile(r"[-/,;]|\bve\b|\bveya\b", re.I)
+
+
+def ilk_numara(s: str) -> str:
+    """Birden çok numara varsa ilkini döner.
+
+    Yapışık numara imzayı bozuyordu: Volta'da aynı mağaza bir kayıtta
+    +905060407627, diğerinde 0506040762705321727627 olarak geldiği için
+    iki ayrı bayi sanılıyordu. 10 markada 147 kayıt bu durumdaydı.
+    """
+    if not s:
+        return ""
+    parca = _COK_NUMARA.split(s)[0].strip()
+    # Tek numaralık uzunluktaysa doğrudan kullan. Üst sınır şart: ayırıcısı
+    # olmayan yapışık numaralarda ilk parça bütün dize oluyor.
+    if 10 <= len(re.sub(r"\D", "", parca)) <= 13:
+        return parca
+    # Ayırıcı yok: haneleri sayıp ilk numarayı kes
+    d = re.sub(r"\D", "", s)
+    for uzunluk in (12, 11, 10):        # +90..., 0..., alan koduyla
+        if len(d) >= uzunluk * 2 - 2 and len(d) % uzunluk == 0:
+            return d[:uzunluk]
+    if len(d) > 13:
+        return d[:11] if d.startswith("0") else d[:10]
+    return s
+
+
 def clean_phone(s: str) -> str:
     """Telefonu +90XXXXXXXXXX formatına indirger. Tekilleştirme için kritik."""
     if not s:
         return ""
+    s = ilk_numara(s)
     d = re.sub(r"\D", "", s)
     if len(d) == 10:
         d = "90" + d

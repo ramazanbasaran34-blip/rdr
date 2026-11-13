@@ -26,6 +26,13 @@ on:
   # Yedek saatler koyuyoruz: hangisi çalışırsa iş yapılır, sonrakiler
   # "periyodu dolmadı" diyip kendiliğinden atlıyor (tarama_gerekiyor_mu),
   # yani çift tarama olmuyor.
+  # GÜNLÜK TARAMA AÇIK — sonuç YALNIZCA ÖNİZLEMEYE yazılır.
+  # Bu akış bayiler_yeni.db'yi (önizleme) günceller ve siteyi yayınlar;
+  # canlı veriye (bayiler.db) DOKUNMAZ. Canlıya geçiş yalnızca
+  # "Önizlemeyi canlıya al" akışıyla ve KULLANICI ONAYIYLA yapılır;
+  # o akışın zamanlaması yoktur, sadece elle çalıştırılır.
+  # Eşzamanlılık grubu ortak (bayi-onizleme-yazma): iki tarama aynı anda
+  # koşup birbirinin sonucunu ezemez.
   schedule:
     - cron: "7 2 * * *"      # 05:07 TR
     - cron: "23 5 * * *"     # 08:23 TR — ilki kaçarsa
@@ -40,8 +47,8 @@ on:
         description: "Periyodu beklemeden hepsini tara (evet yaz)"
         required: false
         default: ""
-  # tetik/komple dosyası değişince KOMPLE tarama başlar (periyot beklenmez).
-  # Sohbetten "komple tara" demek için: bu dosyaya bir satır ekleyip push'la.
+  # tetik/komple dosyası değişince KOMPLE tarama (periyot beklenmez).
+  # Sohbetten tetiklemek için bu dosyaya bir satır eklenip push'lanır.
   push:
     paths: ["tetik/komple"]
 
@@ -49,7 +56,10 @@ permissions:
   contents: write
 
 concurrency:
-  group: bayi-tarama
+  # ORTAK GRUP: bayiler_yeni.db'ye yazan her akış aynı kuyruğa girsin.
+  # Ayrı gruplardayken iki tarama aynı anda koşup birbirinin sonucunu
+  # eziyordu. cancel-in-progress kapalı: iptal etme, SIRAYA AL.
+  group: bayi-onizleme-yazma
   cancel-in-progress: false
 
 jobs:
@@ -103,7 +113,10 @@ jobs:
     needs: tara
     if: always()
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    # 40 dakika yetmiyordu: 9 Eylül'de üç zamanlanmış tarama da bu işte
+    # "Özel modüllü markalar" adımında tam 40. dakikada iptal oldu. Bu hafta
+    # 6 yeni özel modül eklendi; adım artık ~55-70 dakika sürüyor.
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -128,15 +141,90 @@ jobs:
             echo "::error::Hiç parça gelmedi — tarama çalışmamış."
             exit 1
           fi
-          python birlestir.py parcalar bayiler.db
+          # TARAMA ARTIK CANLI VERİYE YAZMIYOR.
+          # Sonuç bayiler_yeni.db'ye gidiyor; canlı sayfa dokunulmadan
+          # kalıyor. Kullanıcı önizlemeyi kontrol edip onaylayınca
+          # "Onayla" akışı bayiler_yeni.db -> bayiler.db kopyalıyor.
+          # TABAN: MEVCUT ÖNİZLEME (10 Eylül). Eskiden her tam tarama canlıdan
+          # yeniden kuruyordu; önizlemedeki temizlikler (180 çöp/çift kayıt),
+          # karantina düzeltmeleri ve yeni modül sonuçları her gece siliniyordu.
+          # Onay akışı önizlemeyi canlıya kopyaladığı için önizleme SÜREGELEN
+          # DURUMDUR; canlıdan yalnızca önizleme hiç yoksa başlanır.
+          if [ ! -f bayiler_yeni.db ]; then
+            echo "önizleme yok — canlıdan başlanıyor"; cp bayiler.db bayiler_yeni.db
+          else
+            echo "taban: mevcut önizleme bayiler_yeni.db"
+          fi
+          python birlestir.py parcalar bayiler_yeni.db
+          # Otomatik temizlik: artık/çift/taşınmış eski kayıtlar ve yanlış
+          # karantina tabanları. "Sitede bulunamadı"ya dokunmaz.
+          python temizle.py bayiler_yeni.db || true
+
+      - name: Özel modüllü markalar
+        run: |
+          # SYM, Kawasaki, Bajaj, Kanuni genel taramaya girmiyor:
+          # cli.py "ozel:" alanını tanımıyor ve onları eski tarifle
+          # tarayıp her ile bir kez yazıyordu (SYM 295 -> 2.886).
+          # Kendi modülleriyle burada taranıyorlar; böylece gece
+          # taraması yine 62 markanın tamamını kapsıyor.
+          pip install playwright && playwright install --with-deps chromium
+          python ozel_tara.py --db bayiler_yeni.db || true
+
+      - name: Kendi betiği ve elle veri dosyası olan markalar
+        run: |
+          # BU ADIM EKSİKTİ. Günlük tarama yalnızca genel taramayı ve
+          # ozel/ modüllerini çalıştırıyordu; brands.yaml'daki "betik:" ve
+          # "elle_dosya:" alanları yalnızca tek_marka.py'de tanımlıydı.
+          # Sonuç: Yamaha 5 Eylül'den beri hiç taranmıyor, "hiç kayıt
+          # çıkmadı" damgası öylece duruyordu; Hero, Harley-Davidson,
+          # Ducati ve Triumph'un elle dosyaları da hiç işlenmiyordu.
+          python - <<'PY' > /tmp/hedefler.txt
+          import yaml
+          c = yaml.safe_load(open("brands.yaml"))["markalar"]
+          for m, v in c.items():
+              if v.get("betik"):
+                  print("betik", v["betik"])
+              elif v.get("elle_dosya"):
+                  print("elle", v["elle_dosya"])
+          PY
+          sort -u /tmp/hedefler.txt | while read TUR AD; do
+            echo "--- $TUR $AD"
+            if [ "$TUR" = "betik" ]; then
+              python "$AD" --db bayiler_yeni.db || true
+            else
+              python elle_tara.py "$AD" --db bayiler_yeni.db || true
+            fi
+          done
+
       - name: Durum özeti
         run: python cli.py durum || true
       - name: Denetim
         run: python denetle.py || true
       - name: Siteyi üret
         run: |
-          mkdir -p site
-          python uret_index.py site/index.html
+          # ÖNİZLEME DE ÜRETİLMELİ. Burada yalnızca index.html üretiliyordu;
+          # bu akış Pages'e yayınlayınca siteyi baştan kuruyor ve
+          # .../onizleme/ adresi siliniyordu — önizleme linkleri 404
+          # veriyordu. yayinla.yml ikisini de üretiyor, burası üretmiyordu.
+          # DAL ÜZERİNDEN YAYIN: Pages main dalını sunuyor (rdr deposu).
+          # Kök index.html = dondurulmuş canlı (canli/index.html kopyası),
+          # onizleme/ = son taramanın sonucu. Hepsi depoya commit edilir.
+          # CANLI SAYFA DONDURULMUŞTUR — bkz. yayinla.yml / onayla.yml.
+          if [ -f canli/index.html ]; then
+            cp canli/index.html index.html
+          else
+            python uret_index.py index.html
+          fi
+          mkdir -p onizleme
+          # ÖNİZLEME: son taramanın sonucu
+          if [ -f bayiler_yeni.db ]; then
+            python uret_index.py onizleme/index.html --db bayiler_yeni.db
+          else
+            cp index.html onizleme/index.html
+          fi
+          test -s onizleme/index.html || { echo "::error::önizleme üretilemedi"; exit 1; }
+          # Yedek adres: alt klasör bazı durumlarda 404 veriyordu
+          cp onizleme/index.html onizleme.html
       - name: Veritabanını depoya yaz
         run: |
           git config user.name  "bayi-radar-bot"
@@ -156,19 +244,37 @@ jobs:
           tail -n 400 gunluk/tarama-gunlugu.txt > /tmp/g.txt \
             && mv /tmp/g.txt gunluk/tarama-gunlugu.txt
 
-          # Pages dal üzerinden yayınlıyor: kök index.html = canlı,
-          # preview/index.html = önizleme. Tarama her ikisini de tazeler.
-          cp site/index.html index.html
-          mkdir -p preview && cp site/index.html preview/index.html
+          # ÖNCE dosya gerçekten var mı — yoksa sessizce boş commit atıp
+          # "başarılı" görünüyordu, tarama sonucu kayboluyordu.
+          test -s bayiler_yeni.db || { echo "::error::bayiler_yeni.db yok/boş"; exit 1; }
+          python - <<'PY'
+          import sqlite3, sys
+          c = sqlite3.connect("bayiler_yeni.db")
+          n = c.execute("select count(*) from bayiler where durum!='kaldirildi'").fetchone()[0]
+          m = c.execute("select count(distinct marka) from bayiler where durum!='kaldirildi'").fetchone()[0]
+          print(f"yazılacak: {n} kayıt, {m} marka")
+          if n < 1000: sys.exit(f"kayıt sayısı şüpheli: {n}")
+          PY
 
-          git add -f bayiler.db gunluk/tarama-gunlugu.txt index.html preview/index.html
+          git add -f bayiler_yeni.db gunluk/tarama-gunlugu.txt index.html onizleme/index.html onizleme.html
           git diff --staged --quiet && { echo "Değişiklik yok"; exit 0; }
-          git commit -m "Veri güncellendi: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git commit -m "Tarama sonucu (önizleme): $(date -u +'%Y-%m-%d %H:%M UTC')"
+          # PUSH: çakışmada BİZİM bayiler_yeni.db'miz kazanmalı.
+          # rebase --skip kullanılıyordu ve çakışmada değişikliği
+          # sessizce atıyordu; tarama sonucu kayboluyordu.
           for i in 1 2 3 4 5; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "yazıldı"; exit 0
+            fi
+            echo "çakışma, yeniden deneniyor ($i)"
             git fetch origin "${GITHUB_REF_NAME}"
-            git rebase -X ours "origin/${GITHUB_REF_NAME}" || git rebase --skip
-            git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
-            sleep 5
+            git checkout --ours bayiler_yeni.db 2>/dev/null || true
+            git merge -X ours "origin/${GITHUB_REF_NAME}" -m "birleştirme" || {
+              git checkout --ours bayiler_yeni.db
+              git add -f bayiler_yeni.db
+              git commit -m "birleştirme (bizim veri korundu)" || true
+            }
+            sleep 6
           done
-          echo "::error::Veri kaydedilemedi"
+          echo "::error::Tarama sonucu yazılamadı"
           exit 1

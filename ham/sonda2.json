@@ -1,0 +1,56 @@
+{
+ "mj_get": {
+  "rks": {
+   "GET_kod": 200,
+   "GET_boyut": 1,
+   "GET_tel": 0,
+   "GET_kayit": 0,
+   "POST_kayit": 17
+  },
+  "kuba": {
+   "GET_kod": 200,
+   "GET_boyut": 0,
+   "GET_tel": 0,
+   "GET_kayit": 0,
+   "POST_kayit": 17
+  }
+ },
+ "yamaha": {
+  "model_kod": 200,
+  "model_boyut": 31603,
+  "model_uclar": [
+   "https://www.yamaha-motor.eu/services/yme/authentication/oauth2/callback",
+   "https://www.yamaha-motor.eu/tr/tr/dealer-locator/"
+  ],
+  "model_kok_kod": 200,
+  "model_kok_boyut": 16216,
+  "model_kok_uclar": [
+   "https://core.dxpapi.com/api/v1/core/",
+   "https://suggest.dxpapi.com/api/v2/suggest/"
+  ],
+  "sayfa_kod": 200,
+  "sayfa_boyut": 11171,
+  "sayfa_uclar": [
+   "https://www.yamaha-motor.eu/al/en/dealer-locator/",
+   "https://www.yamaha-motor.eu/at/de/dealer-locator/",
+   "https://www.yamaha-motor.eu/ba/hr/dealer-locator/",
+   "https://www.yamaha-motor.eu/be/fr/dealer-locator/",
+   "https://www.yamaha-motor.eu/be/nl/dealer-locator/",
+   "https://www.yamaha-motor.eu/bg/bg/dealer-locator/",
+   "https://www.yamaha-motor.eu/ch/de/dealer-locator/",
+   "https://www.yamaha-motor.eu/ch/fr/dealer-locator/",
+   "https://www.yamaha-motor.eu/cy/en/dealer-locator/",
+   "https://www.yamaha-motor.eu/cz/cs/dealer-locator/",
+   "https://www.yamaha-motor.eu/de/de/dealer-locator/",
+   "https://www.yamaha-motor.eu/dk/da/dealer-locator/",
+   "https://www.yamaha-motor.eu/ee/et/dealer-locator/",
+   "https://www.yamaha-motor.eu/es/es/dealer-locator/",
+   "https://www.yamaha-motor.eu/fi/fi/dealer-locator/"
+  ],
+  "sayfa_tel": 0,
+  "js_kod": 200,
+  "parca_sayisi": 1,
+  "parca_tarandi": 0,
+  "js_uclar": []
+ }
+}

@@ -320,6 +320,66 @@ for metin, bek in [
         print(f"  ✗ '{metin[:34]}': {bek} beklendi, {g} geldi")
 print(f"  ✓ telefon tanıma ({_t}/14)")
 
+# ------------------------------------------- 15. Türkçe karakter onarımı
+# Sahada ÜÇ AYRI bozulma türü görüldü ve her biri ayrı ayrı önümüze geldi.
+# Bu test üçünü birden bekçiliyor, tekrar sızmasınlar.
+print("\n15. Türkçe karakter onarımı — üç bozulma türü")
+from bayiradar.normalize import clean_text as _ct
+_ornek = [
+    ("\u00c5\u009eEH\u00c4\u00b0T AL\u00c4\u00b0 BEY", "ŞEHİT ALİ BEY"),   # UTF-8'i latin-1 sanmak
+    ("PAZAR MAH. PTT ÜZERÝ", "PAZAR MAH. PTT ÜZERİ"),                          # latin-5'i latin-1 sanmak
+    ("ÝHSANÝYE MAH.ERTUÐRUL", "İHSANİYE MAH.ERTUĞRUL"),
+    ("ASYA MOTOR&#039;S", "ASYA MOTOR'S"),                                      # HTML varlığı
+    ("Kadıköy / İstanbul", "Kadıköy / İstanbul"),                               # sağlam: dokunma
+    ("Normal Türkçe çğıöşü", "Normal Türkçe çğıöşü"),
+]
+_k = 0
+for _ham, _bek in _ornek:
+    _c = _ct(_ham)
+    if _c == _bek:
+        _k += 1
+    else:
+        print(f"  ✗ {_ham!r} -> {_c!r}, beklenen {_bek!r}")
+        BASARISIZ.append((f"karakter: {_ham[:24]}", [f"{_bek!r} beklendi, {_c!r} geldi"], []))
+if _k == len(_ornek):
+    BASARILI.append("karakter onarımı")
+print(f"  ✓ karakter onarımı ({_k}/{len(_ornek)})")
+
+
+# --------------------------------------- 16. Kodlama seçimi (kök sebep)
+# Türkçe karakter bozulmalarının kaynağı buydu: apparent_encoding
+# (istatistiksel tahmin) sayfanın <meta charset> bildiriminden ÖNCE
+# geliyordu ve Türkçe metinde sık sık latin-1 diye yanlış tahmin ediyordu.
+print("\n16. Kodlama seçimi — beş senaryo")
+from bayiradar.fetch import _en_iyi_coz as _coz
+
+class _SahteYanit:
+    def __init__(self, icerik, ctype="", apparent="ISO-8859-1"):
+        self.content = icerik
+        self.headers = {"content-type": ctype}
+        self.apparent_encoding = apparent
+
+_m = "ŞEHİT ALİ BEY MAHALLESİ ERTUĞRUL SOKAK ÜZERİ ÇİÇEK"
+_senaryo = [
+    ("utf-8 gövde + meta utf-8", b'<meta charset="utf-8">' + _m.encode("utf-8"), "text/html"),
+    ("cp1254 gövde + meta cp1254", b'<meta charset="windows-1254">' + _m.encode("cp1254"), "text/html"),
+    ("cp1254 gövde ama meta YANLIŞ utf-8 diyor", b'<meta charset="utf-8">' + _m.encode("cp1254"), "text/html"),
+    ("başlıkta charset, meta yok", _m.encode("utf-8"), "text/html; charset=utf-8"),
+    ("hiç bildirim yok", _m.encode("utf-8"), "text/html"),
+]
+_k = 0
+for _ad, _icerik, _ctype in _senaryo:
+    _c = _coz(_SahteYanit(_icerik, _ctype), None)
+    if "ŞEHİT" in _c and "ERTUĞRUL" in _c and "ÜZERİ" in _c:
+        _k += 1
+    else:
+        print(f"  ✗ {_ad}: {_c[-30:]!r}")
+        BASARISIZ.append((f"kodlama: {_ad}", ["Türkçe harfler bozuk çözüldü"], []))
+if _k == len(_senaryo):
+    BASARILI.append("kodlama seçimi")
+print(f"  ✓ kodlama seçimi ({_k}/{len(_senaryo)})")
+
+
 # ---------------------------------------------------------------- özet
 print("\n" + "=" * 60)
 print(f"GEÇEN: {len(BASARILI)}   KALAN: {len(BASARISIZ)}")

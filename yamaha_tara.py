@@ -120,6 +120,23 @@ def cevir(ham: list[dict]) -> list[dict]:
     cfg: dict = {}
     out = []
     for d in ham:
+        # SADECE MOTOSİKLET. serviceIds kodları kategoriyi belirtir:
+        # MC* = motosiklet (MC satış, MCSER servis, MC125CC, MCPART...),
+        # GC/GCS = golf arabası, ME* = marin. Yamaha listesinde golf ve
+        # marin bayileri de var; kullanıcı yalnızca motosiklet istiyor.
+        # Motosiklet ve scooter/elektrikli ortak bayiler MC kodunu taşıdığı
+        # için tek MC* filtresi hepsini kapsıyor. MC* kodu yoksa elenir.
+        kodlar = [str(x).upper() for x in (d.get("serviceIds") or [])]
+        if not any(k.startswith("MC") for k in kodlar):
+            continue
+        # KKTC/Kıbrıs Türkiye dışı: Yamaha bunları country=TR sayıyor ama
+        # şehir "KIBRIS" ve posta kodu 99xxx. Türkiye listesine girmesin.
+        _sehir = (d.get("city") or "").upper()
+        _zip = (d.get("zipCode") or "").strip()
+        _adr = " ".join(d.get("addressLines") or []).upper()
+        if "KIBRIS" in _sehir or "KKTC" in _sehir or _zip.startswith("99") \
+                or "KIBRIS" in _adr or "K.K.T.C" in _adr:
+            continue
         ad = re.sub(r"\s+", " ", (d.get("name") or "")).strip()
         rec = {
             "bayi_adi": ad,
@@ -140,6 +157,12 @@ def cevir(ham: list[dict]) -> list[dict]:
 
 def main() -> None:
     kuru = "--kuru" in sys.argv
+    # --db ŞART: bu betik varsayılan olarak CANLI bayiler.db'ye yazıyordu.
+    # Tarama önizlemeye (bayiler_yeni.db) yazmalı, canlıya yalnızca onay
+    # akışı dokunmalı.
+    db_yolu = "bayiler.db"
+    if "--db" in sys.argv:
+        db_yolu = sys.argv[sys.argv.index("--db") + 1]
     basladi = now()
 
     ham = hepsini_cek()
@@ -159,7 +182,7 @@ def main() -> None:
     if kuru:
         print("(kuru çalışma — veritabanına yazılmadı)")
     else:
-        with db() as con:
+        with db(db_yolu) as con:
             sonuc = commit_tarama(con, MARKA, kayitlar, 1.0, basladi)
         rapor["db"] = str(sonuc)[:200]
         print("db:", rapor["db"])

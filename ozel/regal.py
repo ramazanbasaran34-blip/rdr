@@ -84,6 +84,17 @@ def _m(el) -> str:
     return re.sub(r"\s+", " ", el.get_text(" ")).strip() if el else ""
 
 
+# Bayi adı olamayacak alan etiketleri
+_ETIKETLER = {"telefon", "tel", "gsm", "cep", "adres", "adresi", "e posta",
+              "eposta", "email", "mail", "faks", "fax", "harita", "konum",
+              "bayi", "bayii", "servis", "iletisim", "detay", "web"}
+
+
+def _etiket_mi(ad: str) -> bool:
+    s = re.sub(r"[^a-zçğıöşü ]", "", (ad or "").casefold()).strip()
+    return s in _ETIKETLER
+
+
 def coz(rol: str, govde: str, url: str, il: str | None = None) -> list[dict]:
     """Postback yanıtındaki bayi kartlarını çıkarır."""
     soup = BeautifulSoup(govde, "html.parser")
@@ -106,13 +117,20 @@ def coz(rol: str, govde: str, url: str, il: str | None = None) -> list[dict]:
                                     "çerez", "gizlilik", "tüm hakları")):
             continue
 
-        bas = kutu.find(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b"])
+        # ÖNCE gerçek başlık: kartta alanlar <b>Adres</b> / <b>Telefon</b>
+        # diye etiketli geliyor ve genel <b> araması bu ETİKETİ ad
+        # sanıyordu. 456 kaydın 75'inin adı "Telefon", adresi de telefon
+        # numarasıydı.
+        bas = (kutu.select_one("b.title")
+               or kutu.find(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b"]))
         ad = _m(bas)
+        if _etiket_mi(ad):
+            ad = ""
         if not ad:
             # Başlık yoksa telefondan önceki ilk satırı ad say
             ad = metin[:t.start()].strip(" -–|·,")
             ad = ad.split("  ")[0][:80].strip()
-        if not ad or len(ad) < 3:
+        if not ad or len(ad) < 3 or _etiket_mi(ad):
             continue
 
         tel = t.group(0)
@@ -120,6 +138,9 @@ def coz(rol: str, govde: str, url: str, il: str | None = None) -> list[dict]:
         # "Satış Mağazası" / "Servis" gibi kart etiketi adresin başında
         adres = re.sub(r"^\s*(Satış Mağazası|Servis Noktası|Servis|Bayi)\s*",
                        "", adres, flags=re.I)
+        # Kartta alanlar "Adres ..." / "Telefon ..." diye etiketli geliyor;
+        # etiket adresin başında kalıyordu.
+        adres = re.sub(r"^\s*(Adres|Adresi)\s*:?\s*", "", adres, flags=re.I)
         adres = re.sub(r"\s+", " ", adres).strip(" -–|·,")
 
         anahtar = (ad.casefold(), tel)
@@ -128,7 +149,8 @@ def coz(rol: str, govde: str, url: str, il: str | None = None) -> list[dict]:
         gorulen.add(anahtar)
 
         out.append({
-            "bayi_adi": ad,
+            # Ad "ATALAY YIĞMAN Bayi" diye geliyor; rol zaten ayrı alanda.
+            "bayi_adi": re.sub(r"\s*(?:Bayi|Bayii|Servis)\s*$", "", ad).strip(),
             "il": il or "",
             "ilce": "",
             "adres": adres[:220],

@@ -1,0 +1,404 @@
+[
+ {
+  "url": "https://www.yamaha-motor.eu/services/api/dealers",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "POST",
+  "gonderilen": "{\"query\":\"\\n  query GetDealersByCountry ($country: String!, $limit: Int, $offset: Int) {\\n    GetDealersByCountry (country: $country, limit: $limit, offset: $offset) {\\n      vicinityId\\n      name\\n      region\\n      country\\n      city\\n      addressLines\\n      zipCode\\n      telephoneNumbers\\n      email\\n      websites\\n      logoImageUrl\\n      latitude\\n      longitude\\n      serviceIds\\n      salesforceDealer\\n      pickUpCollect\\n      dealerFranchises{\\n        franchiseCode\\n      }\\n      shopOpeningHours {\\n        openingHoursClosed\\n        openingHoursDay\\n        openingHoursOpen\\n        openingHoursType\\n    }\\n      openingHours {\\n        TR {\\n          serviceWeek\\n          serviceWeekend\\n          shopWeek\\n          shopWeekend\\n        }\\n      }\\n    }\\n  }\\n\",\"variables\":{\"country\":\"tr\"}}",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*",
+   "content-type": "application/json"
+  },
+  "boyut": 34516,
+  "puan": 5,
+  "kaydedildi": true
+ },
+ {
+  "url": "blob:https://www.yamaha-motor.eu/d678c9b2-7b8f-4c73-848c-8367dc6d3061",
+  "kod": 200,
+  "tip": "application/javascript",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "*/*"
+  },
+  "boyut": 312634,
+  "puan": 3
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/tr/tr/dealer-locator.model.json",
+  "kod": 200,
+  "tip": "application/json;charset=utf-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 31603,
+  "puan": 3,
+  "kaydedildi": true
+ },
+ {
+  "url": "https://analytics.tiktok.com/i18n/pixel/static/main.MWFiZGNkNWVmMA.js",
+  "kod": 200,
+  "tip": "application/javascript; charset=UTF-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 486207,
+  "puan": 3
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/tr/tr/dealer-locator/?category=MCM",
+  "kod": 200,
+  "tip": "text/html;charset=utf-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 11076,
+  "puan": 2
+ },
+ {
+  "url": "https://d3p4it9p4cf1ca.cloudfront.net/moduleEntry.js",
+  "kod": 200,
+  "tip": "application/javascript",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 1211561,
+  "puan": 2
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/tr/tr.model.json",
+  "kod": 200,
+  "tip": "application/json;charset=utf-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 16245,
+  "puan": 2,
+  "kaydedildi": true
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/content/experience-fragments/yme/tr/tr/yme-bu-editable/header/master/jcr:content/root/header_menu.megamenu.json/content/yme/tr/tr",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*"
+  },
+  "boyut": 36316,
+  "puan": 2,
+  "kaydedildi": true
+ },
+ {
+  "url": "https://cdn.cookielaw.org/scripttemplates/202508.2.0/otBannerSdk.js",
+  "kod": 200,
+  "tip": "application/javascript",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 511525,
+  "puan": 2
+ },
+ {
+  "url": "https://cdn.cookielaw.org/consent/018dd630-60b1-7e79-9a1c-fd142fb1e264/018fc8d3-c912-732f-bc2f-796a5ced4f65/tr-tr.json",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 83125,
+  "puan": 2,
+  "kaydedildi": true
+ },
+ {
+  "url": "https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=not_available&lib=ttq",
+  "kod": 200,
+  "tip": "application/javascript; charset=UTF-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 7911,
+  "puan": 2
+ },
+ {
+  "url": "https://analytics.tiktok.com/i18n/pixel/static/identify_ea043f1c.js",
+  "kod": 200,
+  "tip": "application/javascript; charset=UTF-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 155566,
+  "puan": 2
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/services/api/dealers",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "POST",
+  "gonderilen": "{\"query\":\"\\n  query GetCategoriesByCountry ($country: String!, $limit: Int, $offset: Int) {\\n    GetCategoriesByCountry (country: $country, limit: $limit, offset: $offset) {\\n      categories {\\n        categoryId\\n        categoryName\\n        franchises {\\n          franchiseCode\\n          franchiseDescription\\n        }\\n        services {\\n            serviceId\\n            serviceName\\n        }\\n      },\\n      language\\n    }\\n  }\\n\",\"variables\":{\"country\":\"tr\"}}",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*",
+   "content-type": "application/json"
+  },
+  "boyut": 5097,
+  "puan": 1
+ },
+ {
+  "url": "https://hyperdrive.yamaha-motor.eu/categories/yme-prod-tr/products/?locale=tr-TR",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "POST",
+  "gonderilen": "{\"externalIds\":[\"59015\",\"59035\",\"59030\",\"59013\",\"59007\",\"59008\",\"59044\",\"59047\",\"168819\",\"168821\"]}",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*",
+   "content-type": "application/json"
+  },
+  "boyut": 29389,
+  "puan": 1
+ },
+ {
+  "url": "https://cdn.cookielaw.org/scripttemplates/202508.2.0/assets/v2/otPcCenter.json",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 67871,
+  "puan": 1
+ },
+ {
+  "url": "https://cdn.brcdn.com/v1/br-trk-7660.js",
+  "kod": 200,
+  "tip": "application/javascript",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 20956,
+  "puan": 1
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/services/api/client-location",
+  "kod": 200,
+  "tip": "application/json;charset=utf-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*"
+  },
+  "boyut": 26,
+  "puan": 0
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/services/api/test-ride/form-links?path=%2Ftr%2Ftr",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*"
+  },
+  "boyut": 2,
+  "puan": 0
+ },
+ {
+  "url": "https://hyperdrive.yamaha-motor.eu/products/currency-rates?currencyCode=TRY",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*"
+  },
+  "boyut": 33,
+  "puan": 0
+ },
+ {
+  "url": "https://hyperdrive.yamaha-motor.eu/categories/category-links?locale=tr_tr",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*"
+  },
+  "boyut": 2325,
+  "puan": 0
+ },
+ {
+  "url": "https://www.yamaha-motor.eu/services/api/dealers/demo-units?countryCode=tr",
+  "kod": 200,
+  "tip": "",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "application/json, text/plain, */*"
+  },
+  "boyut": 2,
+  "puan": 0
+ },
+ {
+  "url": "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js",
+  "kod": 200,
+  "tip": "application/javascript",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 26840,
+  "puan": 0
+ },
+ {
+  "url": "https://cdn.cookielaw.org/consent/018dd630-60b1-7e79-9a1c-fd142fb1e264/018dd630-60b1-7e79-9a1c-fd142fb1e264.json",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 4807,
+  "puan": 0
+ },
+ {
+  "url": "https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "accept": "application/json"
+  },
+  "boyut": 69,
+  "puan": 0
+ },
+ {
+  "url": "https://cdn.cookielaw.org/scripttemplates/202508.2.0/assets/otFlat.json",
+  "kod": 200,
+  "tip": "application/json",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 15345,
+  "puan": 0
+ },
+ {
+  "url": "https://dpm.demdex.net/id?d_visid_ver=5.5.0&d_fieldgroup=MC&d_rtbd=json&d_ver=2&d_verify=1&d_orgid=505F3E4959A92ADC0A495E33%40AdobeOrg&d_nsid=0&ts=1788206511263",
+  "kod": 302,
+  "tip": "",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "content-type": "application/x-www-form-urlencoded"
+  }
+ },
+ {
+  "url": "https://dpm.demdex.net/id/rd?d_visid_ver=5.5.0&d_fieldgroup=MC&d_rtbd=json&d_ver=2&d_verify=1&d_orgid=505F3E4959A92ADC0A495E33%40AdobeOrg&d_nsid=0&ts=1788206511263",
+  "kod": 200,
+  "tip": "application/json;charset=utf-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 362,
+  "puan": 0
+ },
+ {
+  "url": "https://cm.everesttech.net/cm/dd?d_uuid=22841871396683973400088431185407605264",
+  "kod": 302,
+  "tip": "",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {}
+ },
+ {
+  "url": "https://dpm.demdex.net/ibs:dpid=411&dpuuid=apXdrwAAACqwjAmh",
+  "kod": 200,
+  "tip": "image/gif",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {}
+ },
+ {
+  "url": "https://yamahamotoreurope.d3.sc.omtrdc.net/id?d_visid_ver=5.5.0&d_fieldgroup=A&mcorgid=505F3E4959A92ADC0A495E33%40AdobeOrg&mid=22617166928088906460137923775760682522&ts=1788206511323",
+  "kod": 200,
+  "tip": "application/x-javascript;charset=utf-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {
+   "content-type": "application/x-www-form-urlencoded"
+  },
+  "boyut": 2,
+  "puan": 0
+ },
+ {
+  "url": "https://yme.demdex.net/dest5.html?d_nsid=undefined",
+  "kod": 200,
+  "tip": "text/html;charset=UTF-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {},
+  "boyut": 6983,
+  "puan": 0
+ },
+ {
+  "url": "https://yamahamotoreurope.d3.sc.omtrdc.net/b/ss/ymeprodeucaas/1/JS-2.25.0-LGU4/s44051571342800?AQB=1&ndh=1&pf=1&t=31%2F7%2F2026%2020%3A1%3A51%201%200&mid=22617166928088906460137923775760682522&aamlh=7&ce=UTF-8&pageName=Dealer%20Locator%20-%20Yamaha%20Motor&g=https%3A%2F%2Fwww.yamaha-motor.eu%2Ftr%2F",
+  "kod": 200,
+  "tip": "image/gif;charset=utf-8",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {}
+ },
+ {
+  "url": "https://analytics-ipv6.tiktokw.us/ipv6/enrich_ipv6",
+  "kod": 200,
+  "tip": "",
+  "yontem": "POST",
+  "gonderilen": "{\"event\":\"EnrichIpv6\",\"event_id\":\"\",\"message_id\":\"messageId-1788206511622-3214434498514-not_available#source=2\",\"is_onsite\":false,\"timestamp\":\"2026-08-31T20:01:51.622Z\",\"context\":{\"ad\":{\"sdk_env\":\"external\",\"jsb_status\":2},\"device\":{\"platform\":\"pc\"},\"user\":{},\"pixel\":{\"code\":\"not_available\",\"runtime\":\"1\"},\"page\":{\"url\":\"https://www.yamaha-motor.eu/tr/tr/dealer-locator/?category=MCM\",\"referrer\":\"\",\"load_progress\":\"2\"},\"library\":{\"name\":\"pixel.js\",\"version\":\"2.2.1\"},\"session_id\":\"ce76908b-a576-11f1-af76-d62c50014505::J5LB-wLAY-2V17uX8n6V-not_available\",\"pageview_id\":\"ce76908b-a576-11f1-af76-d62c50014505-YLBWJ.0.0::ce767e8e-a576-11f1-af76-d62c50014505-not_available\",\"variation_id\":\"default\",\"userAgent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36\"},\"_inspection\":{\"ppf\":[{\"id\":7,\"d\":15800,\"f\":[{\"id\":19,\"d\":100},{\"id\":1,\"d\":400},{\"id\":19,\"d\":100},{\"id\":2,\"d\":6100},{\"id\":18,\"d\":0},{\"id\":15,\"d\":100},{\"id\":7,\"d\":300},{\"id\":6,\"d\":4700},{\"id\":8,\"d\":0},{\"id\":9,\"d\":0},{\"id\":11,\"d\":200},{\"id\":4,\"d\":5600},{\"id\":22,\"d\":600},{\"id\":3,\"d\":6700},{\"id\":19,\"d\":0},{\"id\":16,\"d\":0},{\"id\":17,\"d\":0}]}],\"vids\":\"\"},\"properties\":{},\"signal_diagnostic_labels\":{\"raw_email\":{\"label\":\"missing\"},\"raw_auto_email\":{\"label\":\"missing\"},\"raw_phone\":{\"label\":\"missing\"},\"raw_auto_phone\":{\"label\":\"missing\"},\"hashed_email\":{\"label\":\"missing\"},\"hashed_phone\":{\"label\":\"missing\"},\"raw_eb_email\":{\"label\":\"missing\"},\"raw_eb_phone\":{\"label\":\"missing\"},\"ha",
+  "istek_basliklari": {
+   "content-type": "text/plain;charset=UTF-8"
+  },
+  "boyut": 0,
+  "puan": 0
+ },
+ {
+  "url": "https://analytics.tiktok.com/api/v2/pixel",
+  "kod": 200,
+  "tip": "",
+  "yontem": "POST",
+  "gonderilen": "{\"event\":\"Pageview\",\"event_id\":\"\",\"message_id\":\"messageId-1788206511622-3214434498514-not_available\",\"is_onsite\":false,\"timestamp\":\"2026-08-31T20:01:51.622Z\",\"context\":{\"ad\":{\"sdk_env\":\"external\",\"jsb_status\":2},\"device\":{\"platform\":\"pc\"},\"user\":{},\"pixel\":{\"code\":\"not_available\",\"runtime\":\"1\"},\"page\":{\"url\":\"https://www.yamaha-motor.eu/tr/tr/dealer-locator/?category=MCM\",\"referrer\":\"\",\"load_progress\":\"2\"},\"library\":{\"name\":\"pixel.js\",\"version\":\"2.2.1\"},\"session_id\":\"ce76908b-a576-11f1-af76-d62c50014505::J5LB-wLAY-2V17uX8n6V-not_available\",\"pageview_id\":\"ce76908b-a576-11f1-af76-d62c50014505-YLBWJ.0.0::ce767e8e-a576-11f1-af76-d62c50014505-not_available\",\"variation_id\":\"default\",\"userAgent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36\"},\"_inspection\":{\"ppf\":[{\"id\":7,\"d\":15800,\"f\":[{\"id\":19,\"d\":100},{\"id\":1,\"d\":400},{\"id\":19,\"d\":100},{\"id\":2,\"d\":6100},{\"id\":18,\"d\":0},{\"id\":15,\"d\":100},{\"id\":7,\"d\":300},{\"id\":6,\"d\":4700},{\"id\":8,\"d\":0},{\"id\":9,\"d\":0},{\"id\":11,\"d\":200},{\"id\":4,\"d\":5600},{\"id\":22,\"d\":600},{\"id\":3,\"d\":6700},{\"id\":19,\"d\":0},{\"id\":16,\"d\":0},{\"id\":17,\"d\":0}]}],\"vids\":\"\"},\"properties\":{},\"signal_diagnostic_labels\":{\"raw_email\":{\"label\":\"missing\"},\"raw_auto_email\":{\"label\":\"missing\"},\"raw_phone\":{\"label\":\"missing\"},\"raw_auto_phone\":{\"label\":\"missing\"},\"hashed_email\":{\"label\":\"missing\"},\"hashed_phone\":{\"label\":\"missing\"},\"raw_eb_email\":{\"label\":\"missing\"},\"raw_eb_phone\":{\"label\":\"missing\"},\"hashed_eb_ema",
+  "istek_basliklari": {
+   "content-type": "text/plain;charset=UTF-8"
+  },
+  "boyut": 0,
+  "puan": 0
+ },
+ {
+  "url": "https://p-eu.brsrvr.com/pix.gif?acct_id=7660&cookie2=uid%3D4472834956274%3Av%3D16.1%3Ats%3D1788206511507%3Ahc%3D1&sid=undefined&ref=&tzo=0&rand=0.8774360884464556&title=Dealer%20Locator%20-%20Yamaha%20Motor&ptype=other&domain_key=yamaha_motor_tr_tr&orig_ref_url=https%3A%2F%2Fwww.yamaha-motor.eu%2Ftr",
+  "kod": 200,
+  "tip": "image/gif",
+  "yontem": "GET",
+  "gonderilen": "",
+  "istek_basliklari": {}
+ },
+ {
+  "url": "https://analytics.tiktok.com/api/v2/pixel/act",
+  "kod": 200,
+  "tip": "",
+  "yontem": "POST",
+  "gonderilen": "{\"event_id\":\"\",\"message_id\":\"messageId-1788206511865-9799076871778\",\"is_onsite\":false,\"timestamp\":\"2026-08-31T20:01:51.865Z\",\"context\":{\"ad\":{\"sdk_env\":\"external\",\"jsb_status\":2},\"device\":{\"platform\":\"pc\"},\"user\":{},\"pixel\":{\"code\":\"not_available\",\"runtime\":\"1\",\"codes\":\"not_available\"},\"page\":{\"url\":\"https://www.yamaha-motor.eu/tr/tr/dealer-locator/?category=MCM\",\"referrer\":\"\",\"load_progress\":\"2\"},\"library\":{\"name\":\"pixel.js\",\"version\":\"2.2.1\"},\"session_id\":\"ce76908b-a576-11f1-af76-d62c50014505::J5LB-wLAY-2V17uX8n6V\",\"pageview_id\":\"ce76908b-a576-11f1-af76-d62c50014505-YLBWJ.0.0::ce767e8e-a576-11f1-af76-d62c50014505\",\"variation_id\":\"default\",\"userAgent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36\",\"index\":0,\"sessions\":[]},\"_inspection\":{\"ppf\":[{\"id\":6,\"d\":5800}],\"vids\":\"\"},\"properties\":{},\"signal_diagnostic_labels\":{\"raw_email\":{\"label\":\"missing\"},\"raw_auto_email\":{\"label\":\"missing\"},\"raw_phone\":{\"label\":\"missing\"},\"raw_auto_phone\":{\"label\":\"missing\"},\"hashed_email\":{\"label\":\"missing\"},\"hashed_phone\":{\"label\":\"missing\"},\"raw_eb_email\":{\"label\":\"missing\"},\"raw_eb_phone\":{\"label\":\"missing\"},\"hashed_eb_email\":{\"label\":\"missing\"},\"hashed_eb_phone\":{\"label\":\"missing\"}},\"action\":\"Metadata\",\"auto_collected_properties\":{\"page_trigger\":\"PageView\",\"content_data\":{\"open_graph\":\"{}\",\"microdata\":\"[]\",\"json_ld\":\"[{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@type\\\":\\\"WebSite\\\",\\\"name\\\":\\\"Yamaha Motor Turkey\\\",\\\"url\\\":\\\"https:/",
+  "istek_basliklari": {
+   "content-type": "text/plain;charset=UTF-8"
+  },
+  "boyut": 0,
+  "puan": 0
+ },
+ {
+  "url": "https://analytics.tiktok.com/api/v2/pixel/inter",
+  "kod": 200,
+  "tip": "",
+  "yontem": "POST",
+  "gonderilen": "{\"event_id\":\"\",\"message_id\":\"messageId-1788206521620-1110798312938\",\"is_onsite\":false,\"timestamp\":\"2026-08-31T20:02:01.620Z\",\"context\":{\"ad\":{\"sdk_env\":\"external\",\"jsb_status\":2},\"device\":{\"platform\":\"pc\"},\"user\":{},\"pixel\":{\"code\":\"not_available\",\"runtime\":\"1\",\"codes\":\"not_available\"},\"page\":{\"url\":\"https://www.yamaha-motor.eu/tr/tr/dealer-locator/?category=MCM\",\"referrer\":\"\",\"load_progress\":\"2\"},\"library\":{\"name\":\"pixel.js\",\"version\":\"2.2.1\"},\"session_id\":\"ce76908b-a576-11f1-af76-d62c50014505::J5LB-wLAY-2V17uX8n6V\",\"pageview_id\":\"ce76908b-a576-11f1-af76-d62c50014505-YLBWJ.0.0::ce767e8e-a576-11f1-af76-d62c50014505\",\"variation_id\":\"default\",\"userAgent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36\",\"index\":0},\"_inspection\":{\"vids\":\"\"},\"properties\":{},\"signal_diagnostic_labels\":{\"raw_email\":{\"label\":\"missing\"},\"raw_auto_email\":{\"label\":\"missing\"},\"raw_phone\":{\"label\":\"missing\"},\"raw_auto_phone\":{\"label\":\"missing\"},\"hashed_email\":{\"label\":\"missing\"},\"hashed_phone\":{\"label\":\"missing\"},\"raw_eb_email\":{\"label\":\"missing\"},\"raw_eb_phone\":{\"label\":\"missing\"},\"hashed_eb_email\":{\"label\":\"missing\"},\"hashed_eb_phone\":{\"label\":\"missing\"}},\"action\":\"Pf\",\"auto_collected_properties\":{\"action_event\":\"twt\",\"inter\":{\"ct\":1,\"st\":0},\"page_inter\":{\"metrics_type\":\"ct|st\",\"ct\":1,\"st\":0}}}",
+  "istek_basliklari": {
+   "content-type": "text/plain;charset=UTF-8"
+  },
+  "boyut": 0,
+  "puan": 0
+ }
+]

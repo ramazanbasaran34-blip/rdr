@@ -33,6 +33,19 @@ def birlestir(parca_dizini="parcalar", hedef="bayiler.db"):
         con.executescript(SCHEMA)
         _goc(con)
 
+        # Her parça bayiler.db'nin kopyası: log tablolarını olduğu gibi
+        # eklersek aynı satır 64 kez giriyor (3,9 M satır, 562 MB dosya).
+        # Kopyalanan satırların id'si taban max id'yi geçmez; sadece
+        # üstündekiler bu taramada üretilmiş gerçek yeni satırlar.
+        taban = {}
+        for t in ("tarama_log", "degisim_log"):
+            try:
+                taban[t] = con.execute(
+                    f"SELECT COALESCE(MAX(id), 0) FROM {t}").fetchone()[0]
+            except sqlite3.Error:
+                taban[t] = 0
+        print(f"taban log id: {taban}")
+
         for p in parcalar:
             try:
                 con.execute("ATTACH DATABASE ? AS parca", (str(p),))
@@ -67,8 +80,11 @@ def birlestir(parca_dizini="parcalar", hedef="bayiler.db"):
                         if not alan:
                             continue
                         fiil = "INSERT OR REPLACE" if tablo == "marka_durum" else "INSERT"
+                        suzgec = ""
+                        if tablo in taban and "id" in kaynak_s:
+                            suzgec = f" WHERE id > {taban[tablo]}"
                         con.execute(f"{fiil} INTO {tablo} ({alan}) "
-                                    f"SELECT {alan} FROM parca.{tablo}")
+                                    f"SELECT {alan} FROM parca.{tablo}{suzgec}")
                     except sqlite3.Error:
                         pass
                 con.execute("COMMIT")
@@ -89,8 +105,23 @@ def birlestir(parca_dizini="parcalar", hedef="bayiler.db"):
 
         son = con.execute("SELECT COUNT(*) FROM bayiler").fetchone()[0]
         marka = con.execute("SELECT COUNT(DISTINCT marka) FROM bayiler").fetchone()[0]
+        for t in ("tarama_log", "degisim_log"):
+            try:
+                n = con.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
+                print(f"  {t}: {n} satır")
+            except sqlite3.Error:
+                pass
+        con.execute("VACUUM")
     finally:
         con.close()
+
+    mb = Path(hedef).stat().st_size / 1024 / 1024
+    print(f"dosya: {mb:.1f} MB")
+    if mb > 90:
+        # GitHub 100 MB üstünü reddediyor; buraya gelirse yazma zaten
+        # çöker, sebebini burada söylemek daha faydalı.
+        print(f"::error::{hedef} {mb:.0f} MB — GitHub 100 MB sınırı, yazılamaz")
+        sys.exit(1)
 
     print(f"\n{len(parcalar)} parça · {son} kayıt · {marka} marka")
     if son == 0:

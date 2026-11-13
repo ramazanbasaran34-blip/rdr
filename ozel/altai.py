@@ -118,6 +118,21 @@ def coz(rol: str, govde: str, url: str, il: str | None = None) -> list[dict]:
                        "", adres, flags=re.I)
         adres = re.sub(r"\s+", " ", adres).strip(" -–|·,")
 
+        # Site 2026'da kart yapısını değiştirdi: il/ilçe artık ayrı alan
+        # değil, adres satırının sonunda "... İlçe / İl" biçiminde.
+        # Örn: "ŞİRİNEVLER MH. ... Bahçelievler / İstanbul (Avrupa)"
+        kayit_il = il or ""
+        kayit_ilce = ""
+        m_konum = re.search(r"([A-Za-zÇĞİÖŞÜçğıöşü.]+)\s*/\s*"
+                            r"([A-Za-zÇĞİÖŞÜçğıöşü ]+?)(?:\s*\([^)]*\))?\s*$",
+                            adres)
+        if m_konum:
+            kayit_ilce = m_konum.group(1).strip()
+            il_ham = m_konum.group(2).strip()
+            # "İstanbul (Avrupa)" -> "İstanbul"; parantez zaten regex'te düştü
+            if il_ham:
+                kayit_il = il_ham
+
         anahtar = (ad.casefold(), tel)
         if anahtar in gorulen:
             continue
@@ -125,8 +140,8 @@ def coz(rol: str, govde: str, url: str, il: str | None = None) -> list[dict]:
 
         out.append({
             "bayi_adi": ad,
-            "il": il or "",
-            "ilce": "",
+            "il": kayit_il,
+            "ilce": kayit_ilce,
             "adres": adres[:220],
             "telefon": tel,
             "email": "",

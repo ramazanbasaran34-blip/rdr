@@ -1,0 +1,177 @@
+name: Marka marka tara (teşhis)
+
+# NEDEN AYRI AYRI
+#
+# Toplu tarama 10 grupta çalışıyor ve bir markadaki bozukluk grubun
+# içinde kayboluyordu: hangi markanın kayıt sayısını şişirdiğini ancak
+# tarama bittikten sonra veritabanına bakarak anlıyorduk.
+#
+# Burada her marka KENDİ İŞİNDE çalışıyor:
+#   · logu ayrı, hata veren marka listede kırmızı görünüyor
+#   · biri patlarsa diğerleri etkilenmiyor
+#   · her iş kendi özetini yazıyor: kaç kayıt buldu, öncekine göre fark
+#
+# Sonuçlar tek tek birleştirilip bayiler_yeni.db'ye yazılıyor; canlı
+# veriye dokunulmuyor.
+
+on:
+  workflow_dispatch:
+    inputs:
+      markalar:
+        description: "Sadece belirli markalar (virgülle; boş = hepsi)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  actions: write      # tarama bitince yayın akışını tetiklemek için
+
+concurrency:
+  # Toplu tarama ile AYNI grup: ikisi de bayiler_yeni.db'ye yazıyor,
+  # aynı anda koşarlarsa son biten diğerinin sonucunu eziyor.
+  group: bayi-onizleme-yazma
+  cancel-in-progress: false
+
+jobs:
+  liste:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      markalar: ${{ steps.cikar.outputs.markalar }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install pyyaml
+      - id: cikar
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os, yaml
+          c = yaml.safe_load(open("brands.yaml"))["markalar"]
+          istenen = [x.strip() for x in os.environ.get("SECILEN", "").split(",") if x.strip()]
+          markalar = istenen or sorted(c)
+          print("markalar=" + json.dumps(markalar))
+          PY
+        env:
+          SECILEN: ${{ inputs.markalar }}
+
+  tara:
+    needs: liste
+    runs-on: ubuntu-latest
+    # Bir marka takılırsa 100 dakikada kesilir; diğerleri etkilenmez.
+    # GitHub'ın varsayılanı 6 saat ve takılan iş tüm akışı bekletiyordu.
+    timeout-minutes: 100
+    strategy:
+      fail-fast: false          # bir marka patlarsa diğerleri devam etsin
+      max-parallel: 15
+      matrix:
+        marka: ${{ fromJson(needs.liste.outputs.markalar) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+
+      - name: Bağımlılıklar
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium || true
+
+      - name: "${{ matrix.marka }} taranıyor"
+        timeout-minutes: 80
+        run: |
+          # Çalışma tabanı önizleme: marka_durum tabanları oradan gelsin
+          cp "$( [ -f bayiler_yeni.db ] && echo bayiler_yeni.db || echo bayiler.db )" calisma.db
+          python tek_marka.py "${{ matrix.marka }}" --db calisma.db \
+            | tee sonuc.txt
+          echo "| ${{ matrix.marka }} | $(grep -oP '\d+ -> \d+' sonuc.txt | tail -1) |" \
+            >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Sonucu sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: marka-${{ strategy.job-index }}
+          path: calisma.db
+          retention-days: 1
+
+  birlestir:
+    needs: tara
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      # ref: main ŞART — varsayılan checkout ayrık HEAD'e geçiyor ve
+      # push/merge zinciri çakışmada kilitleniyordu ("Depoya yaz" adımı
+      # sürekli kırılıyordu). Dal üzerinde çalışınca sorun bitiyor.
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -r requirements.txt
+
+      - uses: actions/download-artifact@v4
+        with: { path: indirilen, merge-multiple: false }
+
+      - name: Birleştir ve önizlemeye yaz
+        env:
+          SECILEN: ${{ inputs.markalar }}
+        run: |
+          mkdir -p parcalar
+          find indirilen -name "*.db" -print0 | while IFS= read -r -d '' f; do
+            cp "$f" "parcalar/$(echo "$f" | md5sum | cut -c1-8).db"
+          done
+          ls -la parcalar/
+          # TABAN SEÇİMİ — kısmi tarama önizlemeyi SIFIRLAMASIN.
+          # Birleştirme her seferinde canlının kopyasıyla başlıyordu.
+          # Tek marka tarayınca (örn. "Regal Raptor") diğer 61 markanın
+          # önceki tarama sonuçları siliniyordu: önizleme 15.917'den
+          # 14.061'e düştü. Kısmi taramada taban, canlı değil MEVCUT
+          # ÖNİZLEME olmalı; tam taramada yine canlıdan başlıyoruz.
+          # GÜNCELLEME 10 Eylül: tam taramada da taban ÖNİZLEME (bkz. tarama.yml)
+          if [ -f bayiler_yeni.db ]; then
+            echo "taban: mevcut önizleme (${SECILEN:-tam tarama})"
+          else
+            echo "önizleme yok — canlıdan başlanıyor"; cp bayiler.db bayiler_yeni.db
+          fi
+          python birlestir.py parcalar bayiler_yeni.db
+          # Otomatik temizlik: artık/çift/taşınmış eski kayıtlar ve yanlış
+          # karantina tabanları. "Sitede bulunamadı"ya dokunmaz.
+          python temizle.py bayiler_yeni.db || true
+
+          python - <<'PY'
+          import sqlite3, sys
+          def say(y):
+              c = sqlite3.connect(y)
+              return (c.execute("select count(*) from bayiler where durum!='kaldirildi'").fetchone()[0],
+                      c.execute("select count(distinct marka) from bayiler where durum!='kaldirildi'").fetchone()[0])
+          ct, cm = say("bayiler.db"); yt, ym = say("bayiler_yeni.db")
+          print(f"canlı {ct} ({cm} marka) -> yeni {yt} ({ym} marka)")
+          with open("özet.txt", "w") as f:
+              f.write(f"{ct} -> {yt}\n")
+          # Şişme varsa DURDURMUYORUZ, uyarıyoruz: sonucu önizlemeye
+          # yazmazsak neyin şiştiğini göremiyoruz. Canlıya geçişi
+          # zaten "Önizlemeyi canlıya al" akışındaki fren engelliyor.
+          if yt > ct * 1.25:
+              print(f"::warning::TOPLAM ŞİŞME: {ct} -> {yt} "
+                    f"(%{100*yt//ct-100}) — önizlemede incele, canlıya alma")
+          PY
+
+      - name: Depoya yaz
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python depoya_yaz.py bayiler_yeni.db "Marka marka tarama"
+
+      - name: Önizlemeyi yayınla
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Bu akış veriyi yazıyor ama sayfayı üretmiyordu; "veri güncel,
+          # sayfa eski" durumu oluşuyordu (Arora, 9 Eylül). Tarama bitince
+          # yayın akışı tetikleniyor. CANLI SAYFA DEĞİŞMEZ: yayın akışı
+          # canlı sayfayı dondurulmuş kopyadan (canli/index.html) alıyor,
+          # yalnızca önizleme yenileniyor.
+          gh workflow run yayinla.yml --ref main
+          echo "yayın akışı tetiklendi"

@@ -1,0 +1,28 @@
+{
+ "url": "https://www.rutec.com.tr/satis-noktalari.html",
+ "yanitlar": [
+  {
+   "dosya": "rutec-json-01.json",
+   "url": "https://team.cetur.com.tr/api/Rutec/GetSatisNoktalari",
+   "boyut": 28054,
+   "ipucu": []
+  }
+ ],
+ "istekler": [
+  {
+   "url": "https://www.rutec.com.tr/satis-noktalari.html",
+   "method": "GET",
+   "basliklar": {
+    "upgrade-insecure-requests": "1",
+    "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+   }
+  }
+ ],
+ "tiklanan": [
+  "select:Adana",
+  "Servis"
+ ],
+ "sayfa_boyut": 16508
+}

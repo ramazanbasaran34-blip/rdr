@@ -1,0 +1,87 @@
+{
+ "giris_engeli": false,
+ "il_sayisi": 81,
+ "robots": {
+  "kod": 200,
+  "boyut": 293,
+  "engel": false
+ },
+ "sitemap": {
+  "kod": 403,
+  "boyut": 5806,
+  "engel": true
+ },
+ "sitemap_index": {
+  "kod": 403,
+  "boyut": 5846,
+  "engel": true
+ },
+ "adaylar": {
+  "/bayiler/ankara": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/bayiler/ankara/": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/bayiler/6": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/bayiler/6/": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/bayiler/?city_box=6": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/bayiler/index.php?city_box=6": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/bayi-ara?city_box=6": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/api/bayiler": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/api/bayiler.php": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/wp-json/wp/v2/pages": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  },
+  "/bayiler/?sehir=ankara": {
+   "kod": 403,
+   "kb": 5,
+   "tel": 0,
+   "engel": true
+  }
+ }
+}
