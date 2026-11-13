@@ -1,0 +1,83 @@
+name: Ham sayfaları yakala
+
+# Elle başlatılır. Tarama YAPMAZ, veritabanına DOKUNMAZ.
+# Sadece sayfaların ham HTTP gövdesini indirip ham/ klasörüne işler.
+# Saniyeler sürer, gecelik taramayla çakışmaz.
+
+on:
+  workflow_dispatch:
+    inputs:
+      hedefler:
+        description: "Boşlukla ayrılmış hedef adları (boş = hepsi)"
+        required: false
+        default: ""
+      markalar:
+        description: "Virgülle ayrılmış marka adları (markalar.json'dan)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  yakala:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Bağımlılık
+        run: pip install requests
+
+      - name: Tarayıcı kur
+        if: contains(inputs.hedefler, 'tarayici')
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Yamaha tarayıcı sondası
+        if: contains(inputs.hedefler, 'tarayici')
+        run: python yamaha_tarayici.py || true
+
+      - name: Yakala
+        run: |
+          if [ -n "${{ inputs.markalar }}" ]; then
+            python hamyakala.py --markalar "${{ inputs.markalar }}"
+          else
+            python hamyakala.py ${{ inputs.hedefler }}
+          fi
+
+      - name: MJ ajax sondası
+        if: inputs.hedefler == '' || contains(inputs.hedefler, 'mj')
+        run: python mj_sonda.py || true
+
+      - name: Sonda 2 (MJ GET + Yamaha)
+        if: inputs.hedefler == '' || contains(inputs.hedefler, 'sonda2')
+        run: python sonda2.py || true
+
+      - name: ASP.NET postback sondası
+        if: inputs.hedefler == '' || contains(inputs.hedefler, 'aspnet')
+        run: pip install beautifulsoup4 lxml PyYAML && python aspnet_sonda.py || true
+
+      - name: Hero sondası
+        if: contains(inputs.hedefler, 'hero-sonda')
+        run: pip install requests && python hero_sonda.py || true
+
+      - name: Özeti göster
+        run: cat ham/ozet.json
+
+      - name: Depoya işle
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ham/
+          git diff --staged --quiet || git commit -m "ham sayfa yakalama"
+          # Tarama sürerken push reddedilebilir; birkaç kez dene.
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && exit 0
+            sleep 20
+          done
+          exit 1

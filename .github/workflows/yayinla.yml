@@ -1,0 +1,71 @@
+name: Sadece siteyi yayınla
+
+# Tarama YAPMAZ, hiçbir markanın sitesine istek atmaz.
+# Depodaki bayiler.db'den index.html'i üretip yayınlar.
+# Arayüz değişikliklerini test ederken bunu kullan — böylece siteleri
+# gereksiz yere tekrar tekrar tarayıp Cloudflare engeline takılmayız.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: bayiradar-yayin
+  cancel-in-progress: true
+
+jobs:
+  uret:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Bağımlılık
+        run: pip install -r requirements.txt
+
+      - name: Sayfayı üret
+        run: |
+          mkdir -p site
+          python uret_index.py site/index.html
+
+      - name: Çıktıyı doğrula
+        run: |
+          test -s site/index.html || { echo "index.html boş"; exit 1; }
+          # DİKKAT: görünen METİNLERİ arama. Etiketler değiştikçe
+          # ("Toplam Satış Noktası" -> "Toplam satış noktası") doğrulama
+          # boş yere kırılıyordu. Onun yerine yapısal işaretlere bakıyoruz.
+          for ARA in "satisNoktasi" "yapiskan" "const D =" "sekOzet" "altozet"; do
+            grep -q "$ARA" site/index.html || { echo "eksik: $ARA"; exit 1; }
+          done
+          # Veri gerçekten gömülmüş mü (boş sayfa yayınlamayalım)
+          python - <<'PY'
+          import re, sys
+          h = open("site/index.html", encoding="utf-8").read()
+          m = re.search(r'const D = (\{.*?\});\s*\n', h, re.S)
+          if not m: sys.exit("veri bloğu bulunamadı")
+          import json; d = json.loads(m.group(1))
+          n = len(d.get("bayiler", []))
+          if n < 1000: sys.exit(f"kayıt sayısı şüpheli: {n}")
+          print(f"doğrulandı: {n} kayıt, {len(d.get('markalar',[]))} marka")
+          PY
+          echo "boyut: $(du -h site/index.html | cut -f1)"
+
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+
+  yayinla:
+    needs: uret
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.yayin.outputs.page_url }}
+    steps:
+      - id: yayin
+        uses: actions/deploy-pages@v4

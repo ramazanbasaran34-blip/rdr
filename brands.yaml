@@ -1,0 +1,739 @@
+# ============================================================================
+#  BAYİ RADAR — 62 Motosiklet Markası · Satış ve Servis
+#  Kaynak: markalar_ve_web_siteleri_bayiler_ve_servisler_linkleri_28_08_2026.xlsx
+# ----------------------------------------------------------------------------
+#  ROL MANTIĞI
+#    Her markanın bir ya da iki kaynağı var:
+#      satis_servis → bayi ve servis linki AYNI. Site ikisini birlikte veriyor,
+#                     kayıtlar doğrudan "Satış + Servis" sayılıyor. (25 marka)
+#      satis + servis → linkler AYRI, ikisi ayrı taranıyor. (37 marka)
+#
+#    Ayrı taranan markalarda aynı firma iki listede de çıkabilir. Sistem bunu
+#    telefon, ad çekirdeği ve adres benzerliğiyle tanıyıp TEK kayda birleştirir
+#    ve rolünü "Satış + Servis" yapar. (bayiradar/eslestir.py)
+#
+#  BEKLENEN SAYI
+#    Bazı markalarda saha bilgisinden beklenen kayıt aralığı yazılı. Denetim
+#    aracı gelen sayıyı bununla karşılaştırıyor. Amaç, "kayıtlar temiz görünüyor
+#    ama listenin yarısı hiç gelmemiş" durumunu yakalamak — Mondial'de tam bu
+#    oldu: 390 tertemiz kayıt vardı, 600 servisin hiçbiri yoktu.
+#
+#    Aralık kaynak yapısına göre hesaplandı. Bayi ve servis AYNI sayfadaysa
+#    kayıtlar zaten birleşik geliyor, beklenen ~büyük olan sayı kadar. AYRI
+#    sayfadaysa aynı firma iki listede çıkabilir; sistem birleştirse de sonuç
+#    "büyük olan" ile "toplam" arasında bir yerde oluyor.
+#
+#  TARİF GEREKMİYOR
+#    CSS seçici yazılı değil; yapı sayfadan otomatik çözülüyor.
+#    Tutmazsa marka 'hatali' işaretlenir, eski verisi korunur.
+# ============================================================================
+
+ayarlar:
+  bekleme: 1.5
+  marka_arasi_saniye: 45
+  cache_saat: 6
+  periyot_saat: 168
+
+markalar:
+
+  #  1. HONDA  ·  Japonya  ·  www.honda.com.tr
+  "Honda":
+    # Sitede satış ve servis ayrı listelenmiyor; her nokta ikisini de
+    # yapıyor. Kayıtlar "Satış + Servis" olarak işaretleniyor.
+    beklenen: [36, 78]   # saha: ~52 bayi, ~52 servis
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.honda.com.tr/motosiklet/bayiler-ve-servisler"
+
+  #  2. YAMAHA  ·  Japonya  ·  www.yamaha-motor.eu
+  "Yamaha":
+    beklenen: [27, 125]   # saha: 45 satış, 45 servis
+    # Sitede satış ve servis ayrı listelenmiyor; her nokta ikisini de
+    # yapıyor. Kayıtlar "Satış + Servis" olarak işaretleniyor.
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.yamaha-motor.eu/tr/tr/dealer-locator/"
+
+  #  3. BAJAJ  ·  Hindistan  ·  www.ekuralkan.com
+  "Bajaj":
+    beklenen: [200, 320]   # Kuralkan: 98 satış + 177 servis (kesin)
+    # ozel/kuralkan.py ile toplanıyor: liste Next.js flight
+    # verisinde gömülü, ?city parametresi sunucuda işlenmiyor.
+    ozel: kuralkan
+    bekleme: 1.5
+    kaynaklar:
+      - rol: satis
+        url: "https://www.ekuralkan.com/motosiklet-satis-noktalari?city={sayi}"
+        iterate: {bitis: 81, type: sayi}
+      - rol: servis
+        url: "https://www.ekuralkan.com/motosiklet-teslimat-noktalari?city={sayi}"
+        iterate: {bitis: 81, type: sayi}
+
+  #  4. KANUNI  ·  Türkiye-Çin  ·  www.ekuralkan.com
+  "Kanuni":
+    beklenen: [200, 320]   # Kuralkan: 98 satış + 177 servis (kesin)
+    # ozel/kuralkan.py ile toplanıyor: liste Next.js flight
+    # verisinde gömülü, ?city parametresi sunucuda işlenmiyor.
+    ozel: kuralkan
+    bekleme: 1.5
+    kaynaklar:
+      - rol: satis
+        url: "https://www.ekuralkan.com/motosiklet-satis-noktalari?city={sayi}"
+        iterate: {bitis: 81, type: sayi}
+      - rol: servis
+        url: "https://www.ekuralkan.com/motosiklet-teslimat-noktalari?city={sayi}"
+        iterate: {bitis: 81, type: sayi}
+
+  #  5. MONDIAL  ·  Türkiye-Çin  ·  www.mondialmotor.com.tr
+  "Mondial":
+    beklenen: [420, 1200]   # saha: ~400 bayi, ~600 servis
+    encoding: windows-1254
+    bekleme: 2.0
+    kaynaklar:
+      - rol: satis
+        url: "https://www.mondialmotor.com.tr/bayilerimiz?sehir={il_slug}"
+        iterate: il_slug
+        il_url_den: true
+      - rol: servis
+        url: "https://www.mondialmotor.com.tr/servis-noktalari?sehir={il_slug}"
+        iterate: il_slug
+        il_url_den: true
+
+  #  6. CFMOTO  ·  Çin  ·  www.cfmoto.com.tr
+  "CFMoto":
+    # Tablo yapısı 30.08.2026'da doğrulandı: 29 kayıt, il/ilçe/telefon tam.
+    # Mondial ile aynı altyapı (?sehir= parametresi).
+    encoding: windows-1254
+    beklenen: [350, 1200]
+    bekleme: 2.0
+    kaynaklar:
+      - rol: satis
+        url: "https://www.cfmoto.com.tr/satis-noktalari?sehir={il_slug}"
+        iterate: il_slug
+        il_url_den: true
+      - rol: servis
+        url: "https://www.cfmoto.com.tr/servis-noktalari?sehir={il_slug}"
+        iterate: il_slug
+        il_url_den: true
+    row: "table tbody tr"
+    fields:
+      bayi_adi: "td:nth-child(1)"
+      adres:    "td:nth-child(2)"
+      ilce:     "td:nth-child(3)"
+      telefon:  {sel: "td:nth-child(4) a", attr: "href", regex: "tel:(.+)"}
+  "Kuba":
+    # ajax.php'ye POST. Tarayıcı GEREKMİYOR.
+    # · Sayfada <base href="/"> var: uç KÖKTE, /bayi-servis/ altında değil.
+    # · İlçe seçiminde "Tüm İlçeler" = 0 → il başına tek istek, 973 ilçe yok.
+    # · Uç markayı ayırmaz, tüm MJ grubunu döner (Skyjet, Benelli, Ape Ryder...);
+    #   ayrım her kaydın "Yetkileri" satırında yazıyor → kayit_suzgeci.
+    method: POST
+    iterate: il_post
+    headers:
+      X-Requested-With: XMLHttpRequest
+    row: "div.result-item"
+    fields:
+      bayi_adi: "div.location-name h5"
+      adres: {sel: "div.text-item p", index: 0}
+      telefon: {sel: "a[href^='tel:']", attr: "href", regex: 'tel:\s*([0-9 ()]+)'}
+    ekstra_alanlar:
+      yetkiler: {sel: "div.text-item div:nth-of-type(2) p"}
+    kayit_suzgeci:
+      alan: yetkiler
+      icermeli: ["Kuba Motor"]
+    beklenen: [600, 1400]
+    kaynaklar:
+      - rol: satis
+        url: "https://www.kubamotor.com.tr/ajax.php"
+        data: {action: states, city: "{il_adi}", state: "0", category: "Bayi"}
+      - rol: servis
+        url: "https://www.kubamotor.com.tr/ajax.php"
+        data: {action: states, city: "{il_adi}", state: "0", category: "Servis"}
+
+  "RKS":
+    # ajax.php'ye POST. Tarayıcı GEREKMİYOR.
+    # · Sayfada <base href="/"> var: uç KÖKTE, /bayi-servis/ altında değil.
+    # · İlçe seçiminde "Tüm İlçeler" = 0 → il başına tek istek, 973 ilçe yok.
+    # · Uç markayı ayırmaz, tüm MJ grubunu döner (Skyjet, Benelli, Ape Ryder...);
+    #   ayrım her kaydın "Yetkileri" satırında yazıyor → kayit_suzgeci.
+    method: POST
+    iterate: il_post
+    headers:
+      X-Requested-With: XMLHttpRequest
+    row: "div.result-item"
+    fields:
+      bayi_adi: "div.location-name h5"
+      adres: {sel: "div.text-item p", index: 0}
+      telefon: {sel: "a[href^='tel:']", attr: "href", regex: 'tel:\s*([0-9 ()]+)'}
+    ekstra_alanlar:
+      yetkiler: {sel: "div.text-item div:nth-of-type(2) p"}
+    kayit_suzgeci:
+      alan: yetkiler
+      icermeli: ["RKS Motor"]
+    beklenen: [500, 1200]
+    kaynaklar:
+      - rol: satis
+        url: "https://www.rksmotor.com.tr/ajax.php"
+        data: {action: states, city: "{il_adi}", state: "0", category: "Bayi"}
+      - rol: servis
+        url: "https://www.rksmotor.com.tr/ajax.php"
+        data: {action: states, city: "{il_adi}", state: "0", category: "Servis"}
+
+  "Arora":
+    # Sayfa yapısı 30.08.2026'da yakalanıp doğrulandı: 20 kayıt, hepsinde
+    # il/ilçe/adres/telefon tam. İl seçimi URL'e yansımıyor, bu yüzden
+    # sayfa gerçekten kullanılıyor (listeden seç → sonucu oku).
+    mode: browser
+    beklenen: [400, 900]
+    # Türü kart taşımıyor; sayfadaki onay kutusuyla süzülüyor.
+    # Her tür ayrı ayrı işaretlenip 81 il geziliyor.
+    tur_suzgeci:
+      secici: "input[name=yetkili-servis]"
+      degerler:
+        - {deger: "B",  rol: satis}
+        - {deger: "S",  rol: servis}
+        - {deger: "BS", rol: satis_servis}
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.arora.com.tr/hizmet-noktalari"
+    row: "div.points-card-wrapper"
+    fields:
+      bayi_adi: "h3.points-card-title"
+      adres:    "div.points-card-address"
+      telefon:  {sel: "a.points-card-tel", attr: "href", regex: "tel:(.+)"}
+    il_ilce_birlesik: konum
+    ekstra_alanlar:
+      konum: "div.points-card-city"
+  "Yuki":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://yukimotor.com.tr/satis-noktalari/"
+      - rol: servis
+        url: "https://yukimotor.com.tr/servis-noktalari/"
+
+  # 11. VOGE  ·  Çin  ·  www.vogeturkiye.com.tr
+  "Voge":
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.vogeturkiye.com.tr/yetkili-satici/"
+
+  # 12. PIAGGIO  ·  İtalya  ·  www.piaggio.com.tr
+  "Piaggio":
+    mode: browser
+    beklenen: [42, 120]   # Vespa ile aynı distribütör, benzer ağ varsayıldı
+    kaynaklar:
+      - rol: satis
+        url: "https://www.piaggio.com.tr/tr/yetkili-saticilar.html"
+      - rol: servis
+        url: "https://www.piaggio.com.tr/tr/yetkili-servisler.html"
+
+  # 13. VESPA  ·  İtalya  ·  www.vespa.com.tr
+  "Vespa":
+    mode: browser
+    beklenen: [42, 120]   # saha ~40 bayi ~60 servis · motorcular.com: 32 bayi 54 servis
+    kaynaklar:
+      - rol: satis
+        url: "https://www.vespa.com.tr/tr/yetkili-saticilar.html"
+      - rol: servis
+        url: "https://www.vespa.com.tr/tr/yetkili-servisler.html"
+
+  # 14. KYMCO  ·  Tayvan  ·  www.kymco.com.tr
+  "Kymco":
+    # Tarayıcı ve il seçimi GEREKMİYOR. Sayfa bütün ağı tek tırnaklı bir JS
+    # nesnesi (GeoJSON) olarak kaynağa basıyor; harita onu okuyor. Tek GET
+    # ile 75 kaydın hepsi geliyor, rol ayrımı da veride hazır.
+    beklenen: [70, 90]    # site 2026-08 itibarıyla 37 satıcı + 38 servis
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.kymco.com.tr/tr/satis-servis-agi.html"
+    gomulu:
+      kayit: "\\{\\s*'type':\\s*'yetkili-[a-z]+',.*?'msx':\\s*'.*?'\\s*\\}\\s*\\}"
+      fields:
+        bayi_adi: name
+        adres: address
+        telefon: phone1
+        email: mail1
+      ekstra_alanlar:
+        konum: city
+      rol_alani:
+        regex: "'type':\\s*'(yetkili-[a-z]+)'"
+        esleme:
+          yetkili-satici: satis
+          yetkili-servis: servis
+    il_ilce_birlesik: konum
+
+  # 15. APRILIA  ·  İtalya-Çin  ·  www.aprilia.com.tr
+  "Aprilia":
+    mode: browser
+    beklenen: [28, 78]   # Vespa/Piaggio'dan küçük ağ varsayıldı
+    kaynaklar:
+      - rol: satis
+        url: "https://www.aprilia.com.tr/tr/yetkili-saticilar.html"
+      - rol: servis
+        url: "https://www.aprilia.com.tr/tr/yetkili-servisler.html"
+
+  # 16. HERO  ·  Hindistan  ·  www.heromotor.com.tr
+  "Hero":
+    # TARANMIYOR. Site Cloudflare korumalı; GitHub Actions IP'lerinden
+    # her PHP isteği 403 dönüyor (statik dosyalar 200 — ölçüldü).
+    # Veri elle/hero.json'da; kullanıcının kendi tarayıcısında
+    # hero-konsol3.js çalıştırılarak toplanıyor.
+    elle: true
+    etkilesim: il_secimi
+    kaynaklar:
+      - rol: satis
+        url: "https://www.heromotor.com.tr/bayiler/"
+      - rol: servis
+        url: "https://www.heromotor.com.tr/servisler/"
+
+  # 17. BMW  ·  Almanya-Çin  ·  www.bmw-motorrad.com.tr
+  "BMW":
+    beklenen: [10, 44]   # saha: 14 satış, 18 servis
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.bmw-motorrad.com.tr/tr/ssl/yetkili-satici-ve-servisler.html"
+
+  # 18. FALCON  ·  Türkiye-Çin  ·  falconmotosiklet.com
+  "Falcon":
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://falconmotosiklet.com/bayi-servis-agi/motosiklet"
+      - rol: servis
+        url: "https://falconmotosiklet.com/bayi-servis-agi/servis"
+
+  # 19. VOLTA  ·  Türkiye-Çin  ·  volta.com.tr
+  "Volta":
+    mode: browser
+    beklenen: [140, 360]   # saha: ~100 bayi, ~200 servis
+    kaynaklar:
+      - rol: satis
+        url: "https://volta.com.tr/pages/bayiler"
+      - rol: servis
+        url: "https://volta.com.tr/pages/servis-noktalari"
+
+  # 20. SYM  ·  Tayvan-Çin  ·  www.sym-tr.com
+  "SYM":
+    # ozel/sym.py ile toplanıyor: WPBakery akordeon; il panel
+    # başlığında, ilçe blok içindeki kalın satırda.
+    ozel: sym
+    beklenen: [70, 240]   # saha: ~100 bayi, ~100 servis
+    kaynaklar:
+      - rol: satis
+        url: "https://www.sym-tr.com/bayiler/"
+      - rol: servis
+        url: "https://www.sym-tr.com/servis/"
+
+  # 21. SUZUKI  ·  Japonya  ·  www.suzuki.com.tr
+  "Suzuki":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.suzuki.com.tr/tr/motosiklet/yetkili-saticilar.html"
+      - rol: servis
+        url: "https://www.suzuki.com.tr/tr/motosiklet/yetkili-servisler.html"
+
+  # 22. PEUGEOT  ·  Fransa  ·  www.isotlarmotor.com
+  "Peugeot":
+    mode: browser
+    tur_suzgeci:
+      secici: "input"
+      degerler:
+        - {deger: "Bayi", rol: satis}
+        - {deger: "Servis", rol: servis}
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.isotlarmotor.com/bayiler/"
+
+  # 23. HORWIN  ·  Çin  ·  www.isotlarmotor.com
+  "Horwin":
+    mode: browser
+    tur_suzgeci:
+      secici: "input"
+      degerler:
+        - {deger: "Bayi", rol: satis}
+        - {deger: "Servis", rol: servis}
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.isotlarmotor.com/bayiler/"
+
+  # 24. LAMBRETTA  ·  İtalya  ·  www.isotlarmotor.com
+  "Lambretta":
+    mode: browser
+    tur_suzgeci:
+      secici: "input"
+      degerler:
+        - {deger: "Bayi", rol: satis}
+        - {deger: "Servis", rol: servis}
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.isotlarmotor.com/bayiler/"
+
+  # 25. MOTOLUX  ·  Türkiye-Çin  ·  motolux.com.tr
+  "Motolux":
+    beklenen: [210, 450]   # saha: ~300 bayi, ~300 servis
+    bekleme: 2.0
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://motolux.com.tr/bayiler/sehir/{il_slug}/"
+        iterate: il_slug
+        il_url_den: true
+
+  # 26. KRAL  ·  Türkiye-Çin  ·  kralmotor.tr
+  "Kral":
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://kralmotor.tr/SalesDealer"
+      - rol: servis
+        url: "https://kralmotor.tr/Service"
+
+  # 27. ALTAI  ·  Türkiye-Çin  ·  www.altai.com.tr
+  "Altai":
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.altai.com.tr/tr/bayiler"
+      - rol: servis
+        url: "https://www.altai.com.tr/tr/servisler"
+
+  # 28. DUCATI  ·  İtalya  ·  korlas.com.tr
+  "Ducati":
+    beklenen: [18, 60]   # saha: 12 satış, 31 servis
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://korlas.com.tr/bayi/"
+      - rol: servis
+        url: "https://korlas.com.tr/servis/"
+
+  # 29. TRIUMPH  ·  İngiltere  ·  korlas.com.tr
+  "Triumph":
+    beklenen: [18, 60]   # saha: 12 satış, 31 servis
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://korlas.com.tr/bayi/"
+      - rol: servis
+        url: "https://korlas.com.tr/servis/"
+
+  # 30. KTM  ·  Avusturya  ·  www.spormoto.com
+  "KTM":
+    beklenen: [20, 95]   # saha: 34 satış, 34 servis
+    kaynaklar:
+      - rol: satis
+        url: "https://www.spormoto.com/ktm/bayiler/"
+      - rol: servis
+        url: "https://www.spormoto.com/ktm/ktm-servisler/"
+
+  # 31. HUSQVARNA  ·  Avusturya  ·  www.spormoto.com
+  "Husqvarna":
+    beklenen: [20, 95]   # saha: 34 satış, 34 servis
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.spormoto.com/husqvarna/bayiler/"
+      - rol: servis
+        url: "https://www.spormoto.com/husqvarna/husqvarna-servisler/"
+
+  # 32. CSN  ·  Türkiye-Çin  ·  csnmotor.com.tr
+  "CSN":
+    kaynaklar:
+      - rol: satis
+        url: "https://csnmotor.com.tr/satis-noktalarimiz/"
+      - rol: servis
+        url: "https://csnmotor.com.tr/servis-noktalarimiz/"
+
+  # 33. KAWASAKI  ·  Japonya  ·  www.kawasaki.com.tr
+  "Kawasaki":
+    # ozel/kawasaki.py: il bilgisi adresin sonunda ve kart id'sinde.
+    # Eski tarama 85 kaydın 79'una yanlış il atıyordu.
+    ozel: kawasaki
+    kaynaklar:
+      - rol: satis
+        url: "https://www.kawasaki.com.tr/Home/YetkiliSatici"
+      - rol: servis
+        url: "https://www.kawasaki.com.tr/Home/YetkiliServis"
+
+  # 34. STMAX  ·  Türkiye-Çin  ·  stmax.com.tr
+  "STMax":
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://stmax.com.tr/yetkili-servisler/"
+
+  # 35. ABUSH  ·  Türkiye-Çin  ·  abush.com.tr
+  "Abush":
+    tur_suzgeci:
+      secici: "select[name=type]"
+      degerler:
+        - {deger: "1", rol: satis}
+        - {deger: "2", rol: servis}
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://abush.com.tr/tr/bayiler"
+
+  # 36. REGAL RAPTOR  ·  Çin  ·  regalraptor.com.tr
+  "Regal Raptor":
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://regalraptor.com.tr/tr/bayiler"
+      - rol: servis
+        url: "https://regalraptor.com.tr/tr/servisler"
+
+  # 37. HARLEY DAVIDSON  ·  ABD  ·  www.harley-davidson.com
+  "Harley-Davidson":
+    # TARANMIYOR. Site Cloudflare korumalı ve GitHub Actions IP'lerinden
+    # 403 dönüyor. Veri elle/harley-davidson.json dosyasında tutuluyor ve
+    # elle_tara.py ile işleniyor. Güncelleme sayfadaki düzenleme
+    # ekranından ya da doğrudan o dosyadan yapılır.
+    elle: true
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html"
+
+  # 38. INDIAN  ·  ABD  ·  www.indianmotorcycle.com.tr
+  "Indian":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.indianmotorcycle.com.tr/find-a-dealer/map-view/"
+      - rol: servis
+        url: "https://www.indianmotorcycle.com.tr/find-a-dealer/list-teknik-servisler/"
+
+  # 39. APACHI  ·  Türkiye-Çin  ·  www.isildar.com.tr
+  "Apachi":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.isildar.com.tr/Bayiler"
+      - rol: servis
+        url: "https://www.isildar.com.tr/Servisler/"
+
+  # 40. REWACO  ·  Almanya  ·  rewaco.com.tr
+  "Rewaco":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://rewaco.com.tr/bayiler/"
+      - rol: servis
+        url: "https://rewaco.com.tr/servis/"
+
+  # 41. NANOK  ·  Türkiye-Çin  ·  nanok.com.tr
+  "Nanok":
+    tur_suzgeci:
+      secici: "select[name=service]"
+      degerler:
+        - {deger: "Bayi", rol: satis}
+        - {deger: "Servis", rol: servis}
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://nanok.com.tr/bayilerimiz"
+
+  # 42. MOBILETTE  ·  Çin  ·  www.mobilette.com.tr
+  "Mobilette":
+    kaynaklar:
+      - rol: satis
+        url: "https://www.mobilette.com.tr/tr/bayiler"
+      - rol: servis
+        url: "https://www.mobilette.com.tr/tr/servisler"
+
+  # 43. AODES  ·  ABD-Çin  ·  www.aodes.com.tr
+  "Aodes":
+    kaynaklar:
+      - rol: satis
+        url: "https://www.aodes.com.tr/tr/bayiler"
+      - rol: servis
+        url: "https://www.aodes.com.tr/tr/servisler"
+
+  # 44. RUTEC  ·  Türkiye-Çin  ·  www.rutec.com.tr
+  "Rutec":
+    tur_suzgeci:
+      secici: "select[name=turSel]"
+      degerler:
+        - {deger: "Satış Noktası", rol: satis}
+        - {deger: "Yetkili Servis", rol: servis}
+        - {deger: "Bölge Bayisi", rol: satis}
+    mode: browser
+    beklenen: [21, 45]   # saha: ~30 bayi, ~30 servis
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.rutec.com.tr/satis-noktalari.html"
+
+  # 45. ACCO  ·  Türkiye-Çin  ·  actiomobilite.com
+  "Acco":
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://actiomobilite.com/bayiler"
+
+  # 46. MUSATTI  ·  Türkiye-Çin  ·  musattimotor.com
+  "Musatti":
+    etkilesim: il_secimi
+    mode: browser
+    beklenen: [210, 720]   # saha: ~300 bayi, ~300 servis
+    kaynaklar:
+      - rol: satis
+        url: "https://musattimotor.com/bayi-bul"
+      - rol: servis
+        url: "https://musattimotor.com/servis-bul"
+
+  # 47. GOE  ·  Çin  ·  www.goemobility.com
+  "GOE":
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.goemobility.com/satis-noktalari"
+
+  # 48. MEKA MOTOR  ·  Türkiye-Çin  ·  www.mekamotor.com.tr
+  "Meka Motor":
+    tur_suzgeci:
+      secici: "input"
+      degerler:
+        - {deger: "bayi", rol: satis}
+        - {deger: "servis", rol: servis}
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.mekamotor.com.tr/bayi-ve-servis"
+
+  # 49. ZELSUN  ·  Türkiye-Çin  ·  www.zelsunmotor.com
+  "Zelsun":
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.zelsunmotor.com/Bayilerimiz.aspx"
+      - rol: servis
+        url: "https://www.zelsunmotor.com/Servislerimiz.aspx"
+
+  # 50. SFM  ·  Türkiye-Çin  ·  www.sfmmotor.com.tr
+  "SFM":
+    mode: browser
+    beklenen: [210, 450]   # saha: ~300 bayi, ~300 servis
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.sfmmotor.com.tr/bayi-servis/"
+
+  # 51. KOVE  ·  Çin  ·  www.kovemoto.com.tr
+  "Kove":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.kovemoto.com.tr/yetkilisat%C4%B1c%C4%B1lar"
+      - rol: servis
+        url: "https://www.kovemoto.com.tr/yetkiliservisler"
+
+  # 52. FCM  ·  Türkiye-Çin  ·  fcmmotor.com
+  "FCM":
+    kaynaklar:
+      - rol: satis
+        url: "https://fcmmotor.com/bayiler"
+      - rol: servis
+        url: "https://fcmmotor.com/yetkili-servisler"
+
+  # 53. AKESO  ·  Türkiye-Çin  ·  www.akesomotors.com
+  "Akeso":
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.akesomotors.com/bayilerimiz/"
+
+  # 54. YİBEN  ·  Türkiye-Çin  ·  yibenmotosiklet.com.tr
+  "Yiben":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://yibenmotosiklet.com.tr/tr/sayfa/bayi-agi"
+      - rol: servis
+        url: "https://yibenmotosiklet.com.tr/tr/sayfa/servis-agi"
+
+  # 55. KİMMİ  ·  Türkiye-Çin  ·  www.kimmimotor.com
+  "Kimmi":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.kimmimotor.com/bayiler/"
+      - rol: servis
+        url: "https://www.kimmimotor.com/servisler/"
+
+  # 56. AXİON MOTOR  ·  Türkiye-Çin  ·  axionmotor.com.tr
+  "Axion Motor":
+    mode: browser
+    tur_suzgeci:
+      secici: "select"
+      degerler:
+        - {deger: "bayi", rol: satis}
+        - {deger: "servis", rol: servis}
+        - {deger: "bayi-servis", rol: satis_servis}
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://axionmotor.com.tr/hizmet-noktalarimiz/"
+
+  # 57. REBAT  ·  Türkiye-Çin  ·  rebatmotor.com
+  "Rebat":
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://rebatmotor.com/servis/"   # eski adres 404 veriyordu
+
+  # 58. LİFAN  ·  Türkiye-Çin  ·  www.lifanmotor.com.tr
+  "Lifan":
+    mode: browser
+    kaynaklar:
+      - rol: satis
+        url: "https://www.lifanmotor.com.tr/bayiler/"
+      - rol: servis
+        url: "https://www.lifanmotor.com.tr/servisler/"
+
+  # 59. KAROVAL MOTOR  ·  Türkiye-Çin  ·  karoval.com
+  "Karoval Motor":
+    kaynaklar:
+      - rol: satis
+        url: "https://karoval.com/satis-noktalarimiz/"
+      - rol: servis
+        url: "https://karoval.com/servis-noktalarimiz/"
+
+  # 60. ARNİCA  ·  Türkiye-Çin  ·  arnicamotor.com
+  "Arnica":
+    # Servis listesi alt alta geliyor, adres içinde "İLÇE / İL" yazıyor.
+    # sehir_id=1..81 ile il il geziliyor.
+    beklenen: [60, 220]
+    kaynaklar:
+      - rol: satis
+        url: "https://arnicamotor.com/bayiler?lang=tr&sehir_id={sayi}"
+        iterate: {type: sayi, bitis: 81}
+      - rol: servis
+        url: "https://arnicamotor.com/servisler?lang=tr&sehir_id={sayi}"
+        iterate: {type: sayi, bitis: 81}
+  "Leksas":
+    tur_suzgeci:
+      secici: "select[name=f-type]"
+      degerler:
+        - {deger: "bayi", rol: satis}
+        - {deger: "servis", rol: servis}
+    etkilesim: il_secimi
+    mode: browser
+    kaynaklar:
+      - rol: satis_servis
+        url: "https://www.leksas.com.tr/bayi-servis/"
+
+  # 62. TAKTAS  ·  Türkiye-Çin  ·  taktas.com.tr
+  "Taktas":
+    kaynaklar:
+      - rol: satis
+        url: "https://taktas.com.tr/bayi-ve-servis"
+      - rol: servis
+        url: "https://taktas.com.tr/servislerimiz"

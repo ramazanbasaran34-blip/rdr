@@ -1,0 +1,177 @@
+name: Bayileri tara ve siteyi yayınla
+
+# Markalar gruplara bölünüp AYNI ANDA taranır. Tek sırada tarama 6 saatlik
+# sınıra dayanıyordu; 10 grup paralel çalışınca her grup ~1 saatte bitiyor.
+
+on:
+  # GECELİK OTOMATİK TARAMA AÇIK.
+  #
+  # Askıya alınma sebebi (eksik tarifler) ortadan kalktı: 62 markanın
+  # hepsinde veri var. Her gece o güne düşen ~9 marka taranıyor; markalar
+  # alfabetik sırayla haftanın yedi gününe dağıtıldığı için tek gecede
+  # 62 siteye gidilmiyor.
+  #
+  # Saat: 02:07 UTC = Türkiye'de 05:07.
+  #
+  # DİKKAT — zamanlama GARANTİ DEĞİL. GitHub bu işleri "müsait olunca"
+  # çalıştırıyor; bu depoda daha önce 00:00 için kurulan tarama 03:21 ve
+  # 03:24'te çalışmıştı, yani 3+ saat gecikmişti. Gecikmeyi azaltmak için
+  # dakikayı :00 ve :30 dışında seçtik — herkes cron'unu tam ve yarım saat
+  # başlarına kurduğu için o anlar en yoğun olanlar.
+  #
+  # elle: true işaretli markalar (Hero, Harley-Davidson) atlanır.
+  # ÜÇ FARKLI SAAT — GitHub zamanlamayı garanti etmiyor.
+  # 1 ve 2 Eylül gecelerinde tek cron ile hiç çalışmadı; GitHub yoğun
+  # saatlerde işi saatlerce erteliyor, bazen o günü tamamen atlıyor.
+  # Yedek saatler koyuyoruz: hangisi çalışırsa iş yapılır, sonrakiler
+  # "periyodu dolmadı" diyip kendiliğinden atlıyor (tarama_gerekiyor_mu),
+  # yani çift tarama olmuyor.
+  schedule:
+    - cron: "7 2 * * *"      # 05:07 TR
+    - cron: "23 5 * * *"     # 08:23 TR — ilki kaçarsa
+    - cron: "41 9 * * *"     # 12:41 TR — ikisi de kaçarsa
+  workflow_dispatch:
+    inputs:
+      markalar:
+        description: "Sadece belirli markalar (boş = periyodu dolanlar)"
+        required: false
+        default: ""
+      hepsi:
+        description: "Periyodu beklemeden hepsini tara (evet yaz)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: bayi-tarama
+  cancel-in-progress: false
+
+jobs:
+  tara:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        # Sabit grup numaraları. Marka adları iş akışına JSON ile taşınırken
+        # boşluklu adlar ("Meka Motor") bozuluyordu; artık her iş kendi
+        # grubunu gruplar.py'den satır satır okuyor.
+        grup: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Paketleri kur
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+      - name: Grubu tara
+        run: |
+          mkdir -p parcalar
+          DB="parcalar/grup-${{ matrix.grup }}.db"
+          python gruplar.py 10 --grup ${{ matrix.grup }} > /tmp/markalar.txt
+          echo "Bu gruptaki markalar:"; cat /tmp/markalar.txt
+          EK=""
+          if [ -z "${{ github.event.inputs.hepsi }}" ] && \
+             [ -z "${{ github.event.inputs.markalar }}" ]; then
+            EK="--zamanlanmis"
+          fi
+          # Boşluklu marka adları için satır satır aktarım
+          xargs -a /tmp/markalar.txt -d '\n' python cli.py --db "$DB" tara $EK --marka
+        continue-on-error: true
+      - name: Parçayı sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: parca-${{ strategy.job-index }}
+          path: parcalar/
+          retention-days: 3
+
+  birlestir:
+    needs: tara
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Parçaları indir
+        uses: actions/download-artifact@v4
+        with:
+          pattern: parca-*
+          path: indirilen
+          merge-multiple: true
+      - name: Birleştir
+        run: |
+          mkdir -p parcalar
+          find indirilen -name "*.db" -exec cp {} parcalar/ \; || true
+          ls -la parcalar/ || true
+          if [ -z "$(ls -A parcalar/ 2>/dev/null)" ]; then
+            echo "::error::Hiç parça gelmedi — tarama çalışmamış."
+            exit 1
+          fi
+          python birlestir.py parcalar bayiler.db
+      - name: Durum özeti
+        run: python cli.py durum || true
+      - name: Denetim
+        run: python denetle.py || true
+      - name: Siteyi üret
+        run: |
+          mkdir -p site
+          python uret_index.py site/index.html
+      - name: Veritabanını depoya yaz
+        run: |
+          git config user.name  "bayi-radar-bot"
+          git config user.email "bot@users.noreply.github.com"
+
+          # Her gece bir satır tarama günlüğü yazıyoruz. İki işe yarıyor:
+          #  1) Ne zaman ne tarandığı geriye dönük görülüyor.
+          #  2) GitHub, 60 gün COMMIT olmayan depolarda zamanlanmış işleri
+          #     kapatıyor. Veri hiç değişmediği gecelerde commit atılmazdı
+          #     ve sayaç işlemeye devam ederdi. Bu günlük her gece
+          #     değiştiği için sayaç hiç dolmuyor; kimsenin depoya elle
+          #     dokunması gerekmiyor.
+          mkdir -p gunluk
+          echo "$(date -u +'%Y-%m-%d %H:%M UTC')  tarama çalıştı" \
+            >> gunluk/tarama-gunlugu.txt
+          # Dosya şişmesin: son 400 satır yeter
+          tail -n 400 gunluk/tarama-gunlugu.txt > /tmp/g.txt \
+            && mv /tmp/g.txt gunluk/tarama-gunlugu.txt
+
+          git add -f bayiler.db gunluk/tarama-gunlugu.txt
+          git diff --staged --quiet && { echo "Değişiklik yok"; exit 0; }
+          git commit -m "Veri güncellendi: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase -X ours "origin/${GITHUB_REF_NAME}" || git rebase --skip
+            git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 5
+          done
+          echo "::error::Veri kaydedilemedi"
+          exit 1
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+
+  yayinla:
+    needs: birlestir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.yayin.outputs.page_url }}
+    steps:
+      - id: yayin
+        uses: actions/deploy-pages@v4

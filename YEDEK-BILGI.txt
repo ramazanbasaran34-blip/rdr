@@ -1,0 +1,29 @@
+BAYİ RADAR — YEDEK
+==================
+Alındığı tarih: 03.09.2026
+Kaynak: github.com/ramazanbasaran34-blip/bayi_servisler (main dalı)
+
+BU YEDEKTE NE VAR
+  bayiler.db          Veritabanı — 13.700+ kayıt, 62 marka. EN KRİTİK DOSYA.
+  elle/               Taranamayan markalar (Hero, Harley, Ducati, Triumph).
+                      Siteleri Cloudflare korumalı; kaybolursa yeniden
+                      toplamak zor. İkinci en kritik.
+  cari_kodlar.json    Firmalara verilen 4 haneli kodlar. Silinirse kodlar
+                      değişir, eski çıktılarla eşleşmez.
+  veri/il_satis.json  TÜİK il bazlı satış adetleri (2023-2026).
+  brands.yaml         62 markanın toplama tarifi.
+  ozel/               Marka bazlı toplayıcılar (Kawasaki, SYM, Kuralkan...).
+  bayiradar/          Ayrıştırma, eşleştirme, veritabanı çekirdeği.
+  uret_index.py       Siteyi (index.html) üreten kod.
+  .github/workflows/  Otomatik tarama ve yayın iş akışları.
+
+BU YEDEKTE NE YOK
+  ham/ ve yakalanan/  Sitelerden indirilen geçici HTML kopyaları.
+                      Sadece hata ayıklama içindi, yeniden üretilebilir.
+                      Tam kopya isterseniz GitHub'da yeşil "Code" düğmesi
+                      → "Download ZIP".
+
+GERİ YÜKLEME
+  Dosyaları depoya geri koymak yeterli. Site şu komutla yeniden üretilir:
+      python uret_index.py site/index.html
+  Bağımlılıklar: pip install -r requirements.txt

@@ -1,0 +1,65 @@
+{
+ "_aciklama": "Harley-Davidson Türkiye bayi ağı. harley-davidson.com Cloudflare korumalı ve GitHub Actions IP'lerinden 403 dönüyor. Veri sitenin kendi bayi bulucusundan alınıp buraya yazıldı; ARTIK TARANMIYOR. Rol: Harley'de ayrı servis ağı yok, her nokta satış + servis + yedek parça veriyor (Honda gibi) → satis_servis. Yalnızca Türkiye'deki noktalar alındı; Kıbrıs, Lübnan ve İsrail kayıtları kapsam dışı.",
+ "_kaynak": [
+  "https://www.harley-davidson.com/tr/tr/tools/find-a-dealer.html"
+ ],
+ "_tarih": "2026-09-01",
+ "_duzenlenebilir": true,
+ "kayitlar": [
+  {
+   "marka": "Harley-Davidson",
+   "rol": "satis_servis",
+   "bayi_adi": "Harley-Davidson İstanbul East",
+   "il": "İstanbul",
+   "ilce": "Ataşehir",
+   "adres": "Watergarden AVM",
+   "telefon": "",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Harley-Davidson",
+   "rol": "satis_servis",
+   "bayi_adi": "Harley-Davidson West",
+   "il": "İstanbul",
+   "ilce": "",
+   "adres": "Büyükdere Cad. No:171",
+   "telefon": "0444 2 380",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Harley-Davidson",
+   "rol": "satis_servis",
+   "bayi_adi": "Harley-Davidson İzmir",
+   "il": "İzmir",
+   "ilce": "Gaziemir",
+   "adres": "Beyazevler Mah. Akçay Cad.",
+   "telefon": "0232 210 95 95",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Harley-Davidson",
+   "rol": "satis_servis",
+   "bayi_adi": "Harley-Davidson Ankara",
+   "il": "Ankara",
+   "ilce": "",
+   "adres": "Armada AVM 3.",
+   "telefon": "0444 49 50",
+   "email": "",
+   "website": ""
+  },
+  {
+   "marka": "Harley-Davidson",
+   "rol": "satis_servis",
+   "bayi_adi": "Harley-Davidson Antalya",
+   "il": "Antalya",
+   "ilce": "Muratpaşa",
+   "adres": "Ermenek Mah.",
+   "telefon": "0242 339 44 44",
+   "email": "",
+   "website": ""
+  }
+ ]
+}

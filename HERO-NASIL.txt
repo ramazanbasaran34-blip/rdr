@@ -1,0 +1,105 @@
+Hero verisini toplamak — 3 dakikalık iş
+=======================================
+
+NEDEN SENİN CİHAZINDAN OLMAK ZORUNDA
+Hero'nun sitesi Cloudflare Turnstile kullanıyor ve veri merkezi
+IP'lerini engelliyor. Ben isteklerimi Anthropic'in ve GitHub'ın
+sunucularından atıyorum; sen hangi ağa bağlanırsan bağlan benim
+isteğim oradan çıkmıyor. Aynı sayfa senin tarayıcında sorunsuz
+açılıyor — engel içerikte değil, isteğin kaynağında.
+
+Bu yüzden veriyi SENİN tarayıcın toplayacak. Aşağıdaki kod sitenin
+kendi arama formunu kullanıyor; hiçbir doğrulama atlatmıyor, sahte
+bilgi göndermiyor. Sadece 81 ili senin yerine tek tek geziyor.
+
+
+YAPILACAKLAR
+------------
+1. Bilgisayarda Chrome ile şu adresi aç:
+   https://www.heromotor.com.tr/bayiler/
+
+2. Sayfa açılınca (Cloudflare doğrulaması geçtikten sonra) klavyeden
+   F12'ye bas. Açılan panelde "Console" sekmesine geç.
+
+3. Aşağıdaki kodun TAMAMINI kopyala, Console'a yapıştır, Enter'a bas.
+
+4. Alt satırda "Ankara: 12 kayıt" gibi satırlar akmaya başlayacak.
+   5-8 dakika sürer. Bitince "hero.json" dosyası kendiliğinden inecek.
+
+5. O dosyayı bana gönder. Gerisini ben hallederim.
+
+NOT: Aynı işlemi https://www.heromotor.com.tr/servisler/ sayfasında da
+tekrarla; ikinci dosya "hero-servis.json" adıyla inecek.
+
+
+KOD (tamamını kopyala)
+----------------------
+
+(async () => {
+  const rol = location.pathname.includes('servis') ? 'servis' : 'satis';
+  const iller = [...document.querySelectorAll('select[name=city_box] option')]
+    .map(o => [o.value, o.textContent.trim()])
+    .filter(x => x[0] && x[0] !== '0');
+  console.log(`${iller.length} il bulundu, başlıyorum...`);
+
+  const bekle = ms => new Promise(r => setTimeout(r, ms));
+  const kayitlar = [];
+
+  for (let i = 0; i < iller.length; i++) {
+    const [kod, ad] = iller[i];
+    try {
+      const govde = new URLSearchParams({ city_box: kod, ara: 'Ara' });
+      const y = await fetch(location.href.split('?')[0], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: govde.toString(),
+        credentials: 'same-origin'
+      });
+      const html = await y.text();
+      const d = new DOMParser().parseFromString(html, 'text/html');
+
+      let n = 0;
+      d.querySelectorAll("a[href^='tel:']").forEach(a => {
+        const tel = a.getAttribute('href').slice(4).trim();
+        let kutu = a;
+        for (let k = 0; k < 5; k++) {
+          kutu = kutu.parentElement;
+          if (!kutu) break;
+          if (kutu.innerText.trim().split(/\s+/).length > 8) break;
+        }
+        if (!kutu) return;
+        const bas = kutu.querySelector('h1,h2,h3,h4,h5,strong,b');
+        const isim = bas ? bas.innerText.replace(/\s+/g, ' ').trim() : '';
+        if (!isim) return;
+        let adres = '';
+        kutu.querySelectorAll('p,span,td,div').forEach(e => {
+          const t = e.innerText.replace(/\s+/g, ' ').trim();
+          if (t && t !== isim && !/^[\d\s()+\-]+$/.test(t) && t.length > adres.length)
+            adres = t;
+        });
+        kayitlar.push({ marka: 'Hero', rol, bayi_adi: isim, il: ad,
+                        ilce: '', adres, telefon: tel, email: '', website: '' });
+        n++;
+      });
+      console.log(`[${i + 1}/${iller.length}] ${ad}: ${n} kayıt`);
+    } catch (e) {
+      console.log(`[${i + 1}/${iller.length}] ${ad}: HATA ${e.message}`);
+    }
+    await bekle(1500 + Math.random() * 1500);   // siteyi yormayalım
+  }
+
+  const veri = {
+    _aciklama: 'Hero Türkiye — sitenin kendi arama formuyla, kullanıcının ' +
+               'kendi tarayıcısından toplandı.',
+    _kaynak: [location.href.split('?')[0]],
+    _tarih: new Date().toISOString().slice(0, 10),
+    _duzenlenebilir: true,
+    kayitlar
+  };
+  const b = new Blob([JSON.stringify(veri, null, 1)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = rol === 'servis' ? 'hero-servis.json' : 'hero.json';
+  a.click();
+  console.log(`BİTTİ: ${kayitlar.length} kayıt indirildi.`);
+})();

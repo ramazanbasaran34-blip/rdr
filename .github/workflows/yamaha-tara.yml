@@ -1,0 +1,54 @@
+name: Yamaha tara
+
+on:
+  workflow_dispatch:
+    inputs:
+      kuru:
+        description: "Veritabanına yazmadan sadece rapor (evet/hayır)"
+        required: false
+        default: "hayır"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bayiradar-db
+  cancel-in-progress: false
+
+jobs:
+  tara:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Bağımlılık
+        run: pip install -r requirements.txt
+
+      - name: Gerileme testi
+        run: python test_ayristirici.py
+
+      - name: Tara
+        run: |
+          EK=""
+          if [ "${{ inputs.kuru }}" = "evet" ]; then EK="--kuru"; fi
+          python yamaha_tara.py $EK
+
+      - name: Denetim
+        if: inputs.kuru != 'evet'
+        run: python denetle.py --marka Yamaha || true
+
+      - name: Depoya işle
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ham/ bayiler.db
+          git diff --staged --quiet || git commit -m "Yamaha tarama"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && exit 0
+            sleep 20
+          done
+          exit 1
