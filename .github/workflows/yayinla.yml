@@ -9,9 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: bayiradar-yayin
@@ -57,15 +55,20 @@ jobs:
           PY
           echo "boyut: $(du -h site/index.html | cut -f1)"
 
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: site }
-
-  yayinla:
-    needs: uret
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.yayin.outputs.page_url }}
-    steps:
-      - id: yayin
-        uses: actions/deploy-pages@v4
+      - name: Canlı ve önizlemeye yaz, gönder
+        run: |
+          git config user.name  "bayi-radar-bot"
+          git config user.email "bot@users.noreply.github.com"
+          cp site/index.html index.html
+          mkdir -p preview && cp site/index.html preview/index.html
+          git add index.html preview/index.html
+          git diff --staged --quiet && { echo "Değişiklik yok"; exit 0; }
+          git commit -m "Site yayınlandı: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase -X ours "origin/${GITHUB_REF_NAME}" || git rebase --skip
+            git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 5
+          done
+          echo "::error::Site kaydedilemedi"
+          exit 1

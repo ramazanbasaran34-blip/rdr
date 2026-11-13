@@ -40,11 +40,13 @@ on:
         description: "Periyodu beklemeden hepsini tara (evet yaz)"
         required: false
         default: ""
+  # tetik/komple dosyası değişince KOMPLE tarama başlar (periyot beklenmez).
+  # Sohbetten "komple tara" demek için: bu dosyaya bir satır ekleyip push'la.
+  push:
+    paths: ["tetik/komple"]
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: bayi-tarama
@@ -80,7 +82,9 @@ jobs:
           python gruplar.py 10 --grup ${{ matrix.grup }} > /tmp/markalar.txt
           echo "Bu gruptaki markalar:"; cat /tmp/markalar.txt
           EK=""
-          if [ -z "${{ github.event.inputs.hepsi }}" ] && \
+          # tetik/komple push'u = komple tarama; periyot kontrolü yapılmaz
+          if [ "${{ github.event_name }}" != "push" ] && \
+             [ -z "${{ github.event.inputs.hepsi }}" ] && \
              [ -z "${{ github.event.inputs.markalar }}" ]; then
             EK="--zamanlanmis"
           fi
@@ -152,7 +156,12 @@ jobs:
           tail -n 400 gunluk/tarama-gunlugu.txt > /tmp/g.txt \
             && mv /tmp/g.txt gunluk/tarama-gunlugu.txt
 
-          git add -f bayiler.db gunluk/tarama-gunlugu.txt
+          # Pages dal üzerinden yayınlıyor: kök index.html = canlı,
+          # preview/index.html = önizleme. Tarama her ikisini de tazeler.
+          cp site/index.html index.html
+          mkdir -p preview && cp site/index.html preview/index.html
+
+          git add -f bayiler.db gunluk/tarama-gunlugu.txt index.html preview/index.html
           git diff --staged --quiet && { echo "Değişiklik yok"; exit 0; }
           git commit -m "Veri güncellendi: $(date -u +'%Y-%m-%d %H:%M UTC')"
           for i in 1 2 3 4 5; do
@@ -163,15 +172,3 @@ jobs:
           done
           echo "::error::Veri kaydedilemedi"
           exit 1
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: site }
-
-  yayinla:
-    needs: birlestir
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.yayin.outputs.page_url }}
-    steps:
-      - id: yayin
-        uses: actions/deploy-pages@v4
