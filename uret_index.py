@@ -164,7 +164,7 @@ def uret(cikti="index.html", markalar_json="markalar.json", db_yolu="bayiler.db"
             Path("veri/il_satis.json").read_text(encoding="utf-8"))
     except Exception:  # noqa: BLE001
         il_satis = {"iller": {}, "_yillar": []}
-    # Marka bazlı satış adetleri (2025 tam yıl, 2026 ilk 9 ay). "Bayi başı
+    # Marka bazlı satış adetleri (2025 tam yıl, 2026 ilk N ay; N = il_satis._ay_sayisi). "Bayi başı
     # ortalama satış" raporunda kullanılıyor. Yoksa rapor "veri yok" der.
     try:
         marka_satis = json.loads(
@@ -240,6 +240,10 @@ def uret(cikti="index.html", markalar_json="markalar.json", db_yolu="bayiler.db"
     html = (SABLON
             .replace("__VERI__", json.dumps(veri, ensure_ascii=False,
                                             separators=(",", ":")))
+            .replace("__AY26__", str(il_satis.get("_ay_sayisi", 10)))
+            .replace("__AY26_TARIH__", str(il_satis.get("_kismi_tarih", "")))
+            .replace("__AY26_SON__", str(il_satis.get("_son_ay", "")))
+            .replace("__AY26_ARALIK__", str(il_satis.get("_aralik", "")))
             .replace("__LOGO_SOL__", _logo(f"{logo_dizin}/kuralkan.b64"))
             .replace("__LOGO_SAG__", _logo(f"{logo_dizin}/dayanisma.b64")))
     Path(cikti).parent.mkdir(parents=True, exist_ok=True)
@@ -1304,16 +1308,17 @@ h2{font-size:19px;font-weight:700;text-align:center;letter-spacing:-.01em;
       bugünkü <b>toplam satış noktası</b> sayısına bölünür
       (sadece bayi + bayi ve servis). <b>Aylık satış</b> hesaplanırken
       2025 <b>tam yıl</b> olduğu için 12'ye, 2026 ise yalnızca
-      <b>ilk 9 ayı</b> (30.09 itibarıyla) kapsadığı için 9'a bölünür —
+      <b>ilk __AY26__ ayı</b> (__AY26_ARALIK__, __AY26_TARIH__ itibarıyla) kapsadığı için ay sayısına (__AY26__) bölünür —
       bu yüzden iki yılın aylık ortalaması adil biçimde kıyaslanabilir.
-      <b>Not:</b> TÜİK'ten 2026 için şimdilik yalnızca ilk 9 ayın verisi
-      geldi; bu güncellemede yalnızca <b>Eylül</b> ayı eklendi.
+      <b>*2026:</b> TÜİK'ten 2026 için şimdilik ilk __AY26__ ayın (__AY26_ARALIK__) verisi
+      geldi; bu güncellemede <b>__AY26_SON__</b> ayı eklendi ve tüm yılların rakamları
+      TÜİK'in son dosyasına göre yenilendi.
       Satış verisi olmayan markalar için “veri yok”.</p>
     <div class="secimler"><button class="btn ana" id="btnBayiOrtXls">Excel indir</button></div>
     <div class="yapiskan">
       <input class="ara" id="araBayiOrt" type="search" placeholder="Marka ara" autocomplete="off">
     </div>
-    <div class="borbaskap"><div class="baslikcubuk sirali borbas" data-tablo="bayiOrtListe"><span class="ilkkol sirakol" data-s="ad"># Marka</span><span class="sagb"><span data-s="nokta" class="sirakol k gen">Toplam<br>satış<br>noktası</span><span data-s="s2025" class="sirakol k gen">2025<br>toplam<br>satış</span><span data-s="o2025" class="sirakol k gen">2025<br>bayi başı<br>satış</span><span data-s="s2026" class="sirakol k gen">2026*<br>toplam<br>satış</span><span data-s="o2026" class="sirakol k gen">2026*<br>bayi başı<br>satış</span><span data-s="ay2025" class="sirakol k gen">2025<br>bayi başı<br>aylık satış</span><span data-s="ay2026" class="sirakol k gen">2026*<br>bayi başı<br>aylık satış</span><span data-s="kiyas" class="sirakol k gen">2025→2026<br>aylık satış<br>kıyaslama</span><span class="okbos"></span></span></div></div>
+    <div class="borbaskap"><div class="baslikcubuk sirali borbas" data-tablo="bayiOrtListe"><span class="ilkkol sirakol" data-s="ad"># Marka</span><span class="sagb"><span data-s="nokta" class="sirakol k gen">Toplam<br>satış<br>noktası</span><span data-s="s2025" class="sirakol k gen">2025<br>toplam<br>satış</span><span data-s="o2025" class="sirakol k gen">2025<br>bayi başı<br>satış</span><span data-s="s2026" class="sirakol k gen">2026*<br>__AY26__ aylık<br>toplam satış</span><span data-s="o2026" class="sirakol k gen">2026*<br>__AY26__ aylık<br>bayi başı satış</span><span data-s="ay2025" class="sirakol k gen">2025<br>bayi başı aylık<br>satış (÷12)</span><span data-s="ay2026" class="sirakol k gen">2026*<br>bayi başı aylık<br>satış (÷__AY26__)</span><span data-s="kiyas" class="sirakol k gen">2025→2026<br>aylık satış<br>kıyaslama</span><span class="okbos"></span></span></div></div>
     <div class="borsar"><div id="bayiOrtListe"></div></div>
   </section>
 
@@ -1330,7 +1335,7 @@ h2{font-size:19px;font-weight:700;text-align:center;letter-spacing:-.01em;
     <div class="yapiskan">
       <input class="ara" id="araVerim" type="search" placeholder="İl ara" autocomplete="off">
     </div>
-    <div class="vbaskap"><div class="baslikcubuk sirali" data-tablo="verimListe"><span class="ilkkol sirakol" data-s="ad">#  İl</span><span class="sagb"><span data-s="nokta" class="sirakol k" id="verimNoktaBas">Nokta</span><span data-s="2024" class="sirakol k">2024<br>satış</span><span data-s="v2024" class="sirakol k gen">2024<br>bayi başı<br>satış adedi</span><span data-s="2025" class="sirakol k">2025<br>satış</span><span data-s="v2025" class="sirakol k gen">2025<br>bayi başı<br>satış adedi</span><span data-s="2026" class="sirakol k">2026*<br>satış</span><span data-s="v2026" class="sirakol k gen">2026*<br>9 aylık bayi başı<br>aylık satış adedi</span><span data-s="kiyas" class="sirakol k gen">2025→2026<br>aylık satış<br>kıyaslama</span><span class="okbos"></span></span></div></div>
+    <div class="vbaskap"><div class="baslikcubuk sirali" data-tablo="verimListe"><span class="ilkkol sirakol" data-s="ad">#  İl</span><span class="sagb"><span data-s="nokta" class="sirakol k" id="verimNoktaBas">Nokta</span><span data-s="2024" class="sirakol k">2024<br>satış</span><span data-s="v2024" class="sirakol k gen">2024<br>bayi başı<br>satış adedi</span><span data-s="2025" class="sirakol k">2025<br>satış</span><span data-s="v2025" class="sirakol k gen">2025<br>bayi başı<br>satış adedi</span><span data-s="2026" class="sirakol k">2026*<br>__AY26__ aylık<br>satış</span><span data-s="v2026" class="sirakol k gen">2026*<br>bayi başı aylık<br>satış adedi (÷__AY26__)</span><span data-s="kiyas" class="sirakol k gen">2025→2026<br>aylık satış<br>kıyaslama</span><span class="okbos"></span></span></div></div>
     <div class="vsar"><div class="liste" id="verimListe"></div></div>
     <div class="bos" id="verimBos" style="display:none">Sonuç bulunamadı.</div>
   </section>
@@ -1386,6 +1391,9 @@ h2{font-size:19px;font-weight:700;text-align:center;letter-spacing:-.01em;
 </div>
 <script>
 const D = __VERI__;
+/* 2026 kaç ayı kapsıyor: veri/il_satis.json → _ay_sayisi (üretimde gömülür). */
+const AY26 = __AY26__, AY26_TARIH = "__AY26_TARIH__",
+      AY26_SON = "__AY26_SON__", AY26_ARALIK = "__AY26_ARALIK__";
 /* Yapışkan başlıklar üst şeridin ALTINA otursun; yoksa şeridin arkasında
    kalıp görünmez oluyorlar. Şerit yüksekliği ekrana göre değiştiği için
    ölçüp CSS değişkenine yazıyoruz. */
@@ -1813,18 +1821,17 @@ function bayiOrtVeri(){
     const o26 = (var_ && nokta) ? Math.round(s26/nokta) : (var_?0:null);
     return {ad:m.ad, nokta, var_:var_,
       s2025:s25, s2026:s26, o2025:o25, o2026:o26,
-      // Ortalama aylık: 2026 ilk 9 ayın bayi başı aylık ortalaması
-      // Aylık ortalama: 2025 tam yıl → 12'ye, 2026 ilk 9 ay → 9'a bölünür.
+      // Aylık ortalama: 2025 tam yıl → 12'ye, 2026 ilk AY26 ay → AY26'ya bölünür.
       // Aylık ortalama YUVARLANMADAN tutulur: küçük sayılarda yuvarlama
       // yüzde kıyaslamayı bozuyordu (CFMoto 2,70→3 ve 2,43→2 olunca fark
       // %10 yerine %33 görünüyordu). Satırda 2 ondalıkla gösteriliyor.
       ay2025: (var_ && nokta) ? s25/nokta/12 : (var_?0:null),
-      ay2026: (var_ && nokta) ? s26/nokta/9  : (var_?0:null),
+      ay2026: (var_ && nokta) ? s26/nokta/AY26 : (var_?0:null),
       // 2025→2026 aylık satış değişimi (%). Bayi başı aylık üzerinden;
       // 2025 aylık 0 ise oran hesaplanamaz (null).
       kiyas: (function(){
         if(!(var_ && nokta)) return null;
-        const a25 = s25/nokta/12, a26 = s26/nokta/9;
+        const a25 = s25/nokta/12, a26 = s26/nokta/AY26;
         if(a25 === 0) return null;
         return (a26 - a25) / a25 * 100;
       })()};
@@ -1874,8 +1881,8 @@ $("#btnBayiOrtXls").onclick = async e => {
   const YY = "veri yok";
   const bas = ["Marka","Toplam satış noktası",
     "2025 toplam satış","2025 bayi başı satış",
-    "2026 toplam satış (30.09)","2026 bayi başı satış (30.09)",
-    "2025 bayi başı aylık satış","2026 bayi başı aylık satış (30.09)",
+    `2026 toplam satış (${AY26_ARALIK}, ${AY26_TARIH})`,`2026 bayi başı satış (${AY26_ARALIK})`,
+    "2025 bayi başı aylık satış (÷12)",`2026 bayi başı aylık satış (÷${AY26})`,
     "2025→2026 aylık satış değişimi (%)"];
   const iki = n => Math.round(n*100)/100;   // 2 ondalık
   const o = [bas, ...l.map(x => x.var_
@@ -1926,11 +1933,11 @@ $("#btnVerimXls").onclick = async e => {
   const l = verimVeri().sort((a,b)=>b.v2025-a.v2025);
   const etiket = VERIM_ROL==="satis" ? "Bayi" : "Servis";
   const bas = ["İl","Plaka",`${etiket} noktası`,
-    "2023 satış","2024 satış","2025 satış","2026 satış (30.09)",
+    "2023 satış","2024 satış","2025 satış",`2026 satış (${AY26_ARALIK}, ${AY26_TARIH})`,
     `2023 ${etiket.toLocaleLowerCase("tr")} başı yıllık`,
     `2024 ${etiket.toLocaleLowerCase("tr")} başı yıllık`,
     `2025 ${etiket.toLocaleLowerCase("tr")} başı yıllık`,
-    `2026 ${etiket.toLocaleLowerCase("tr")} başı 9 aylık AYLIK (30.09)`,
+    `2026 ${etiket.toLocaleLowerCase("tr")} başı aylık satış (÷${AY26})`,
     "2025→2026 aylık satış değişimi (%)"];
   const iki = n => Math.round(n*100)/100;
   const o = [bas, ...l.map(x=>[x.ad,x.plaka,x.nokta,
@@ -2377,7 +2384,7 @@ function kayitHtml(x, no, duzenlenebilir=false){
    nokta sayıları bizim veritabanımızdan ve FİRMA bazlı (aynı firma
    birden çok markaya bayilik yapsa da bir kez sayılır).
 
-   2026 rakamı 30.09 itibarıyla (ilk 9 ay), yıl tamamlanmadı — kıyaslarken
+   2026 rakamı il_satis._kismi_tarih itibarıyla (ilk AY26 ay), yıl tamamlanmadı — kıyaslarken
    ayrı değerlendirilmeli, bu yüzden ekranda ayrıca işaretleniyor. */
 let VERIM_ROL = "satis";
 
@@ -2403,15 +2410,14 @@ function verimVeri(){
                "2023": s["2023"]||0, "2024": s["2024"]||0,
                "2025": s["2025"]||0, "2026": s["2026"]||0};
     // Yıllık bayi başı (2023-2025 tam yıl): satış / nokta.
-    // 2026 ilk 9 ay olduğu için AYLIK karşılaştırma: (2026/nokta)/9.
+    // 2026 ilk AY26 ay olduğu için AYLIK karşılaştırma: (2026/nokta)/AY26.
     // Diğer yıllarda da aylık kıyas için /12 tutuluyor.
     ["2023","2024","2025"].forEach(y =>
       o["v"+y] = nokta ? Math.round(o[y] / nokta) : 0);
-    // v2026 sütunu AYLIK gösteriliyor (başlık "9 aylık aylık satış"):
-    // 2026 ilk 9 ay olduğu için /nokta/9. Kıyas da bunun aylık karşısı.
-    o.v2026  = nokta ? Math.round(o["2026"]/nokta/9) : 0;
+    // v2026 sütunu AYLIK gösteriliyor: /nokta/AY26. Kıyas da bunun aylık karşısı.
+    o.v2026  = nokta ? Math.round(o["2026"]/nokta/AY26) : 0;
     o.ay2025 = nokta ? o["2025"]/nokta/12 : 0;
-    o.ay2026 = nokta ? o["2026"]/nokta/9  : 0;
+    o.ay2026 = nokta ? o["2026"]/nokta/AY26 : 0;
     o.kiyas = (nokta && o.ay2025>0) ? (o.ay2026-o.ay2025)/o.ay2025*100 : null;
     return o;
   }).filter(x => x.nokta > 0 || x["2024"] > 0);
@@ -2450,13 +2456,13 @@ function cizVerim(){
     `2025'te <b>${bicim(top25)}</b> motosiklet satıldı · ` +
     `Türkiye ortalaması ${etiket} başına <b>${topN?Math.round(top24/topN):0}</b> adet/yıl (2024), ` +
     `<b>${topN?Math.round(top25/topN):0}</b> (2025), ` +
-    `<b>${topN?Math.round(top26/topN):0}</b> adet (2026* — 9 aylık). ` +
+    `<b>${topN?Math.round(top26/topN):0}</b> adet (2026* — ${AY26} aylık, ${AY26_ARALIK}). ` +
     `<span style="color:var(--celik)">Satış adetleri TÜİK. ` +
-    `<b>*2026 rakamı 30.09 itibarıyladır</b> (ilk 9 ay), yıl tamamlanmadığı için ` +
+    `<b>*2026 rakamı ${AY26_TARIH} itibarıyladır</b> (ilk ${AY26} ay: ${AY26_ARALIK}), yıl tamamlanmadığı için ` +
     `diğer yıllarla doğrudan kıyaslanamaz. En sağdaki kıyaslama, ` +
-    `<b>aylık</b> satışları oranlar: 2025 yıllık ÷12, 2026 ÷9. ` +
-    `<b>Not:</b> TÜİK'ten 2026 için şimdilik yalnızca ilk 9 ayın verisi geldi; ` +
-    `bu güncellemede yalnızca <b>Eylül</b> ayı eklendi.</span>`;
+    `<b>aylık</b> satışları oranlar: 2025 yıllık ÷12, 2026 ÷${AY26}. ` +
+    `<b>Not:</b> TÜİK'ten 2026 için şimdilik ilk ${AY26} ayın (${AY26_ARALIK}) verisi geldi; ` +
+    `bu güncellemede <b>${AY26_SON}</b> ayı eklendi ve tüm yılların rakamları TÜİK'in son dosyasına göre yenilendi.</span>`;
 
   $("#verimBos").style.display = l.length ? "none" : "block";
   $("#verimListe").innerHTML = l.map((x,ix)=>`
