@@ -1,3 +1,10 @@
+!!! ARTIK GEREKMİYOR (23 Kasım 2026) !!!
+Hero otomatik taranıyor: ozel/hero.py (GitHub Actions'tan siteye erişim
+açıldı). Aşağıdaki konsol kodu da artık çalışmaz — sitede tel: bağlantısı
+kalmadı, 0 kayıt döndürür. elle/hero.json kullanılmıyor; yalnızca arşiv.
+Tek başına Hero taramak için: tetik/marka dosyasına "Hero" satırı ekleyip
+push'la (Marka marka tara akışı çalışır, sonuç önizlemeye gider).
+
 Hero verisini toplamak — 3 dakikalık iş
 =======================================
 
