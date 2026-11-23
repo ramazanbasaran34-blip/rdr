@@ -21,6 +21,10 @@ on:
         description: "Sadece belirli markalar (virgülle; boş = hepsi)"
         required: false
         default: ""
+  # tetik/marka dosyası değişince içindeki markalar taranır (sohbetten
+  # tetik; dosyada virgülle ayrılmış marka adları, ör. "Hero").
+  push:
+    paths: ["tetik/marka"]
 
 permissions:
   contents: write
@@ -48,12 +52,20 @@ jobs:
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json, os, yaml
           c = yaml.safe_load(open("brands.yaml"))["markalar"]
-          istenen = [x.strip() for x in os.environ.get("SECILEN", "").split(",") if x.strip()]
+          secilen = os.environ.get("SECILEN", "")
+          if os.environ.get("OLAY") == "push" and os.path.exists("tetik/marka"):
+              satirlar = open("tetik/marka", encoding="utf-8").read().strip().splitlines()
+              secilen = satirlar[-1] if satirlar else ""
+              # Boş tetik TÜM markaları taramasın (saatler sürer)
+              if not secilen.strip():
+                  raise SystemExit("tetik/marka boş — tarama yapılmadı")
+          istenen = [x.strip() for x in secilen.split(",") if x.strip()]
           markalar = istenen or sorted(c)
           print("markalar=" + json.dumps(markalar))
           PY
         env:
           SECILEN: ${{ inputs.markalar }}
+          OLAY: ${{ github.event_name }}
 
   tara:
     needs: liste

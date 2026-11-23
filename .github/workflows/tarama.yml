@@ -19,7 +19,7 @@ on:
   # dakikayı :00 ve :30 dışında seçtik — herkes cron'unu tam ve yarım saat
   # başlarına kurduğu için o anlar en yoğun olanlar.
   #
-  # elle: true işaretli markalar (Hero, Harley-Davidson) atlanır.
+  # elle: true işaretli markalar (Harley-Davidson) atlanır; Hero artık taranıyor (ozel/hero.py).
   # ÜÇ FARKLI SAAT — GitHub zamanlamayı garanti etmiyor.
   # 1 ve 2 Eylül gecelerinde tek cron ile hiç çalışmadı; GitHub yoğun
   # saatlerde işi saatlerce erteliyor, bazen o günü tamamen atlıyor.

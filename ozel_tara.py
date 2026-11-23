@@ -61,6 +61,8 @@ GEZINME = {
     "fcm": "tek",
     "zelsun": "il_adi", "motolux": "il_adi", "csn": "il_adi",
     "musatti": "il_kodu",
+    # Hero: il başına POST; modül kendi isteğini atıyor (getir)
+    "hero": "tek",
     "leksas": "tek", "indian": "tek",
     "aprilia": "tek", "piaggio": "tek", "kymco": "tek", "yiben": "tek",
     # ASP.NET WebForms: il seçimi ViewState taşıyan POST ile

@@ -278,16 +278,11 @@ markalar:
 
   # 16. HERO  ·  Hindistan  ·  www.heromotor.com.tr
   "Hero":
-    # Veri elle/hero.json'dan geliyor. elle_dosya işareti olmadan tarama
-    # bu markaya hiç dokunmuyordu; dosyada yapılan düzeltmeler (ör. EYMEN
-    # MOTOR yanına "(Önder Motor)") veriye hiç yansımıyordu.
-    elle_dosya: hero
-    # TARANMIYOR. Site Cloudflare korumalı; GitHub Actions IP'lerinden
-    # her PHP isteği 403 dönüyor (statik dosyalar 200 — ölçüldü).
-    # Veri elle/hero.json'da; kullanıcının kendi tarayıcısında
-    # hero-konsol3.js çalıştırılarak toplanıyor.
-    elle: true
-    etkilesim: il_secimi
+    # TARANIYOR (Kasım 2026). Eskiden elle/hero.json'dan geliyordu.
+    # ozel/hero.py: bayiler/ ve servisler/ sayfalarında 81 il için POST.
+    # Şube kuralı: aynı ad + farklı adres = ayrı şube; aynı ad + aynı
+    # adres hem bayi hem serviste = satis_servis (ayrıntı modülde).
+    ozel: hero
     kaynaklar:
       - rol: satis
         url: "https://www.heromotor.com.tr/bayiler/"
