@@ -42,6 +42,7 @@ import time
 
 from bs4 import BeautifulSoup
 
+from bayiradar.eslestir import _ayirt_edici, adres_benzer
 from bayiradar.normalize import fold
 
 MARKA = "Hero"
@@ -101,8 +102,10 @@ def coz(rol: str, govde: str, url: str, il: str | None = None) -> list[dict]:
 
 
 def _ad_anahtari(ad: str) -> str:
-    a = fold(ad)
-    a = re.sub(r"\(.*?\)", " ", a)
+    # Parantez fold'dan ÖNCE atılmalı: fold noktalama işaretlerini
+    # siliyor, "(7/24 Açık)" sonra yakalanamıyordu (Üsküdar merkezi
+    # bu yüzden birleşmedi, 23 Kasım).
+    a = fold(re.sub(r"\(.*?\)", " ", ad))
     # Önder Motor merkezleri: satışta SHOWROOM, serviste SERVIS yazıyor
     a = re.sub(r"\b(showroom|servis)\b", " ", a)
     return re.sub(r"[^a-z0-9]", "", a)
@@ -118,14 +121,40 @@ def _ortak_ad(ad: str) -> str:
     return re.sub(r"\s+", " ", a).strip(" /-")
 
 
+_GENEL = {"hero", "merkez", "showroom", "servis", "sube", "subesi"}
+
+
+def _ayni_isyeri(a: dict, b: dict) -> bool:
+    """İki liste satırı aynı işyeri mi?
+
+    Adres belirleyici: adres benzer değilse aynı ad bile olsa AYRI ŞUBE.
+    Adres benzerse adlar da örtüşmeli (aynı adreste iki ayrı firma
+    olabiliyor). Yazım farkları (EMİROĞLU/EMIROGLU, "SOK. NO : 4"/"SK.
+    NO:4", "BALKANOGLU MAD."/"BALKANOĞLU MADENCİLİK") eşleşir.
+
+    Bunu modülde yapmak ŞART: ayrı bırakılırsa veritabanı ikisini aynı
+    eski kayda yazıyor, ikincisi birincinin rolünü eziyor ve firma
+    "sadece servis" görünüyordu (Elazığ, Bodrum, Şarkışla, Çanakkale,
+    Tarsus — 23 Kasım ilk tarama).
+    """
+    if a["il"] != b["il"]:
+        return False
+    if not adres_benzer(a["adres"], b["adres"]):
+        return False
+    if _ad_anahtari(a["bayi_adi"]) == _ad_anahtari(b["bayi_adi"]):
+        return True
+    ka = _ayirt_edici(a["bayi_adi"]) - _GENEL
+    kb = _ayirt_edici(b["bayi_adi"]) - _GENEL
+    return bool(ka & kb)
+
+
 def birlestir(kayitlar: list[dict]) -> list[dict]:
-    """Şube kuralı: aynı il + ad + adres → tek kayıt; adres farklıysa ayrı."""
-    tablo: dict[tuple, dict] = {}
+    """Şube kuralı: aynı işyeri (ad + adres) → tek kayıt; adres farklıysa ayrı."""
+    sonuc: list[dict] = []
     for k in kayitlar:
-        anahtar = (k["il"], _ad_anahtari(k["bayi_adi"]), _adres_anahtari(k["adres"]))
-        var = tablo.get(anahtar)
+        var = next((v for v in sonuc if _ayni_isyeri(v, k)), None)
         if var is None:
-            tablo[anahtar] = dict(k)
+            sonuc.append(dict(k))
             continue
         if var["rol"] != k["rol"]:
             var["rol"] = "satis_servis"
@@ -133,11 +162,10 @@ def birlestir(kayitlar: list[dict]) -> list[dict]:
                 # Satış adı esas; SHOWROOM/SERVİS farkı varsa ortak ada indir
                 satis = var if var.get("_ilk_rol") != "servis" else k
                 var["bayi_adi"] = _ortak_ad(satis["bayi_adi"])
-            # Servis sayfası bazen ek numara veriyor (yedek parça hattı);
-            # bayi sayfasındaki numara esas, yoksa servisinki.
+            # Bayi sayfasındaki numara esas, yoksa servisinki.
             if not var["telefon"]:
                 var["telefon"] = k["telefon"]
-    return list(tablo.values())
+    return sonuc
 
 
 def getir(oturum) -> list[dict]:
